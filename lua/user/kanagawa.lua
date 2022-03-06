@@ -1,10 +1,10 @@
-local status_ok, lualine = pcall(require, "kanagawa")
+local status_ok, k = pcall(require, "kanagawa")
 if not status_ok then
 	return
 end
 
 
-require("kanagawa").setup({
+k.setup({
     undercurl = true, -- enable undercurls
     commentStyle = "italic",
     functionStyle = "NONE",

@@ -71,6 +71,7 @@ return packer.startup(function(use)
   use "hrsh7th/cmp-cmdline" -- cmdline completions
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
   use "hrsh7th/cmp-nvim-lsp"
+  use "hrsh7th/cmp-cmdline"
 
   -- snippets
   use "L3MON4D3/LuaSnip" --snippet engine
@@ -91,6 +92,7 @@ return packer.startup(function(use)
     run = ":TSUpdate",
   }
   use "JoosepAlviste/nvim-ts-context-commentstring"
+  use  "theHamsta/nvim-treesitter-pairs"
 
   -- Git
   use "lewis6991/gitsigns.nvim"
@@ -104,6 +106,10 @@ return packer.startup(function(use)
   use "ethanholz/nvim-lastplace" --open file in last curso pos
   use "rmagatti/goto-preview" --preview goto
   use "tpope/vim-eunuch"  --unix coomands mkdir 
+
+   use "folke/trouble.nvim" --see problems in code
+   use "danymat/neogen" --see problems in code
+   use "folke/todo-comments.nvim"
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

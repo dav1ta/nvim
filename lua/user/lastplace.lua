@@ -1,6 +1,6 @@
-local status_ok, lualine = pcall(require, "nvim-gps")
+local status_ok, lastplace = pcall(require, "nvim-lastplace")
 if not status_ok then
 	return
 end
-require("nvim-lastplace").setup({})
+lastplace.setup({})
 

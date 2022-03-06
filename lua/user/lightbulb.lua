@@ -1,10 +1,10 @@
 -- Showing defaults
-local status_ok, lualine = pcall(require, "nvim-lightbulb")
+local status_ok, l = pcall(require, "nvim-lightbulb")
 if not status_ok then
 	return
 end
 
-require("nvim-lightbulb").update_lightbulb({
+l.update_lightbulb({
     sign = {
         enabled = true,
         -- Priority of the gutter sign

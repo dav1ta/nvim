@@ -129,6 +129,11 @@ _G.packer_plugins = {
     path = "/home/davit/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
   },
+  ["goto-preview"] = {
+    loaded = true,
+    path = "/home/davit/.local/share/nvim/site/pack/packer/start/goto-preview",
+    url = "https://github.com/rmagatti/goto-preview"
+  },
   ["impatient.nvim"] = {
     loaded = true,
     path = "/home/davit/.local/share/nvim/site/pack/packer/start/impatient.nvim",
@@ -148,6 +153,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/davit/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
+  },
+  neogen = {
+    loaded = true,
+    path = "/home/davit/.local/share/nvim/site/pack/packer/start/neogen",
+    url = "https://github.com/danymat/neogen"
   },
   ["nlsp-settings.nvim"] = {
     loaded = true,
@@ -204,6 +214,11 @@ _G.packer_plugins = {
     path = "/home/davit/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
+  ["nvim-treesitter-pairs"] = {
+    loaded = true,
+    path = "/home/davit/.local/share/nvim/site/pack/packer/start/nvim-treesitter-pairs",
+    url = "https://github.com/theHamsta/nvim-treesitter-pairs"
+  },
   ["nvim-ts-context-commentstring"] = {
     loaded = true,
     path = "/home/davit/.local/share/nvim/site/pack/packer/start/nvim-ts-context-commentstring",
@@ -244,15 +259,30 @@ _G.packer_plugins = {
     path = "/home/davit/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
+  ["todo-comments.nvim"] = {
+    loaded = true,
+    path = "/home/davit/.local/share/nvim/site/pack/packer/start/todo-comments.nvim",
+    url = "https://github.com/folke/todo-comments.nvim"
+  },
   ["toggleterm.nvim"] = {
     loaded = true,
     path = "/home/davit/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
     url = "https://github.com/akinsho/toggleterm.nvim"
   },
+  ["trouble.nvim"] = {
+    loaded = true,
+    path = "/home/davit/.local/share/nvim/site/pack/packer/start/trouble.nvim",
+    url = "https://github.com/folke/trouble.nvim"
+  },
   ["vim-bbye"] = {
     loaded = true,
     path = "/home/davit/.local/share/nvim/site/pack/packer/start/vim-bbye",
     url = "https://github.com/moll/vim-bbye"
+  },
+  ["vim-eunuch"] = {
+    loaded = true,
+    path = "/home/davit/.local/share/nvim/site/pack/packer/start/vim-eunuch",
+    url = "https://github.com/tpope/vim-eunuch"
   },
   ["vista.vim"] = {
     loaded = true,

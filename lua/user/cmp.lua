@@ -105,6 +105,7 @@ cmp.setup {
         luasnip = "[Snippet]",
         buffer = "[Buffer]",
         path = "[Path]",
+
       })[entry.source.name]
       return vim_item
     end,
@@ -127,3 +128,15 @@ cmp.setup {
     native_menu = false,
   },
 }
+
+cmp.setup.cmdline(':', {
+  sources = {
+    { name = 'cmdline' }
+  }
+})
+
+cmp.setup.cmdline('/', {
+  sources = {
+    { name = 'buffer' }
+  }
+})
