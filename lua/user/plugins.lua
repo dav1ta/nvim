@@ -98,6 +98,13 @@ return packer.startup(function(use)
   use "liuchengxu/vista.vim" -- left side function panel
   use "SmiteshP/nvim-gps" --below location on statusline
 
+  use 'kosayoda/nvim-lightbulb' --lightbulb if there is some fix suggestion
+
+  use "luukvbaal/stabilize.nvim" --stabilize text when splitting 
+  use "ethanholz/nvim-lastplace" --open file in last curso pos
+  use "rmagatti/goto-preview" --preview goto
+  use "tpope/vim-eunuch"  --unix coomands mkdir 
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then

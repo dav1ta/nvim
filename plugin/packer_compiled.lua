@@ -174,6 +174,16 @@ _G.packer_plugins = {
     path = "/home/davit/.local/share/nvim/site/pack/packer/start/nvim-gps",
     url = "https://github.com/SmiteshP/nvim-gps"
   },
+  ["nvim-lastplace"] = {
+    loaded = true,
+    path = "/home/davit/.local/share/nvim/site/pack/packer/start/nvim-lastplace",
+    url = "https://github.com/ethanholz/nvim-lastplace"
+  },
+  ["nvim-lightbulb"] = {
+    loaded = true,
+    path = "/home/davit/.local/share/nvim/site/pack/packer/start/nvim-lightbulb",
+    url = "https://github.com/kosayoda/nvim-lightbulb"
+  },
   ["nvim-lsp-installer"] = {
     loaded = true,
     path = "/home/davit/.local/share/nvim/site/pack/packer/start/nvim-lsp-installer",
@@ -223,6 +233,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/davit/.local/share/nvim/site/pack/packer/start/project.nvim",
     url = "https://github.com/ahmedkhalf/project.nvim"
+  },
+  ["stabilize.nvim"] = {
+    loaded = true,
+    path = "/home/davit/.local/share/nvim/site/pack/packer/start/stabilize.nvim",
+    url = "https://github.com/luukvbaal/stabilize.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,

@@ -1,4 +1,4 @@
-local status_ok, lualine = pcall(require, "nvim-gps")
+local status_ok, gps = pcall(require, "nvim-gps")
 if not status_ok then
 	return
 end
@@ -6,11 +6,10 @@ local status_ok, lualine = pcall(require, "lualine")
 if not status_ok then
 	return
 end
-require("nvim-gps").setup()
+gps.setup()
 
-local gps = require("nvim-gps")
 
-require("lualine").setup({
+lualine.setup({
 	sections = {
 			lualine_c = {
 				{ gps.get_location, cond = gps.is_available },
