@@ -71,7 +71,6 @@ return packer.startup(function(use)
   use "hrsh7th/cmp-cmdline" -- cmdline completions
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
   use "hrsh7th/cmp-nvim-lsp"
-  use "hrsh7th/cmp-cmdline"
 
   -- snippets
   use "L3MON4D3/LuaSnip" --snippet engine
@@ -84,7 +83,17 @@ return packer.startup(function(use)
   use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
 
   -- Telescope
-  use "nvim-telescope/telescope.nvim"
+   use({
+            "nvim-telescope/telescope.nvim",
+            requires = {
+                "nvim-telescope/telescope-frecency.nvim",
+                "nvim-telescope/telescope-project.nvim",
+                "nvim-telescope/telescope-github.nvim",
+                'nvim-telescope/telescope-live-grep-raw.nvim'
+            },
+        })
+
+    use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
   -- Treesitter
   use {
@@ -110,6 +119,9 @@ return packer.startup(function(use)
    use "folke/trouble.nvim" --see problems in code
    use "danymat/neogen" --see problems in code
    use "folke/todo-comments.nvim"
+   use "sindrets/diffview.nvim"
+   use "Shatur/neovim-session-manager"
+
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
