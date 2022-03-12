@@ -66,6 +66,7 @@ local setup = {
     -- most people should not need to change this
     i = { "j", "k" },
     v = { "j", "k" },
+    n = { "'", '"' },
   },
 }
 
@@ -93,7 +94,7 @@ local mappings = {
     "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
     "Find files",
   },
-  ["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
+  ["F"] = { "<cmd>Telescope live_grep_raw theme=ivy<cr>", "Find Text" },
   ["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
 
   p = {
@@ -169,6 +170,7 @@ local mappings = {
     R = { "<cmd>Telescope registers<cr>", "Registers" },
     k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
     C = { "<cmd>Telescope commands<cr>", "Commands" },
+    r = { "<cmd>Telescope live_grep_raw<cr>", "Commands" },
   },
 
   t = {
