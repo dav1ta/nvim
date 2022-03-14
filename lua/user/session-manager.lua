@@ -5,4 +5,7 @@ end
 
 session_manager.setup({
     autoload_mode = "Disabled",
+    autosave_ignore_not_normal = true,
+    autosave_last_session = false,
+
 })

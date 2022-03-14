@@ -17,7 +17,7 @@ local options = {
   swapfile = false,                        -- creates a swapfile
   -- termguicolors = true,                    -- set term gui colors (most terminals support this)
   timeoutlen = 100,                        -- time to wait for a mapped sequence to complete (in milliseconds)
-  undofile = false,                         -- enable persistent undo
+  undofile = true,                         -- enable persistent undo
   updatetime = 300,                        -- faster completion (4000ms default)
   writebackup = false,                     -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
   expandtab = true,                        -- convert tabs to spaces
@@ -43,3 +43,4 @@ end
 vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.cmd [[set iskeyword+=-]]
 vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
+vim.cmd [[set langmap=ქq,წw,ეe,რr,ტt,ყy,უu,იi,ოo,პp,აa,სs,დd,ფf,გg,ჰh,ჯj,კk,ლl,ზz,ხx,ცc,ვv,ბb,ნn,მm,ჭW,ღR,ძZ,ჩC,თT,შS]] -- TODO: this doesn't seem to work
