@@ -143,11 +143,17 @@ telescope.setup({
             hidden_files = true,
             display_type = "full",
         },
+         ["ui-select"] = {
+      require("telescope.themes").get_dropdown {
+        previewer = false,
+        -- even more opts
+      },
+    },
     },
 })
 -- telescope.load_extension("frecency")
 telescope.load_extension("fzf")
 telescope.load_extension("gh")
 telescope.load_extension("project")
-
+telescope.load_extension "ui-select"
 telescope.load_extension("live_grep_raw")

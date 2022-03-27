@@ -58,11 +58,22 @@ return packer.startup(function(use)
   use "goolord/alpha-nvim"
   use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
   use "folke/which-key.nvim"
+  use "unblevable/quick-scope"
+  use "andymass/vim-matchup"
+    use "nacro90/numb.nvim"
+    use "folke/zen-mode.nvim"
+    use "karb94/neoscroll.nvim"
+    use "kevinhwang91/nvim-bqf"
+    use "lunarvim/vim-solidity"
+    use "tpope/vim-repeat"
+    use "tversteeg/registers.nvim"
+    use "nyngwang/NeoZoom.lua"
+  use "filipdutescu/renamer.nvim"
+  use "ray-x/lsp_signature.nvim"
 
   -- Colorschemes
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
-  -- use "lunarvim/darkplus.nvim"
-  use "rebelot/kanagawa.nvim"
+  use "lunarvim/darkplus.nvim"
 
   -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin
@@ -71,7 +82,26 @@ return packer.startup(function(use)
   use "hrsh7th/cmp-cmdline" -- cmdline completions
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
   use "hrsh7th/cmp-nvim-lsp"
+  use {
+    "tzachar/cmp-tabnine",
+    config = function()
+      local tabnine = require "cmp_tabnine.config"
+      tabnine:setup {
+        max_lines = 1000,
+        max_num_results = 20,
+        sort = true,
+        run_on_every_keystroke = true,
+        snippet_placeholder = "..",
+        ignored_file_types = { -- default is not to ignore
+          -- uncomment to ignore in lua:
+          -- lua = true
+        },
+      }
+    end,
 
+    run = "./install.sh",
+    requires = "hrsh7th/nvim-cmp",
+  }
   -- snippets
   use "L3MON4D3/LuaSnip" --snippet engine
   use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
@@ -89,7 +119,8 @@ return packer.startup(function(use)
                 "nvim-telescope/telescope-frecency.nvim",
                 "nvim-telescope/telescope-project.nvim",
                 "nvim-telescope/telescope-github.nvim",
-                'nvim-telescope/telescope-live-grep-raw.nvim'
+                'nvim-telescope/telescope-live-grep-raw.nvim',
+                "nvim-telescope/telescope-ui-select.nvim"
             },
         })
 
@@ -102,9 +133,11 @@ return packer.startup(function(use)
   }
   use "JoosepAlviste/nvim-ts-context-commentstring"
   use  "theHamsta/nvim-treesitter-pairs"
+    use "windwp/nvim-ts-autotag"
 
   -- Git
   use "lewis6991/gitsigns.nvim"
+    use "https://github.com/rhysd/conflict-marker.vim"
 
   use "liuchengxu/vista.vim" -- left side function panel
   use "SmiteshP/nvim-gps" --below location on statusline

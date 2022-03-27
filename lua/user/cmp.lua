@@ -16,33 +16,9 @@ local check_backspace = function()
 end
 
 --   פּ ﯟ   some other good icons
-local kind_icons = {
-  Text = "",
-  Method = "m",
-  Function = "",
-  Constructor = "",
-  Field = "",
-  Variable = "",
-  Class = "",
-  Interface = "",
-  Module = "",
-  Property = "",
-  Unit = "",
-  Value = "",
-  Enum = "",
-  Keyword = "",
-  Snippet = "",
-  Color = "",
-  File = "",
-  Reference = "",
-  Folder = "",
-  EnumMember = "",
-  Constant = "",
-  Struct = "",
-  Event = "",
-  Operator = "",
-  TypeParameter = "",
-}
+local icons = require "user.icons"
+
+local kind_icons = icons.kind
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
 cmp.setup {
@@ -105,6 +81,7 @@ cmp.setup {
         luasnip = "[Snippet]",
         buffer = "[Buffer]",
         path = "[Path]",
+        cmp_tabnine = "[T]",
 
       })[entry.source.name]
       return vim_item
@@ -115,6 +92,7 @@ cmp.setup {
     { name = "luasnip" },
     { name = "buffer" },
     { name = "path" },
+        { name = "cmp_tabnine" },
   },
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,
