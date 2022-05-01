@@ -1,23 +1,17 @@
 local null_ls_status_ok, null_ls = pcall(require, "null-ls")
 if not null_ls_status_ok then
-	return
+  return
 end
 
--- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
-local formatting = null_ls.builtins.formatting
--- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
-local diagnostics = null_ls.builtins.diagnostics
-
 null_ls.setup({
-	debug = false,
-	sources = {
-    formatting.prettier.with {
-      extra_filetypes = { "toml", "solidity" },
-      extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
-    },
-		formatting.black.with({ extra_args = { "--fast" } }),
-		formatting.stylua,
-    diagnostics.flake8,
-
-	},
+  debup = false,
+  sources = {
+    -- null_ls.builtins.formatting.black,
+    -- null_ls.builtins.diagnostics.flake8,
+    null_ls.builtins.formatting.shfmt.with({ filetypes = { "sh", "zsh" } }),
+    null_ls.builtins.formatting.stylua,
+    null_ls.builtins.formatting.prettier.with({
+      filetypes = { "javascriptreact", "typescriptreact", "javascript", "typescript" },
+    }),
+  },
 })

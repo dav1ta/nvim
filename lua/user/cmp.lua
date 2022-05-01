@@ -8,6 +8,7 @@ if not snip_status_ok then
   return
 end
 
+require("luasnip/loaders/from_vscode").lazy_load{path="~/.config/nvim/snippets"}
 require("luasnip/loaders/from_vscode").lazy_load()
 
 local check_backspace = function()
@@ -20,7 +21,6 @@ local icons = require "user.icons"
 
 local kind_icons = icons.kind
 -- find more here: https://www.nerdfonts.com/cheat-sheet
-
 cmp.setup {
   snippet = {
     expand = function(args)
@@ -98,11 +98,11 @@ cmp.setup {
     behavior = cmp.ConfirmBehavior.Replace,
     select = false,
   },
-  documentation = {
-    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-  },
+  -- documentation = {
+  --   border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+  -- },
   experimental = {
-    ghost_text = false,
+    ghost_text = true,
     native_menu = false,
   },
 }

@@ -45,7 +45,6 @@ return packer.startup(function(use)
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
   use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
-  use "numToStr/Comment.nvim" -- Easily comment stuff
   use "kyazdani42/nvim-web-devicons"
   use "kyazdani42/nvim-tree.lua"
   use "akinsho/bufferline.nvim"
@@ -60,20 +59,30 @@ return packer.startup(function(use)
   use "folke/which-key.nvim"
   use "unblevable/quick-scope"
   use "andymass/vim-matchup"
-    use "nacro90/numb.nvim"
-    use "folke/zen-mode.nvim"
-    use "karb94/neoscroll.nvim"
-    use "kevinhwang91/nvim-bqf"
-    use "lunarvim/vim-solidity"
-    use "tpope/vim-repeat"
-    use "tversteeg/registers.nvim"
-    use "nyngwang/NeoZoom.lua"
+  use "nacro90/numb.nvim"
+  use "folke/zen-mode.nvim"
+  use "karb94/neoscroll.nvim"
+  use "kevinhwang91/nvim-bqf"
+  use "tpope/vim-repeat"
+  use "tversteeg/registers.nvim"
+  use "nyngwang/NeoZoom.lua"
   use "filipdutescu/renamer.nvim"
   use "ray-x/lsp_signature.nvim"
+  use "numToStr/Comment.nvim"
+  use "norcalli/nvim-colorizer.lua"
+  use "ThePrimeagen/harpoon"
+  use({
+    "simrat39/symbols-outline.nvim",
+    cmd = { "SymbolsOutline", "SymbolsOutlineOpen", "SymbolsOutlineClose" },
+  })
+
+
 
   -- Colorschemes
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
   use "lunarvim/darkplus.nvim"
+  use "lunarvim/onedarker.nvim"
+  use { "briones-gabriel/darcula-solid.nvim", requires = "rktjmp/lush.nvim" }
 
   -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin
@@ -132,29 +141,37 @@ return packer.startup(function(use)
     run = ":TSUpdate",
   }
   use "JoosepAlviste/nvim-ts-context-commentstring"
+  use    "nvim-treesitter/nvim-treesitter-textobjects"
   use  "theHamsta/nvim-treesitter-pairs"
     use "windwp/nvim-ts-autotag"
 
   -- Git
   use "lewis6991/gitsigns.nvim"
     use "https://github.com/rhysd/conflict-marker.vim"
+      use({ "f-person/git-blame.nvim" })
 
   use "liuchengxu/vista.vim" -- left side function panel
-  use "SmiteshP/nvim-gps" --below location on statusline
-
-
   use "luukvbaal/stabilize.nvim" --stabilize text when splitting 
   use "ethanholz/nvim-lastplace" --open file in last curso pos
   use "rmagatti/goto-preview" --preview goto
   use "tpope/vim-eunuch"  --unix coomands mkdir 
 
    use "folke/trouble.nvim" --see problems in code
-   use "danymat/neogen" --see problems in code
+   use "danymat/neogen" --Annotation
    use "folke/todo-comments.nvim"
    use "sindrets/diffview.nvim"
-   use "Shatur/neovim-session-manager"
-   use "tpope/vim-surround"
-  		use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install" })
+   use "Mephistophiles/surround.nvim"
+  	use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install" })
+
+  --dap
+
+    -- DAP
+  use "mfussenegger/nvim-dap"
+  use "theHamsta/nvim-dap-virtual-text"
+  use "rcarriga/nvim-dap-ui"
+    use("mfussenegger/nvim-dap-python")
+  use "Pocco81/DAPInstall.nvim"
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then
