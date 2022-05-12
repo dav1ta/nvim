@@ -98,9 +98,9 @@ lualine.setup {
       -- { nvim_gps, cond = hide_in_width },
     },
     -- lualine_x = { "encoding", "fileformat", "filetype" },
-    lualine_x = {  "encoding", filetype },
+    lualine_x = { progress , "encoding", filetype },
     lualine_y = { location },
-    lualine_z = { progress },
+    lualine_z = { },
   },
   inactive_sections = {
     lualine_a = {},

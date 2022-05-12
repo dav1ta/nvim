@@ -65,24 +65,22 @@ return packer.startup(function(use)
   use "kevinhwang91/nvim-bqf"
   use "tpope/vim-repeat"
   use "tversteeg/registers.nvim"
-  use "nyngwang/NeoZoom.lua"
   use "filipdutescu/renamer.nvim"
   use "ray-x/lsp_signature.nvim"
   use "numToStr/Comment.nvim"
   use "norcalli/nvim-colorizer.lua"
-  use "ThePrimeagen/harpoon"
   use({
     "simrat39/symbols-outline.nvim",
     cmd = { "SymbolsOutline", "SymbolsOutlineOpen", "SymbolsOutlineClose" },
   })
-
-
+ 
+  use "mg979/vim-visual-multi"
 
   -- Colorschemes
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
   use "lunarvim/darkplus.nvim"
-  use "lunarvim/onedarker.nvim"
   use { "briones-gabriel/darcula-solid.nvim", requires = "rktjmp/lush.nvim" }
+  use "cpea2506/one_monokai.nvim"
 
   -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin
@@ -128,7 +126,6 @@ return packer.startup(function(use)
                 "nvim-telescope/telescope-frecency.nvim",
                 "nvim-telescope/telescope-project.nvim",
                 "nvim-telescope/telescope-github.nvim",
-                'nvim-telescope/telescope-live-grep-raw.nvim',
                 "nvim-telescope/telescope-ui-select.nvim"
             },
         })
@@ -148,7 +145,6 @@ return packer.startup(function(use)
   -- Git
   use "lewis6991/gitsigns.nvim"
     use "https://github.com/rhysd/conflict-marker.vim"
-      use({ "f-person/git-blame.nvim" })
 
   use "liuchengxu/vista.vim" -- left side function panel
   use "luukvbaal/stabilize.nvim" --stabilize text when splitting 
@@ -162,6 +158,7 @@ return packer.startup(function(use)
    use "sindrets/diffview.nvim"
    use "Mephistophiles/surround.nvim"
   	use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install" })
+    use "b0o/SchemaStore.nvim"
 
   --dap
 

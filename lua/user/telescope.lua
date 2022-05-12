@@ -18,7 +18,7 @@ telescope.setup({
             "--follow",
             "--color=never",
         },
-        dynamic_preview_title = true,
+        dynamic_preview_title = false,
         prompt_prefix = "❯ ",
         -- prompt_prefix = " ",
         selection_caret = " ",
@@ -152,8 +152,7 @@ telescope.setup({
     },
 })
 -- telescope.load_extension("frecency")
-telescope.load_extension("fzf")
+-- telescope.load_extension("fzf")
 telescope.load_extension("gh")
 telescope.load_extension("project")
 telescope.load_extension "ui-select"
-telescope.load_extension("live_grep_raw")
