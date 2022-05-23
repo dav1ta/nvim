@@ -33,6 +33,15 @@ keymap("n", "<C-Down>", ":resize +2<CR>", opts)
 keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
+
+keymap("n", "d", '"_d', opts)
+keymap("n", "x", '"_x', opts)
+
+keymap("n", "<leader>1", '1gt', opts)
+keymap("n", "<leader>2", '2gt', opts)
+keymap("n", "<leader>3", '3gt', opts)
+keymap("n", "<leader>4", '4gt', opts)
+
 -- Navigate buffers
 
 -- Move text up and down

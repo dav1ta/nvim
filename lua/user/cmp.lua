@@ -8,6 +8,16 @@ if not snip_status_ok then
   return
 end
 
+local cmp_dap_status_ok, cmp_dap = pcall(require, "cmp_dap")
+if not cmp_dap_status_ok then
+  return
+end
+
+
+  enabled = function()
+    return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or cmp_dap.is_dap_buffer()
+  end,
+
 require("luasnip/loaders/from_vscode").lazy_load{path="~/.config/nvim/snippets"}
 require("luasnip/loaders/from_vscode").lazy_load()
 
@@ -82,6 +92,7 @@ cmp.setup {
         buffer = "[Buffer]",
         path = "[Path]",
         cmp_tabnine = "[T]",
+        dap = "[DAP]",
 
       })[entry.source.name]
       return vim_item
@@ -93,6 +104,7 @@ cmp.setup {
     { name = "buffer" },
     { name = "path" },
         { name = "cmp_tabnine" },
+        { name = "dap" },
   },
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,

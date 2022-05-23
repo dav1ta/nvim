@@ -79,7 +79,7 @@ return packer.startup(function(use)
   -- Colorschemes
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
   use "lunarvim/darkplus.nvim"
-  use { "briones-gabriel/darcula-solid.nvim", requires = "rktjmp/lush.nvim" }
+  use { "dav1ta/darcula-solid.nvim", requires = "rktjmp/lush.nvim" }
   use "cpea2506/one_monokai.nvim"
 
   -- cmp plugins
@@ -87,6 +87,7 @@ return packer.startup(function(use)
   use "hrsh7th/cmp-buffer" -- buffer completions
   use "hrsh7th/cmp-path" -- path completions
   use "hrsh7th/cmp-cmdline" -- cmdline completions
+    use "rcarriga/cmp-dap"
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
   use "hrsh7th/cmp-nvim-lsp"
   use {
@@ -126,7 +127,8 @@ return packer.startup(function(use)
                 "nvim-telescope/telescope-frecency.nvim",
                 "nvim-telescope/telescope-project.nvim",
                 "nvim-telescope/telescope-github.nvim",
-                "nvim-telescope/telescope-ui-select.nvim"
+                "nvim-telescope/telescope-ui-select.nvim",
+                "nvim-telescope/telescope-rg.nvim"
             },
         })
 
@@ -141,6 +143,14 @@ return packer.startup(function(use)
   use    "nvim-treesitter/nvim-treesitter-textobjects"
   use  "theHamsta/nvim-treesitter-pairs"
     use "windwp/nvim-ts-autotag"
+
+
+  use {
+    "ghillb/cybu.nvim",
+    branch = "v1.x", -- won't receive breaking changes
+    -- branch = "main", -- timely updates
+    requires = { "kyazdani42/nvim-web-devicons" }, --optional
+  }
 
   -- Git
   use "lewis6991/gitsigns.nvim"
