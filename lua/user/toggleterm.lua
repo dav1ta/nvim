@@ -68,3 +68,17 @@ local python = Terminal:new({ cmd = "python", hidden = true })
 function _PYTHON_TOGGLE()
 	python:toggle()
 end
+
+
+
+local run = Terminal:new({ cmd = "run",
+                          hidden = true,
+                          direction = 'horizontal',
+                           close_on_exit = false,
+})
+
+
+function _RUN_TOGGLE()
+	run:toggle()
+end
+

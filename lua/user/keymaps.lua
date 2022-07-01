@@ -66,6 +66,13 @@ keymap("v", "p", '"_dP', opts)
 keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 
+function Run()
+vim.cmd("Bdelete! *lastcmd");
+vim.cmd(":terminal  sleep 0.5;$(cat /tmp/lastcmd)")
+end
+
+keymap("n", "<leader>5", ":lua Run()<CR>", opts)
+
 -- Terminal --
 -- Better terminal navigation
 -- keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)

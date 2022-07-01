@@ -92,12 +92,13 @@ local mappings = {
   ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
   ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
    ["R"] = { '<cmd>lua require("renamer").rename()<cr>', "Rename" },
-  ["F"] = { "<cmd>Telescope live_grep_raw<cr>", "Find Text" },
+  ["F"] = { "<cmd>Telescope live_grep_args<cr>", "Find Text" },
   ["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
   ["f"] = {
       "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
       "Find files",
     },
+  [","] = {"<cmd>TermExec cmd='python %' direction=horizontal size=10 <cr>","Run Python"},
 
 
 

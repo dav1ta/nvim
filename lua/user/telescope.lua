@@ -209,4 +209,4 @@ telescope.setup({
 telescope.load_extension("gh")
 telescope.load_extension("project")
 telescope.load_extension("ui-select")
-telescope.load_extension("live_grep_raw")
+telescope.load_extension("live_grep_args")

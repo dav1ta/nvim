@@ -5,7 +5,7 @@ end
 cybu.setup {
   position = {
     relative_to = "win", -- win, editor, cursor
-    anchor = "bottomleft", -- topleft, topcenter, topright,
+    anchor = "center", -- topleft, topcenter, topright,
     -- centerleft, center, centerright,
     -- bottomleft, bottomcenter, bottomright
     -- vertical_offset = 10, -- vertical offset from anchor in lines
@@ -14,7 +14,7 @@ cybu.setup {
     -- max_win_width = 0.5, -- integer for absolute in columns
     -- float for relative to win/editor width
   },
-  display_time = 1500, -- time the cybu window is displayed
+  display_time = 200, -- time the cybu window is displayed
   style = {
     path = "relative", -- absolute, relative, tail (filename only)
     border = "rounded", -- single, double, rounded, none

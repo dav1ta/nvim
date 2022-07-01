@@ -23,7 +23,7 @@ local diagnostics = {
 local diff = {
   symbols = { added = " ", modified = " ", removed = " " },
   "diff",
-  colored = false,
+  colored = true,
   cond = hide_in_width,
 }
 
@@ -91,8 +91,8 @@ lualine.setup {
   },
   sections = {
     -- lualine_a = { branch, diagnostics },
-    lualine_a = { branch },
-    lualine_b = { diagnostics,diff},
+    lualine_a = { branch, },
+    lualine_b = { diagnostics,diff,{'filename',file_status=true,path=1}},
     -- lualine_c = { _gps },
     lualine_c = {
       -- { nvim_gps, cond = hide_in_width },

@@ -6,6 +6,7 @@ end
 
 npairs.setup {
   check_ts = true,
+  enable_check_bracket_line = true,
   ts_config = {
     lua = { "string", "source" },
     javascript = { "string", "template_string" },
