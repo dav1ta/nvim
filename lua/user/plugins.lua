@@ -91,27 +91,6 @@ return packer.startup(function(use)
 	use("rcarriga/cmp-dap")
 	use("saadparwaiz1/cmp_luasnip") -- snippet completions
 	use("hrsh7th/cmp-nvim-lsp")
-	use({
-		"tzachar/cmp-tabnine",
-		config = function()
-			local tabnine = require("cmp_tabnine.config")
-			tabnine:setup({
-				max_lines = 1000,
-				max_num_results = 20,
-				sort = true,
-				run_on_every_keystroke = true,
-				snippet_placeholder = "..",
-				ignored_file_types = { -- default is not to ignore
-					-- uncomment to ignore in lua:
-					-- lua = true
-				},
-			})
-		end,
-
-		run = "./install.sh",
-		requires = "hrsh7th/nvim-cmp",
-	})
-  
   use  ({"tiagovla/scope.nvim",config=function ()
         require("scope").setup() end})
 

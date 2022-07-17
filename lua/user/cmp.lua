@@ -91,7 +91,6 @@ cmp.setup {
         luasnip = "[Snippet]",
         buffer = "[Buffer]",
         path = "[Path]",
-        cmp_tabnine = "[T]",
         dap = "[DAP]",
 
       })[entry.source.name]
@@ -103,7 +102,6 @@ cmp.setup {
     { name = "luasnip" },
     { name = "buffer" },
     { name = "path" },
-        { name = "cmp_tabnine" },
         { name = "dap" },
   },
   confirm_opts = {
