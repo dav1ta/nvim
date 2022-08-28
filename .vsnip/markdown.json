@@ -35,5 +35,17 @@
       "---",
       "$0"
     ]
+  },
+
+  "python snippet": {
+    "prefix": "psnip",
+    "description": "Creates Python snippet",
+    "body": [
+      "```python",
+      "${1}",
+      "${2}",
+      
+      "```"
+    ]
   }
 }

@@ -98,7 +98,7 @@ local mappings = {
       "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
       "Find files",
     },
-  [","] = {"<cmd>VimuxRunLastCommand<cr>", "Run Last VimuxCommand"},
+  [","] = {"<cmd>VimuxRunCommand('python ' . bufname('%'))<cr>", "Run Last VimuxCommand"},
   ["5"] = {"<cmd>VimuxCloseRunner | VimuxRunCommand 'run'<cr>", "Run Last VimuxCommand"},
   ["t"] = {"<cmd>VimuxTogglePane <cr>", "Toggle Pane"},
   ["j"] = {"<cmd>VimuxInspectRunner <cr>", "Toggle Pane"},

@@ -18,9 +18,9 @@ end
     return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or cmp_dap.is_dap_buffer()
   end,
 
-require("luasnip/loaders/from_vscode").lazy_load{path="~/.config/nvim/snippets"}
-require("luasnip/loaders/from_vscode").lazy_load()
 
+require("luasnip/loaders/from_vscode").lazy_load()
+require("luasnip/loaders/from_vscode").lazy_load { paths = "~/.config/nvim/.vsnip" }
 local check_backspace = function()
   local col = vim.fn.col "." - 1
   return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"

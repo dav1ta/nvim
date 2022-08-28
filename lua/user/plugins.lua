@@ -80,8 +80,6 @@ return packer.startup(function(use)
 	-- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
 	use("lunarvim/darkplus.nvim")
 	use({ "dav1ta/darcula-solid.nvim", requires = "rktjmp/lush.nvim" })
-  use "https://github.com/juanedi/predawn.vim" 
-  use "https://github.com/Matsuuu/pinkmare"
 
 	-- cmp plugins
 	use("hrsh7th/nvim-cmp") -- The completion plugin
@@ -91,10 +89,14 @@ return packer.startup(function(use)
 	use("rcarriga/cmp-dap")
 	use("saadparwaiz1/cmp_luasnip") -- snippet completions
 	use("hrsh7th/cmp-nvim-lsp")
-  use  ({"tiagovla/scope.nvim",config=function ()
-        require("scope").setup() end})
+	use({
+		"tiagovla/scope.nvim",
+		config = function()
+			require("scope").setup()
+		end,
+	})
 
-  use "preservim/vimux"
+	use("preservim/vimux")
 	-- snippets
 	use("L3MON4D3/LuaSnip") --snippet engine
 	use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
