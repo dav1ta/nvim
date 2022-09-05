@@ -80,6 +80,8 @@ return packer.startup(function(use)
 	-- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
 	use("lunarvim/darkplus.nvim")
 	use({ "dav1ta/darcula-solid.nvim", requires = "rktjmp/lush.nvim" })
+  use 'srcery-colors/srcery-vim'
+  use 'Mofiqul/dracula.nvim'
 
 	-- cmp plugins
 	use("hrsh7th/nvim-cmp") -- The completion plugin
