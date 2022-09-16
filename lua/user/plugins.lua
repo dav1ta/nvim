@@ -66,13 +66,8 @@ return packer.startup(function(use)
 	use("tpope/vim-repeat")
 	use("tversteeg/registers.nvim")
 	use("filipdutescu/renamer.nvim")
-	use("ray-x/lsp_signature.nvim")
 	use("numToStr/Comment.nvim")
 	use("norcalli/nvim-colorizer.lua")
-	use({
-		"simrat39/symbols-outline.nvim",
-		cmd = { "SymbolsOutline", "SymbolsOutlineOpen", "SymbolsOutlineClose" },
-	})
 
 	use("mg979/vim-visual-multi")
 
@@ -92,6 +87,7 @@ return packer.startup(function(use)
 	use("saadparwaiz1/cmp_luasnip") -- snippet completions
 	use("hrsh7th/cmp-nvim-lsp")
 	use({
+
 		"tiagovla/scope.nvim",
 		config = function()
 			require("scope").setup()
@@ -104,15 +100,25 @@ return packer.startup(function(use)
 	use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
 
 	-- LSP
-	use("neovim/nvim-lspconfig") -- enable LSP
-	use("williamboman/nvim-lsp-installer") -- simple to use language server installer
-	use("tamago324/nlsp-settings.nvim") -- language server settings defined in json for
-	use("jose-elias-alvarez/null-ls.nvim") -- for formatters and linters
+  use "neovim/nvim-lspconfig" -- enable LSP
+  use "lvimuser/lsp-inlayhints.nvim"
 
-	-- Telescope
+  use "williamboman/mason.nvim"
+  use "williamboman/mason-lspconfig.nvim"
+  use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
+  use "ray-x/lsp_signature.nvim"
+  use "simrat39/symbols-outline.nvim"
+  use "b0o/SchemaStore.nvim"  
+
+
+  use "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
+
+
+  -- Telescope
 	use({
 		"nvim-telescope/telescope.nvim",
 		requires = {
+
 			"nvim-telescope/telescope-frecency.nvim",
 			"nvim-telescope/telescope-project.nvim",
 			"nvim-telescope/telescope-github.nvim",
@@ -123,6 +129,7 @@ return packer.startup(function(use)
 
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
+
 	-- Treesitter
 	use({
 		"nvim-treesitter/nvim-treesitter",
@@ -132,6 +139,9 @@ return packer.startup(function(use)
 	use("nvim-treesitter/nvim-treesitter-textobjects")
 	use("theHamsta/nvim-treesitter-pairs")
 	use("windwp/nvim-ts-autotag")
+
+
+  use "p00f/nvim-ts-rainbow"
 
 	use({
 		"ghillb/cybu.nvim",
@@ -156,7 +166,6 @@ return packer.startup(function(use)
 	use("sindrets/diffview.nvim")
 	use("Mephistophiles/surround.nvim")
 	use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install" })
-	use("b0o/SchemaStore.nvim")
 
 	--dap
 
