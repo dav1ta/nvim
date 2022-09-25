@@ -53,19 +53,16 @@ return packer.startup(function(use)
 	use("akinsho/toggleterm.nvim")
 	use("ahmedkhalf/project.nvim")
 	use("lewis6991/impatient.nvim")
-	use("lukas-reineke/indent-blankline.nvim")
+	-- use("lukas-reineke/indent-blankline.nvim")
 	use("goolord/alpha-nvim")
 	use("antoinemadec/FixCursorHold.nvim") -- This is needed to fix lsp doc highlight
 	use("folke/which-key.nvim")
 	use("unblevable/quick-scope")
 	use("andymass/vim-matchup")
 	use("nacro90/numb.nvim")
-	use("folke/zen-mode.nvim")
-	use("karb94/neoscroll.nvim")
 	use("kevinhwang91/nvim-bqf")
 	use("tpope/vim-repeat")
 	use("tversteeg/registers.nvim")
-	use("filipdutescu/renamer.nvim")
 	use("numToStr/Comment.nvim")
 	use("norcalli/nvim-colorizer.lua")
 
@@ -175,6 +172,12 @@ return packer.startup(function(use)
 	use("rcarriga/nvim-dap-ui")
 	use("mfussenegger/nvim-dap-python")
 	use("Pocco81/DAPInstall.nvim")
+
+
+  use "dstein64/vim-startuptime"
+
+
+
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

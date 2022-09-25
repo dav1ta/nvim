@@ -7,7 +7,7 @@ end
 -- ft_to_parser.motoko = "typescript"
 
 configs.setup {
-  ensure_installed = { "c", "lua", "rust","python","bash","dockerfile","gitignore","go","tsx","html","scss"},
+  ensure_installed = { "c", "lua","python","bash","dockerfile","gitignore","go","tsx","html","scss","css","javascript",'yaml'},
   sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
   ignore_install = { "" }, -- List of parsers to ignore installing
   matchup = {
@@ -53,7 +53,7 @@ configs.setup {
     disable = { "html" },
   },
   playground = {
-    enable = true,
+    enable = false,
   },
   textobjects = {
     select = {

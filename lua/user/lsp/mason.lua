@@ -85,10 +85,10 @@ for _, server in pairs(servers) do
   end
 
 
-  if server == "emmet_ls" then
-    local emmet_ls_opts = require "user.lsp.settings.emmet_ls"
-    opts = vim.tbl_deep_extend("force", emmet_ls_opts, opts)
-  end
+  -- if server == "emmet_ls" then
+  --   local emmet_ls_opts = require "user.lsp.settings.emmet_ls"
+  --   opts = vim.tbl_deep_extend("force", emmet_ls_opts, opts)
+  -- end
 
 
   lspconfig[server].setup(opts)

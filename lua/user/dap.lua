@@ -55,6 +55,17 @@ dapui.setup {
 
 local icons = require "user.icons"
 
+
+dap.adapters.python = {
+			type = "executable",
+			command = "python",
+			request = "launch",
+
+			args = {
+				"-v",
+					},
+		}
+
 vim.fn.sign_define('DapBreakpoint', {text=icons.ui.Bug, texthl='DiagnosticSignError', linehl='', numhl=''})
 
 dap.listeners.after.event_initialized["dapui_config"] = function()
