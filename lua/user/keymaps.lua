@@ -78,3 +78,10 @@ keymap('n', '<Up>', '<cmd> lua require("dap").toggle_breakpoint()<cr>', opts)
 keymap('n', '<Down>', '<cmd> lua require("dap").step_over()<cr>', opts)
 keymap('n', '<Left>', '<cmd> lua require("dap").step_out()<cr>', opts)
 keymap('n', '<Right>', '<cmd> lua require("dap").step_into()<cr>', opts)
+
+
+
+keymap('n', ',1', '<cmd> BufferLineGoToBuffer 1 <cr>', opts)
+keymap('n', ',2', '<cmd> BufferLineGoToBuffer 2 <cr>', opts)
+keymap('n', ',3', '<cmd> BufferLineGoToBuffer 3 <cr>', opts)
+keymap('n', ',4', '<cmd> BufferLineGoToBuffer 4 <cr>', opts)

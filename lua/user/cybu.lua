@@ -14,7 +14,7 @@ cybu.setup {
     -- max_win_width = 0.5, -- integer for absolute in columns
     -- float for relative to win/editor width
   },
-  display_time = 200, -- time the cybu window is displayed
+  display_time = 1000, -- time the cybu window is displayed
   style = {
     path = "relative", -- absolute, relative, tail (filename only)
     border = "rounded", -- single, double, rounded, none
@@ -28,3 +28,4 @@ cybu.setup {
   },
 }
 vim.keymap.set("n", "H", "<Plug>(CybuPrev)")
+vim.keymap.set("n", "J", "<Plug>(CybuNext)")
