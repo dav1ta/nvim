@@ -11,6 +11,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 vim.api.nvim_set_keymap("n", "gp", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", {noremap=true})
+vim.api.nvim_set_keymap("n", "gP", "<cmd>lua require('goto-preview').close_all_win()<CR>", {noremap=true})
 
 -- Modes
 --   normal_mode = "n",
@@ -36,11 +37,6 @@ keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 keymap("n", "d", '"_d', opts)
 keymap("n", "x", '"_x', opts)
-
-keymap("n", "<leader>1", '1gt', opts)
-keymap("n", "<leader>2", '2gt', opts)
-keymap("n", "<leader>3", '3gt', opts)
-keymap("n", "<leader>4", '4gt', opts)
 
 -- Navigate buffers
 
@@ -74,14 +70,22 @@ keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 -- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 -- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
-keymap('n', '<Up>', '<cmd> lua require("dap").toggle_breakpoint()<cr>', opts)
+keymap('n', '<Up>', '<cmd> lua require("dap").step_out()<cr>', opts)
 keymap('n', '<Down>', '<cmd> lua require("dap").step_over()<cr>', opts)
-keymap('n', '<Left>', '<cmd> lua require("dap").step_out()<cr>', opts)
+keymap('n', '<Left>', '<cmd> lua require("dap").toggle_breakpoint()<cr>', opts)
 keymap('n', '<Right>', '<cmd> lua require("dap").step_into()<cr>', opts)
 
 
 
-keymap('n', ',1', '<cmd> BufferLineGoToBuffer 1 <cr>', opts)
-keymap('n', ',2', '<cmd> BufferLineGoToBuffer 2 <cr>', opts)
-keymap('n', ',3', '<cmd> BufferLineGoToBuffer 3 <cr>', opts)
-keymap('n', ',4', '<cmd> BufferLineGoToBuffer 4 <cr>', opts)
+keymap('n', '<leader>1', '<cmd> BufferLineGoToBuffer 1 <cr>', opts)
+keymap('n', '<leader>2', '<cmd> BufferLineGoToBuffer 2 <cr>', opts)
+keymap('n', '<leader>3', '<cmd> BufferLineGoToBuffer 3 <cr>', opts)
+keymap('n', '<leader>4', '<cmd> BufferLineGoToBuffer 4 <cr>', opts)
+
+
+keymap("n", ",1", '1gt', opts)
+keymap("n", ",2", '2gt', opts)
+keymap("n", ",3", '3gt', opts)
+keymap("n", ",4", '4gt', opts)
+
+

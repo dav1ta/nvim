@@ -81,14 +81,11 @@ local opts = {
 
 local mappings = {
   ["a"] = { "<cmd>Alpha<cr>", "Alpha" },
-  ["b"] = {
-    "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-    "Buffers",
-  },
   ["w"] = {
-    "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_ivy{previewer = false,layout_config={height=10}})<cr>",
+    "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{})<cr>",
     "Buffers",
   },
+
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
   -- ["w"] = { "<cmd>w!<CR>", "Save" },
   -- ["q"] = { "<cmd>q!<CR>", "Quit" },
@@ -105,6 +102,7 @@ local mappings = {
   ["5"] = {"<cmd>VimuxCloseRunner | VimuxRunCommand 'run'<cr>", "Run Last VimuxCommand"},
   ["t"] = {"<cmd>VimuxTogglePane <cr>", "Toggle Pane"},
   ["j"] = {"<cmd>VimuxInspectRunner <cr>", "Toggle Pane"},
+  ["r"] = {"<cmd>BufferLineCyclePrev<cr>", "Prev Tag"},
 
 
 
@@ -145,6 +143,7 @@ local mappings = {
   l = {
     name = "LSP",
     a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+    b = { "<cmd>lua require('lsp_lines').toggle()<cr>", "Toggle lines" },
     d = {
       "<cmd>Telescope lsp_document_diagnostics<cr>",
       "Document Diagnostics",
@@ -174,7 +173,7 @@ local mappings = {
     },
   },
 
-   r = {
+   v = {
     name = "Find",
     b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
     c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },

@@ -140,13 +140,6 @@ return packer.startup(function(use)
 
   use "p00f/nvim-ts-rainbow"
 
-	use({
-		"ghillb/cybu.nvim",
-		branch = "v1.x", -- won't receive breaking changes
-		-- branch = "main", -- timely updates
-		requires = { "kyazdani42/nvim-web-devicons" }, --optional
-	})
-
 	-- Git
 	use("lewis6991/gitsigns.nvim")
 	use("https://github.com/rhysd/conflict-marker.vim")
@@ -172,6 +165,9 @@ return packer.startup(function(use)
 	use("rcarriga/nvim-dap-ui")
 	use("mfussenegger/nvim-dap-python")
 	use("Pocco81/DAPInstall.nvim")
+
+
+  use("SmiteshP/nvim-navic")
 
 
   use "dstein64/vim-startuptime"
