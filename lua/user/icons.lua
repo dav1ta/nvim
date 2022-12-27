@@ -90,11 +90,11 @@
       Calendar = "",
     },
     diagnostics = {
-      Error = "",
-      Warning = "",
-      Information = "",
+      Error = "",
+      Warning = "",
+      Information = "'",
       Question = "",
-      Hint = "",
+      Hint = "",
     },
     misc = {
       Robot = "ﮧ",

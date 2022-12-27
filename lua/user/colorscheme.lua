@@ -1,6 +1,10 @@
+ require('neosolarized').setup({
+    comment_italics = true,
+    background_set = false,
+  })
 vim.cmd [[
 try
-  colorscheme dracula 
+  colorscheme neosolarized 
   set termguicolors
   " hi Visual  guifg=#000000 guibg=#FFFFFF gui=none
   "  hi DiagnosticUnderlineError guifg=#000000 ctermfg=131 guibg=#fa967d ctermbg=234 cterm=bold gui=bold

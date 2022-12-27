@@ -1,5 +1,5 @@
 # My Neovim Setup
-extended from [Neovim-from-scratch](https://github.com/LunarVim/Neovim-from-scratch)
+Based on [Neovim-from-scratch](https://github.com/LunarVim/Neovim-from-scratch)
 
 
 

@@ -47,7 +47,6 @@ return packer.startup(function(use)
 	use("windwp/nvim-autopairs") -- Autopairs, integrates with both cmp and treesitter
 	use("kyazdani42/nvim-web-devicons")
 	use("kyazdani42/nvim-tree.lua")
-	use("akinsho/bufferline.nvim")
 	use("moll/vim-bbye")
 	use("nvim-lualine/lualine.nvim")
 	use("akinsho/toggleterm.nvim")
@@ -62,18 +61,26 @@ return packer.startup(function(use)
 	use("nacro90/numb.nvim")
 	use("kevinhwang91/nvim-bqf")
 	use("tpope/vim-repeat")
-	use("tversteeg/registers.nvim")
 	use("numToStr/Comment.nvim")
 	use("norcalli/nvim-colorizer.lua")
+  use("RRethy/vim-illuminate")
 
 	use("mg979/vim-visual-multi")
 
 	-- Colorschemes
 	-- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
+  use "tjdevries/colorbuddy.nvim"
 	use("lunarvim/darkplus.nvim")
 	use({ "dav1ta/darcula-solid.nvim", requires = "rktjmp/lush.nvim" })
   use 'srcery-colors/srcery-vim'
   use 'Mofiqul/dracula.nvim'
+  use 'B4mbus/oxocarbon-lua.nvim'
+  use 'arzg/vim-colors-xcode'
+  use "shaunsingh/solarized.nvim"
+  use "svrana/neosolarized.nvim"
+
+
+
 
 	-- cmp plugins
 	use("hrsh7th/nvim-cmp") -- The completion plugin
@@ -90,16 +97,14 @@ return packer.startup(function(use)
 			require("scope").setup()
 		end,
 	})
-
 	use("preservim/vimux")
 	-- snippets
 	use("L3MON4D3/LuaSnip") --snippet engine
 	use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
 
 	-- LSP
-  use "neovim/nvim-lspconfig" -- enable LSP
   use "lvimuser/lsp-inlayhints.nvim"
-
+  use "neovim/nvim-lspconfig" -- enable LSP
   use "williamboman/mason.nvim"
   use "williamboman/mason-lspconfig.nvim"
   use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
@@ -169,11 +174,33 @@ return packer.startup(function(use)
 
   use("SmiteshP/nvim-navic")
 
-
   use "dstein64/vim-startuptime"
+  use "TimUntersberger/neogit"
+  use 'sam4llis/nvim-tundra' -- packer.nvim
 
 
 
+use {
+    "zbirenbaum/copilot.lua",
+    event = { "VimEnter" },
+    config = function()
+      vim.defer_fn(function()
+        require("copilot").setup {
+        }
+      end, 100)
+    end,
+  }
+use {
+    "zbirenbaum/copilot-cmp",
+    after = { "copilot.lua" },
+    config = function()
+      require("copilot_cmp").setup {
+        formatters = {
+          insert_text = require("copilot_cmp.format").remove_existing,
+        },
+      }
+    end,
+  }
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

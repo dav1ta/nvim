@@ -2,7 +2,7 @@ local cmp_status_ok, cmp = pcall(require, "cmp")
 if not cmp_status_ok then
   return
 end
-
+local compare = require "cmp.config.compare"
 local snip_status_ok, luasnip = pcall(require, "luasnip")
 if not snip_status_ok then
   return
@@ -100,11 +100,61 @@ cmp.setup {
     end,
   },
   sources = {
+{
+      name = "copilot",
+      -- keyword_length = 0,
+      max_item_count = 3,
+      trigger_characters = {
+        {
+          ".",
+          ":",
+          "(",
+          "'",
+          '"',
+          "[",
+          ",",
+          "#",
+          "*",
+          "@",
+          "|",
+          "=",
+          "-",
+          "{",
+          "/",
+          "\\",
+          "+",
+          "?",
+          " ",
+          -- "\t",
+          -- "\n",
+        },
+      },
+      group_index = 2,
+    },
     { name = "nvim_lsp" },
     { name = "buffer" },
     { name = "path" },
     { name = "luasnip" },
         { name = "dap" },
+sorting = {
+    priority_weight = 2,
+    comparators = {
+      -- require("copilot_cmp.comparators").prioritize,
+      -- require("copilot_cmp.comparators").score,
+      compare.offset,
+      compare.exact,
+      -- compare.scopes,
+      compare.score,
+      compare.recently_used,
+      compare.locality,
+      -- compare.kind,
+      compare.sort_text,
+      compare.length,
+      compare.order,
+      -- require("copilot_cmp.comparators").prioritize,
+      -- require("copilot_cmp.comparators").score,
+    },
+  },
   },
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,
@@ -113,20 +163,15 @@ cmp.setup {
   -- documentation = {
   --   border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
   -- },
-  experimental = {
-    ghost_text = true,
-    native_menu = false,
-  },
+  -- experimental = {
+  --   ghost_text = true,
+  --   native_menu = false,
+  -- },
 }
 
-cmp.setup.cmdline(':', {
-  sources = {
-    { name = 'cmdline' }
-  }
-})
+-- cmp.setup.cmdline(':', {
+--   sources = {
+--     { name = 'cmdline' }
+--   }
+-- })
 
-cmp.setup.cmdline('/', {
-  sources = {
-    { name = 'buffer' }
-  }
-})

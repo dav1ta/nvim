@@ -21,6 +21,10 @@ null_ls.setup {
     formatting.stylua,
     -- diagnostics.flake8,
   },
+on_attach = function(client)
+      vim.cmd [[ command! Flake8Enable execute 'lua require("null-ls").register({require("null-ls").builtins.diagnostics.flake8})' ]]
+      vim.cmd [[ command! Flake8Disable execute 'lua require("null-ls").disable({require("null-ls").builtins.diagnostics.flake8})' ]]
+  end,
 }
 
 local unwrap = {
