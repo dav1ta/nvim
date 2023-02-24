@@ -40,17 +40,12 @@ configs.setup {
     enable = true,
     extended_mode = false,
     colors = {
-      -- "#68a0b0",
-      -- "#946EaD",
-      -- "#c7aA6D",
       "Gold",
       "Orchid",
       "DodgerBlue",
-      -- "Cornsilk",
-      -- "Salmon",
-      -- "LawnGreen",
     },
     disable = { "html" },
+    max_file_lines = 1000,
   },
   playground = {
     enable = false,

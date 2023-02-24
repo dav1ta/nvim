@@ -2,7 +2,7 @@ local cmp_status_ok, cmp = pcall(require, "cmp")
 if not cmp_status_ok then
   return
 end
-local compare = require "cmp.config.compare"
+
 local snip_status_ok, luasnip = pcall(require, "luasnip")
 if not snip_status_ok then
   return
@@ -94,6 +94,7 @@ cmp.setup {
         buffer = "[Buffer]",
         path = "[Path]",
         dap = "[DAP]",
+        ['vim-dadbod-completion'] = '[DB]',
 
       })[entry.source.name]
       return vim_item
@@ -136,25 +137,7 @@ cmp.setup {
     { name = "path" },
     { name = "luasnip" },
         { name = "dap" },
-sorting = {
-    priority_weight = 2,
-    comparators = {
-      -- require("copilot_cmp.comparators").prioritize,
-      -- require("copilot_cmp.comparators").score,
-      compare.offset,
-      compare.exact,
-      -- compare.scopes,
-      compare.score,
-      compare.recently_used,
-      compare.locality,
-      -- compare.kind,
-      compare.sort_text,
-      compare.length,
-      compare.order,
-      -- require("copilot_cmp.comparators").prioritize,
-      -- require("copilot_cmp.comparators").score,
-    },
-  },
+
   },
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,
@@ -175,3 +158,11 @@ sorting = {
 --   }
 -- })
 
+local autocomplete_group = vim.api.nvim_create_augroup('vimrc_autocompletion', { clear = true })
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'sql', 'mysql', 'plsql' },
+  callback = function()
+    cmp.setup.buffer({ sources = { { name = 'vim-dadbod-completion' } } })
+  end,
+  group = autocomplete_group,
+})

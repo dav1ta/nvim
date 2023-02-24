@@ -14,7 +14,6 @@ local servers = {
   "emmet_ls",
   "html",
   "jsonls",
-  "sumneko_lua",
   "tflint",
   "terraformls",
   "tsserver",
@@ -69,10 +68,10 @@ for _, server in pairs(servers) do
     opts = vim.tbl_deep_extend("force", jsonls_opts, opts)
   end
 
-  if server == "yamlls" then
-    local yamlls_opts = require "user.lsp.settings.yamlls"
-    opts = vim.tbl_deep_extend("force", yamlls_opts, opts)
-  end
+  -- if server == "yamlls" then
+  --   local yamlls_opts = require "user.lsp.settings.yamlls"
+  --   opts = vim.tbl_deep_extend("force", yamlls_opts, opts)
+  -- end
 
   if server == "tsserver" then
     local tsserver_opts = require "user.lsp.settings.tsserver"
