@@ -9,23 +9,22 @@ if not status_ok_1 then
 end
 
 local servers = {
-  "cssls",
-  "cssmodules_ls",
-  "emmet_ls",
+  -- "cssls",
+  -- "cssmodules_ls",
+  -- "emmet_ls",
   "html",
-  "jsonls",
-  "tflint",
-  "terraformls",
-  "tsserver",
+  -- "jsonls",
+  -- "tflint",
+  -- "terraformls",
+  -- "tsserver",
   "pyright",
-  "yamlls",
-  "bashls",
-  "clangd",
-  "taplo",
-  "lemminx",
-  "jdtls"
+  -- "yamlls",
+  -- "bashls",
+  -- "clangd",
+  -- "jdtls"
   
 }
+
 
 local settings = {
   ui = {

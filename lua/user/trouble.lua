@@ -1,3 +1,4 @@
+function setup()
 local status_ok, trouble = pcall(require, "trouble")
 if not status_ok then
 	return
@@ -60,3 +61,6 @@ vim.api.nvim_set_keymap("n", "<leader>tl", "<cmd>Trouble loclist<cr>", { silent 
 vim.api.nvim_set_keymap("n", "<leader>tq", "<cmd>Trouble quickfix<cr>", { silent = true, noremap = true })
 vim.api.nvim_set_keymap("n", "gR", "<cmd>Trouble lsp_references<cr>", { silent = true, noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>xx", ":call v:lua.toggle_diagnostics()<CR>", { noremap = true, silent = true })
+
+end
+return {setup=setup}

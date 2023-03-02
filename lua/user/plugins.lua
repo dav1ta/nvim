@@ -24,6 +24,12 @@ if not status_ok then
 end
 
 
+tree= require("user.treesitter")
+gitsigns= require("user.gitsigns")
+trbl= require("user.trouble")
+neogense= require("user.neogen")
+tele= require("user.telescope")
+
 
 -- Install your plugins here
 return lazy.setup({
@@ -36,20 +42,18 @@ return lazy.setup({
 	{"moll/vim-bbye"},
 	{"nvim-lualine/lualine.nvim"},
 	{"akinsho/toggleterm.nvim"},
-	{"ahmedkhalf/project.nvim"},
+	--{"ahmedkhalf/project.nvim"},
 	{"lewis6991/impatient.nvim"},
 	-- {"lukas-reineke/indent-blankline.nvim"},
 	{"goolord/alpha-nvim"},
 	{"antoinemadec/FixCursorHold.nvim"}, -- This is needed to fix lsp doc highlight
 	{"folke/which-key.nvim"},
 	-- {"unblevable/quick-scope"},
-	{"andymass/vim-matchup"},
 	{"nacro90/numb.nvim"},
 	{"kevinhwang91/nvim-bqf"},
 	{"tpope/vim-repeat"},
 	{"numToStr/Comment.nvim"},
 	{"norcalli/nvim-colorizer.lua"},
-  {"RRethy/vim-illuminate"},
 
 	{"mg979/vim-visual-multi"},
   {"christoomey/vim-tmux-navigator"},
@@ -99,47 +103,62 @@ return lazy.setup({
   "neovim/nvim-lspconfig", -- enable LSP
 
   "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-
-
-		  "nvim-telescope/telescope-project.nvim",
-			"nvim-telescope/telescope-frecency.nvim",
-			"nvim-telescope/telescope-github.nvim",
-			"nvim-telescope/telescope-ui-select.nvim",
-			"nvim-telescope/telescope-live-grep-args.nvim",
-	    { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-			"debugloop/telescope-undo.nvim",
+    "nvim-telescope/telescope-ui-select.nvim",
+    "nvim-telescope/telescope-live-grep-args.nvim",
+    "nvim-telescope/telescope-project.nvim",
 	{
 		"nvim-telescope/telescope.nvim",
+    depedencies={
+		  "nvim-telescope/telescope-project.nvim",
+			"nvim-telescope/telescope-ui-select.nvim",
+			"nvim-telescope/telescope-live-grep-args.nvim",
+	    "ahmedkhalf/project.nvim",
+	    { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+    },
+    config = tele.setup,
+		event = "BufReadPost",
 	},
 
 
+  {"RRethy/vim-illuminate"},
 
-	-- Treesitter
-	{
-		"nvim-treesitter/nvim-treesitter",
-		run = ":TSUpdate",
-	},
+	{"andymass/vim-matchup"},
+
+  "mrjones2014/nvim-ts-rainbow",
   "JoosepAlviste/nvim-ts-context-commentstring",
 	"nvim-treesitter/nvim-treesitter-textobjects",
 	"theHamsta/nvim-treesitter-pairs",
 	"windwp/nvim-ts-autotag",
-
-
+  
+	-- Treesitter
+	{
+		"nvim-treesitter/nvim-treesitter",
+		-- :run = ":TSUpdate",
+    config = tree.setup,
+		event = "BufReadPost",
+    depedencies = {
+  "JoosepAlviste/nvim-ts-context-commentstring",
+	"nvim-treesitter/nvim-treesitter-textobjects",
+	"theHamsta/nvim-treesitter-pairs",
+	"windwp/nvim-ts-autotag",
   "mrjones2014/nvim-ts-rainbow",
+    },
+	},
+
 
 	-- Git
-	{"lewis6991/gitsigns.nvim"},
+	{"lewis6991/gitsigns.nvim",config=gitsigns.setup,event="BufReadPre"},
 	{"https://github.com/rhysd/conflict-marker.vim"},
 
-	{"liuchengxu/vista.vim"}, -- left side function panel
+	{"liuchengxu/vista.vim",event="BufReadPre"}, -- left side function panel
 	{"luukvbaal/stabilize.nvim"}, --stabilize text when splitting
 	{"ethanholz/nvim-lastplace"}, --open file in last curso pos
 	{"rmagatti/goto-preview"}, --preview goto
 	{"tpope/vim-eunuch"}, --unix coomands mkdir
 
-	{"folke/trouble.nvim"}, --see problems in code
-	{"danymat/neogen"}, --Annotation
-	{"folke/todo-comments.nvim"},
+	{"folke/trouble.nvim",config=trbl.setup,event="BufReadPost",depedencies={'gitsigns'}}, --see problems in code
+	{"danymat/neogen",config=neogense.setup,event="BufReadPre"}, --Annotation
+	{"folke/todo-comments.nvim",event="BufReadPre"},
 	{"sindrets/diffview.nvim"},
 	{"Mephistophiles/surround.nvim"},
 	{ "iamcco/markdown-preview.nvim", run = "cd app && npm install" },

@@ -1,13 +1,13 @@
+function setup()
+  print("dggd" )
+
 local status_ok, configs = pcall(require, "nvim-treesitter.configs")
 if not status_ok then
   return
 end
 
--- local ft_to_parser = require("nvim-treesitter.parsers").filetype_to_parsername
--- ft_to_parser.motoko = "typescript"
-
 configs.setup {
-  ensure_installed = { "c", "lua","python","bash","dockerfile","gitignore","go","tsx","html","scss","css","javascript",'yaml'},
+   ensure_installed = { "c", "lua","python","bash","dockerfile","gitignore","go","tsx","html","scss","css","javascript",'yaml'},
   sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
   ignore_install = { "" }, -- List of parsers to ignore installing
   matchup = {
@@ -111,4 +111,9 @@ configs.setup {
       },
     },
   },
+}
+end
+
+return {
+  setup = setup
 }
