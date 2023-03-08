@@ -1,4 +1,5 @@
 -- default configuration
+function setup()
 
 local status_ok, illuminate = pcall(require, "illuminate")
 if not status_ok then
@@ -67,3 +68,5 @@ illuminate.configure({
 vim.cmd([[ hi def IlluminatedWordText gui=None]])
 vim.cmd([[ hi def IlluminatedWordRead gui=None]])
 vim.cmd([[ hi def IlluminatedWordWrite gui=None]])
+end
+return {config=config}

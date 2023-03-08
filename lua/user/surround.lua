@@ -1,3 +1,4 @@
+function setup()
 local status_ok, surround = pcall(require, "surround")
 if not status_ok then
 	return
@@ -16,3 +17,5 @@ surround.setup {
   },
   prefix = "s"
 }
+end
+return {setup=setup}

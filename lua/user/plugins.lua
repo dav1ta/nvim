@@ -29,6 +29,13 @@ gitsigns= require("user.gitsigns")
 trbl= require("user.trouble")
 neogense= require("user.neogen")
 tele= require("user.telescope")
+illuminate= require("user.illuminate")
+matchup= require("user.matchup")
+surround= require("user.surround")
+term= require("user.toggleterm")
+which = require("user.whichkey")
+numb = require("user.numb")
+sig = require("user.lsp_signature")
 
 
 -- Install your plugins here
@@ -41,15 +48,15 @@ return lazy.setup({
 	{"kyazdani42/nvim-tree.lua"},
 	{"moll/vim-bbye"},
 	{"nvim-lualine/lualine.nvim"},
-	{"akinsho/toggleterm.nvim"},
-	--{"ahmedkhalf/project.nvim"},
+	{"akinsho/toggleterm.nvim",config=term.setup},
+	{"ahmedkhalf/project.nvim"},
 	{"lewis6991/impatient.nvim"},
 	-- {"lukas-reineke/indent-blankline.nvim"},
 	{"goolord/alpha-nvim"},
 	{"antoinemadec/FixCursorHold.nvim"}, -- This is needed to fix lsp doc highlight
-	{"folke/which-key.nvim"},
+	{"folke/which-key.nvim",config=which.setup,event="VeryLazy"},
 	-- {"unblevable/quick-scope"},
-	{"nacro90/numb.nvim"},
+	{"nacro90/numb.nvim",config=numb.config,event="BufReadPre"},
 	{"kevinhwang91/nvim-bqf"},
 	{"tpope/vim-repeat"},
 	{"numToStr/Comment.nvim"},
@@ -62,11 +69,7 @@ return lazy.setup({
 	-- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
   {"tjdevries/colorbuddy.nvim"},
 	{"lunarvim/darkplus.nvim"},
-	{ "dav1ta/darcula-solid.nvim", requires = "rktjmp/lush.nvim" },
-  'srcery-colors/srcery-vim',
   'Mofiqul/dracula.nvim',
-  'B4mbus/oxocarbon-lua.nvim',
-  'arzg/vim-colors-xcode',
   "svrana/neosolarized.nvim",
 
 
@@ -97,18 +100,19 @@ return lazy.setup({
   "williamboman/mason.nvim",
   "williamboman/mason-lspconfig.nvim",
   "jose-elias-alvarez/null-ls.nvim", -- for formatters and linters
-  "ray-x/lsp_signature.nvim",
+  {"ray-x/lsp_signature.nvim",event="BufReadPre",config=sig.setup},
+
   "simrat39/symbols-outline.nvim",
   "b0o/SchemaStore.nvim" , 
   "neovim/nvim-lspconfig", -- enable LSP
 
-  "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
     "nvim-telescope/telescope-ui-select.nvim",
     "nvim-telescope/telescope-live-grep-args.nvim",
     "nvim-telescope/telescope-project.nvim",
 	{
 		"nvim-telescope/telescope.nvim",
     depedencies={
+		"nvim-treesitter/nvim-treesitter",
 		  "nvim-telescope/telescope-project.nvim",
 			"nvim-telescope/telescope-ui-select.nvim",
 			"nvim-telescope/telescope-live-grep-args.nvim",
@@ -116,51 +120,51 @@ return lazy.setup({
 	    { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
     },
     config = tele.setup,
-		event = "BufReadPost",
+		event = "InsertEnter",
 	},
 
 
-  {"RRethy/vim-illuminate"},
+  -- {"RRethy/vim-illuminate",config=illuminate.setup,event="BufReadPost"},
 
-	{"andymass/vim-matchup"},
+	{"andymass/vim-matchup",config=matchup.config,event="InsertEnter",
+  depedencies={
+		"nvim-treesitter/nvim-treesitter"},
 
-  "mrjones2014/nvim-ts-rainbow",
-  "JoosepAlviste/nvim-ts-context-commentstring",
-	"nvim-treesitter/nvim-treesitter-textobjects",
-	"theHamsta/nvim-treesitter-pairs",
-	"windwp/nvim-ts-autotag",
+  },
+
+
+  {"mrjones2014/nvim-ts-rainbow"},
+  {"JoosepAlviste/nvim-ts-context-commentstring",event="BufReadPost"},
+  {"nvim-treesitter/nvim-treesitter-textobjects",event="BufReadPost"},
+  {"theHamsta/nvim-treesitter-pairs",event="BufReadPost"},
+  
+  {"windwp/nvim-ts-autotag",event="InsertEnter"},
   
 	-- Treesitter
 	{
 		"nvim-treesitter/nvim-treesitter",
+
 		-- :run = ":TSUpdate",
     config = tree.setup,
 		event = "BufReadPost",
-    depedencies = {
-  "JoosepAlviste/nvim-ts-context-commentstring",
-	"nvim-treesitter/nvim-treesitter-textobjects",
-	"theHamsta/nvim-treesitter-pairs",
-	"windwp/nvim-ts-autotag",
-  "mrjones2014/nvim-ts-rainbow",
-    },
 	},
 
 
 	-- Git
 	{"lewis6991/gitsigns.nvim",config=gitsigns.setup,event="BufReadPre"},
-	{"https://github.com/rhysd/conflict-marker.vim"},
+	{"https://github.com/rhysd/conflict-marker.vim",event="BufReadPost"},
 
 	{"liuchengxu/vista.vim",event="BufReadPre"}, -- left side function panel
 	{"luukvbaal/stabilize.nvim"}, --stabilize text when splitting
 	{"ethanholz/nvim-lastplace"}, --open file in last curso pos
-	{"rmagatti/goto-preview"}, --preview goto
-	{"tpope/vim-eunuch"}, --unix coomands mkdir
+	{"rmagatti/goto-preview",event="BufReadPre"}, --preview goto
+	{"tpope/vim-eunuch",event="BufReadPre"}, --unix coomands mkdir
 
 	{"folke/trouble.nvim",config=trbl.setup,event="BufReadPost",depedencies={'gitsigns'}}, --see problems in code
 	{"danymat/neogen",config=neogense.setup,event="BufReadPre"}, --Annotation
 	{"folke/todo-comments.nvim",event="BufReadPre"},
-	{"sindrets/diffview.nvim"},
-	{"Mephistophiles/surround.nvim"},
+	{"sindrets/diffview.nvim",event="BufReadPre"},
+	{"Mephistophiles/surround.nvim",config=surround.setup,event="BufReadPre"},
 	{ "iamcco/markdown-preview.nvim", run = "cd app && npm install" },
 
 	--dap
@@ -173,10 +177,10 @@ return lazy.setup({
 	{"Pocco81/DAPInstall.nvim"},
 
 
-  {"SmiteshP/nvim-navic"},
+  {"SmiteshP/nvim-navic",event="BufReadPost"},
 
   "dstein64/vim-startuptime",
-  "TimUntersberger/neogit",
+  {"TimUntersberger/neogit",event="BufReadPre"},
 
   "tpope/vim-dadbod",
   "kristijanhusak/vim-dadbod-completion",

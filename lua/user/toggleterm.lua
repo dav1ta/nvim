@@ -1,3 +1,4 @@
+function setup()
 local status_ok, toggleterm = pcall(require, "toggleterm")
 if not status_ok then
 	return
@@ -58,4 +59,5 @@ local run = Terminal:new({ cmd = "run",
 function _RUN_TOGGLE()
 	run:toggle()
 end
-
+end
+return {setup=setup}

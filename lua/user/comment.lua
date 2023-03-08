@@ -1,3 +1,4 @@
+function setup()
 local status_ok, comment = pcall(require, "Comment")
 if not status_ok then
   return
@@ -59,3 +60,6 @@ comment.setup(
     post_hook = nil,
   }
 )
+end
+
+return {setup=setup}
