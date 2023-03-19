@@ -36,6 +36,8 @@ term= require("user.toggleterm")
 which = require("user.whichkey")
 numb = require("user.numb")
 sig = require("user.lsp_signature")
+comp = require("user.completion")
+autopairs = require "user.autopairs"
 
 
 -- Install your plugins here
@@ -43,7 +45,6 @@ return lazy.setup({
 	-- My plugins here
 	{"nvim-lua/popup.nvim"}, -- An implementation of the Popup API from vim in Neovim
 	{"nvim-lua/plenary.nvim"}, -- Useful lua functions used ny lots of plugins
-	{"windwp/nvim-autopairs"}, -- Autopairs, integrates with both cmp and treesitter
 	{"kyazdani42/nvim-web-devicons"},
 	{"kyazdani42/nvim-tree.lua"},
 	{"moll/vim-bbye"},
@@ -76,13 +77,19 @@ return lazy.setup({
 
 
 	-- cmp plugins
-	"hrsh7th/nvim-cmp" ,
-	"hrsh7th/cmp-buffer",
+  {"hrsh7th/nvim-cmp" ,
+	dependencies = {
+  "hrsh7th/cmp-buffer",
 	"hrsh7th/cmp-path" ,
 	"hrsh7th/cmp-cmdline",
 	"rcarriga/cmp-dap",
 	"saadparwaiz1/cmp_luasnip", -- snippet completions
 	"hrsh7th/cmp-nvim-lsp",
+    },
+  --  config = comp.setup
+  },
+
+
 	{
 
 		"tiagovla/scope.nvim",
@@ -112,11 +119,6 @@ return lazy.setup({
 	{
 		"nvim-telescope/telescope.nvim",
     depedencies={
-		"nvim-treesitter/nvim-treesitter",
-		  "nvim-telescope/telescope-project.nvim",
-			"nvim-telescope/telescope-ui-select.nvim",
-			"nvim-telescope/telescope-live-grep-args.nvim",
-	    "ahmedkhalf/project.nvim",
 	    { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
     },
     config = tele.setup,
@@ -126,27 +128,24 @@ return lazy.setup({
 
   -- {"RRethy/vim-illuminate",config=illuminate.setup,event="BufReadPost"},
 
-	{"andymass/vim-matchup",config=matchup.config,event="InsertEnter",
-  depedencies={
+	{"andymass/vim-matchup",config=matchup.config,event="InsertEnter",dependencies={
 		"nvim-treesitter/nvim-treesitter"},
-
   },
 
 
-  {"mrjones2014/nvim-ts-rainbow"},
-  {"JoosepAlviste/nvim-ts-context-commentstring",event="BufReadPost"},
-  {"nvim-treesitter/nvim-treesitter-textobjects",event="BufReadPost"},
-  {"theHamsta/nvim-treesitter-pairs",event="BufReadPost"},
-  
-  {"windwp/nvim-ts-autotag",event="InsertEnter"},
-  
+	{"windwp/nvim-autopairs",event="InsertEnter",
+      dependencies = { "nvim-treesitter/nvim-treesitter", "hrsh7th/nvim-cmp" }
+    ,config=autopairs.setup}, -- Autopairs, integrates with both cmp and treesitter
+
 	-- Treesitter
 	{
 		"nvim-treesitter/nvim-treesitter",
-
 		-- :run = ":TSUpdate",
     config = tree.setup,
-		event = "BufReadPost",
+    dependencies={"windwp/nvim-ts-autotag",
+    "mrjones2014/nvim-ts-rainbow",
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    "nvim-treesitter/nvim-treesitter-textobjects"},
 	},
 
 
@@ -160,7 +159,7 @@ return lazy.setup({
 	{"rmagatti/goto-preview",event="BufReadPre"}, --preview goto
 	{"tpope/vim-eunuch",event="BufReadPre"}, --unix coomands mkdir
 
-	{"folke/trouble.nvim",config=trbl.setup,event="BufReadPost",depedencies={'gitsigns'}}, --see problems in code
+	{"folke/trouble.nvim",config=trbl.setup,event="BufReadPost",depnedencies={'gitsigns'}}, --see problems in code
 	{"danymat/neogen",config=neogense.setup,event="BufReadPre"}, --Annotation
 	{"folke/todo-comments.nvim",event="BufReadPre"},
 	{"sindrets/diffview.nvim",event="BufReadPre"},
@@ -183,8 +182,8 @@ return lazy.setup({
   {"TimUntersberger/neogit",event="BufReadPre"},
 
   "tpope/vim-dadbod",
-  "kristijanhusak/vim-dadbod-completion",
   "kristijanhusak/vim-dadbod-ui",
+
 
 
 

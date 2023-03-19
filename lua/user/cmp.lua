@@ -52,7 +52,8 @@ cmp.setup {
     -- Set `select` to `false` to only confirm explicitly selected items.
     ["<C-h>"] = cmp.mapping.confirm { select = true },
     ["<Right>"] = cmp.mapping.confirm { select = true },
-    ["<CR>"] = cmp.mapping.confirm { select = false },
+    ["<CR>"] = cmp.mapping.confirm ({ select = false, 
+      behavior = cmp.ConfirmBehavior.Replace}),
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -86,7 +87,7 @@ cmp.setup {
     fields = {"abbr", "kind","menu" },
     format = function(entry, vim_item)
       -- Kind icons
-      vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+      vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind],vim_item.kind)
       -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
       vim_item.menu = ({
         nvim_lsp = "[LSP]",
@@ -94,7 +95,7 @@ cmp.setup {
         buffer = "[Buffer]",
         path = "[Path]",
         dap = "[DAP]",
-        ['vim-dadbod-completion'] = '[DB]',
+        --['vim-dadbod-completion'] = '[DB]',
 
       })[entry.source.name]
       return vim_item
@@ -127,7 +128,7 @@ cmp.setup {
           "?",
           " ",
           -- "\t",
-          -- "\n",
+         -- "\n",
         },
       },
       group_index = 2,
@@ -158,11 +159,4 @@ cmp.setup {
 --   }
 -- })
 
-local autocomplete_group = vim.api.nvim_create_augroup('vimrc_autocompletion', { clear = true })
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'sql', 'mysql', 'plsql' },
-  callback = function()
-    cmp.setup.buffer({ sources = { { name = 'vim-dadbod-completion' } } })
-  end,
-  group = autocomplete_group,
-})
+

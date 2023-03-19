@@ -23,9 +23,6 @@ configs.setup {
     disable = { "markdown" }, -- list of language that will be disabled
     -- additional_vim_regex_highlighting = true,
   },
-  autopairs = {
-    enable = true,
-  },
   indent = { enable = true, disable = { "python", "css", "rust" } },
   context_commentstring = {
     enable = true,
