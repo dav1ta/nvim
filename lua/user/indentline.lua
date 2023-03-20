@@ -1,6 +1,6 @@
 local status_ok, indent_blankline = pcall(require, "indent_blankline")
 if not status_ok then
-  print("dsfsag")
+  print("indent_blankline not found")
 	return
 end
 

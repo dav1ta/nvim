@@ -1,6 +1,7 @@
 function setup()
 local status_ok, numb = pcall(require, "numb")
 if not status_ok then
+    print("numb not found")
 	return
 end
 numb.setup({

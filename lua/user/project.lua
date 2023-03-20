@@ -1,5 +1,6 @@
 local status_ok, project = pcall(require, "project_nvim")
 if not status_ok then
+  print("project_nvim not found")
 	return
 end
 project.setup({

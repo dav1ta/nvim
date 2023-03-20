@@ -1,15 +1,18 @@
 local cmp_status_ok, cmp = pcall(require, "cmp")
 if not cmp_status_ok then
+  print("cmp not found")
   return
 end
 
 local snip_status_ok, luasnip = pcall(require, "luasnip")
 if not snip_status_ok then
+  print("luasnip not found")
   return
 end
 
 local cmp_dap_status_ok, cmp_dap = pcall(require, "cmp_dap")
 if not cmp_dap_status_ok then
+  print("cmp_dap not found")
   return
 end
 

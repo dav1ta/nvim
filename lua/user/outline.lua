@@ -1,5 +1,6 @@
 local status_ok, symbols_outline = pcall(require, "symbols-outline")
 if not status_ok then
+  print("symbols-outline not found")
   return
 end
 

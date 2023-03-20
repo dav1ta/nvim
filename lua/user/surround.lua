@@ -1,6 +1,7 @@
 function setup()
 local status_ok, surround = pcall(require, "surround")
 if not status_ok then
+  print("surround not found")
 	return
 end
 

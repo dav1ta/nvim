@@ -1,6 +1,7 @@
 -- Setup nvim-cmp.
 function setup()
 local status_ok, npairs = pcall(require, "nvim-autopairs")
+print("nvim-autopairs not found")
 if not status_ok then
   return
 end

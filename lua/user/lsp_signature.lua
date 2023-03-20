@@ -1,6 +1,7 @@
 function setup()
 local status_ok, signature = pcall(require, "lsp_signature")
 if not status_ok then
+  print("signature not found")
   return
 end
 

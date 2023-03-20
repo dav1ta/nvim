@@ -1,6 +1,7 @@
 function setup()
 local status_ok, trouble = pcall(require, "trouble")
 if not status_ok then
+    print("trouble not found")
 	return
 end
 
