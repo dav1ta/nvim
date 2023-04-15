@@ -84,7 +84,6 @@ local function open_nvim_tree(data)
 
   -- buffer is a [No Name]
   local no_name = data.file == "" and vim.bo[data.buf].buftype == ""
-
   -- &ft
   local filetype = vim.bo[data.buf].ft
 
@@ -94,9 +93,10 @@ local function open_nvim_tree(data)
   if vim.tbl_contains(IGNORED_FT, filetype) then
     return
   end
+  print(no_name)
 
   -- open the tree but don't focus it
-  if not real_file then
+  if not real_file and not no_name then
     require("nvim-tree.api").tree.toggle({ focus = false })
   end
 end

@@ -16,6 +16,7 @@ if not cmp_dap_status_ok then
   return
 end
 
+local compare = require "cmp.config.compare"
 
   enabled = function()
     return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or cmp_dap.is_dap_buffer()
@@ -108,7 +109,7 @@ cmp.setup {
 {
       name = "copilot",
       -- keyword_length = 0,
-      max_item_count = 3,
+      max_item_count = 10,
       trigger_characters = {
         {
           ".",
@@ -136,30 +137,34 @@ cmp.setup {
       },
       group_index = 2,
     },
-    { name = "nvim_lsp" },
-    { name = "buffer" },
-    { name = "path" },
-    { name = "luasnip" },
+    { name = "nvim_lsp",group_index=2},
+    { name = "buffer" ,group_index=2},
+    { name = "path" ,group_index=2},
+    { name = "luasnip",group_index=2},
         { name = "dap" },
 
   },
+
+sorting = {
+    priority_weight = 2,
+    comparators = {
+      compare.offset,
+      compare.exact,
+      compare.score,
+      compare.recently_used,
+      compare.locality,
+      compare.sort_text,
+      compare.length,
+      compare.order,
+    },
+  },
+  formatters = {
+    insert_text = require("copilot_cmp.format").remove_existing
+  },
+
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,
     select = false,
   },
-  -- documentation = {
-  --   border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-  -- },
-  -- experimental = {
-  --   ghost_text = true,
-  --   native_menu = false,
-  -- },
 }
-
--- cmp.setup.cmdline(':', {
---   sources = {
---     { name = 'cmdline' }
---   }
--- })
-
 

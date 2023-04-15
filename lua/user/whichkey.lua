@@ -84,7 +84,7 @@ local opts = {
 local mappings = {
   ["a"] = { "<cmd>Alpha<cr>", "Alpha" },
   ["w"] = {
-    "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{})<cr>",
+    "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown({}))<cr>",
     "Buffers",
   },
 
@@ -92,7 +92,7 @@ local mappings = {
   -- ["w"] = { "<cmd>w!<CR>", "Save" },
   -- ["q"] = { "<cmd>q!<CR>", "Quit" },
     ["/"] = { '<cmd>Telescope current_buffer_fuzzy_find<CR>', "Search" },
-  ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
+  --["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
   ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
    ["R"] = { '<cmd>lua require("renamer").rename()<cr>', "Rename" },
   ["F"] = { "<cmd>Telescope live_grep_args<cr>", "Find Text" },
@@ -101,24 +101,13 @@ local mappings = {
       "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
       "Find files",
     },
-  ["5"] = {"<cmd>VimuxCloseRunner | VimuxRunCommand 'run'<cr>", "Run Last VimuxCommand"},
+  ["5"] = {"<cmd>RunMakefile <cr>","Run"},
   ["t"] = {"<cmd>VimuxTogglePane <cr>", "Toggle Pane"},
   ["j"] = {"<cmd>VimuxInspectRunner <cr>", "Toggle Pane"},
   ["r"] = {"<cmd>BufferLineCyclePrev<cr>", "Prev Tag"},
 
 
 
-
-
-  p = {
-    name = "Packer",
-    c = { "<cmd>PackerCompile<cr>", "Compile" },
-    i = { "<cmd>PackerInstall<cr>", "Install" },
-    s = { "<cmd>PackerSync<cr>", "Sync" },
-    S = { "<cmd>PackerStatus<cr>", "Status" },
-    u = { "<cmd>PackerUpdate<cr>", "Update" },
-  },
-  
   g = {
     name = "Git",
     g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },

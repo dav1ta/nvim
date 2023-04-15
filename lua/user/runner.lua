@@ -95,3 +95,28 @@ end
 
 
 vim.cmd("command! -nargs=* RunMakefile lua run_makefile(<q-args>)")
+
+local function trim(s)
+  return s:gsub("^%s*(.-)%s*$", "%1")
+end
+
+local function trim(s)
+  return s:gsub("^%s*(.-)%s*$", "%1")
+end
+
+ function tmux_run(cmd_name, cmd)
+  -- Check if the window with the given cmd_name already exists
+  local window_id = trim(vim.fn.system(string.format("tmux list-windows -F \"#{window_name} #{window_id}\" | grep \"^%s \" | awk '{print $2}'", cmd_name)))
+
+  if window_id == "" then
+    -- If the window doesn't exist, create a new window and run the command
+    vim.fn.system(string.format("tmux new-window -n \"%s\" \"%s\"", cmd_name, cmd))
+  else
+    -- If the window exists, select it
+    vim.fn.system(string.format("tmux select-window -t \"%s\"", window_id))
+  end
+end
+
+vim.cmd("command! TmuxHtop lua _G.tmux_run('htop', 'htop')")
+vim.cmd("command! LazyGit lua _G.tmux_run('lazygit', 'lazygit')")
+vim.cmd("command! LazyDocker lua _G.tmux_run('lazydocker', 'lazydocker')")

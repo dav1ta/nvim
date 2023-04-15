@@ -37,7 +37,8 @@ which = require("user.whichkey")
 numb = require("user.numb")
 sig = require("user.lsp_signature")
 comp = require("user.completion")
-autopairs = require "user.autopairs"
+autopairs = require ("user.autopairs")
+comment = require ("user.comment")
 
 
 -- Install your plugins here
@@ -49,7 +50,7 @@ return lazy.setup({
 	{"kyazdani42/nvim-tree.lua"},
 	{"moll/vim-bbye"},
 	{"nvim-lualine/lualine.nvim"},
-	{"akinsho/toggleterm.nvim",config=term.setup},
+	{"akinsho/toggleterm.nvim",config=term.setup,event="BufReadPost"},
 	{"ahmedkhalf/project.nvim"},
 	{"lewis6991/impatient.nvim"},
 	-- {"lukas-reineke/indent-blankline.nvim"},
@@ -57,10 +58,10 @@ return lazy.setup({
 	{"antoinemadec/FixCursorHold.nvim"}, -- This is needed to fix lsp doc highlight
 	{"folke/which-key.nvim",config=which.setup,event="VeryLazy"},
 	-- {"unblevable/quick-scope"},
-	{"nacro90/numb.nvim",config=numb.config,event="BufReadPre"},
+	{"nacro90/numb.nvim",config=numb.setup,event="BufReadPre"},
 	{"kevinhwang91/nvim-bqf"},
 	{"tpope/vim-repeat"},
-	{"numToStr/Comment.nvim"},
+	{"numToStr/Comment.nvim",config=comment.setup,event="BufReadPost"},
 	{"norcalli/nvim-colorizer.lua"},
 
 	{"mg979/vim-visual-multi"},
@@ -128,7 +129,7 @@ return lazy.setup({
 
   -- {"RRethy/vim-illuminate",config=illuminate.setup,event="BufReadPost"},
 
-	{"andymass/vim-matchup",config=matchup.config,event="InsertEnter",dependencies={
+	{"andymass/vim-matchup",config=matchup.setup,event="InsertEnter",dependencies={
 		"nvim-treesitter/nvim-treesitter"},
   },
 
@@ -183,7 +184,7 @@ return lazy.setup({
 
   "tpope/vim-dadbod",
   "kristijanhusak/vim-dadbod-ui",
-
+"mbbill/undotree",
 
 
 
