@@ -73,32 +73,16 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
 })
 
 
-local function open_nvim_tree(data)
 
-  local IGNORED_FT = {
-    "alpha","startify"
-  }
+-- local function open_nvim_tree()
+--   local path = vim.fn.expand('%:p') -- Get the full path of the current buffer
+--   local is_directory = vim.fn.isdirectory(path) == 1 -- Check if the path is a directory
 
-  -- buffer is a real file on the disk
-  local real_file = vim.fn.filereadable(data.file) == 1
+--   if is_directory then
+--     -- If it's a directory, open nvim-tree without focusing it
+--     require("nvim-tree.api").tree.toggle({ focus = false })
+--   end
+-- end
 
-  -- buffer is a [No Name]
-  local no_name = data.file == "" and vim.bo[data.buf].buftype == ""
-  -- &ft
-  local filetype = vim.bo[data.buf].ft
+-- vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
 
-  -- only files please
-
-  -- skip ignored filetypes
-  if vim.tbl_contains(IGNORED_FT, filetype) then
-    return
-  end
-  print(no_name)
-
-  -- open the tree but don't focus it
-  if not real_file and not no_name then
-    require("nvim-tree.api").tree.toggle({ focus = false })
-  end
-end
-
-vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
