@@ -102,6 +102,8 @@ local mappings = {
       "Find files",
     },
   ["5"] = {"<cmd>RunMakefile <cr>","Run"},
+  ["5"] = {"<cmd>RunMakefile debug;<cr>","Run"},
+    
   ["t"] = {"<cmd>VimuxTogglePane <cr>", "Toggle Pane"},
   ["j"] = {"<cmd>VimuxInspectRunner <cr>", "Toggle Pane"},
   ["r"] = {"<cmd>BufferLineCyclePrev<cr>", "Prev Tag"},

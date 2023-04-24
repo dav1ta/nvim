@@ -20,11 +20,11 @@ local actions = require("diffview.actions")
         -- layout = "diff1_inline",
         winbar_info = false,
       },
-      merge_tool = {
-        layout = "diff3_mixed",
-        disable_diagnostics = true,
-        winbar_info = true,
-      },
+      -- merge_tool = {
+      --   layout = "diff3_mixed",
+      --   disable_diagnostics = true,
+      --   winbar_info = true,
+      -- },
       file_history = {
         -- layout = "diff1_inline",
         winbar_info = false,

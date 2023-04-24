@@ -109,3 +109,5 @@ end)
 pcall(function()
   require("dap-python").test_runner = "pytest"
 end)
+
+require("nvim-dap-virtual-text").setup()
