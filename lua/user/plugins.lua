@@ -111,23 +111,21 @@ return lazy.setup({
   {"ray-x/lsp_signature.nvim",event="BufReadPre",config=sig.setup},
 
   "simrat39/symbols-outline.nvim",
-  "b0o/SchemaStore.nvim" , 
+  "b0o/SchemaStore.nvim" ,
   "neovim/nvim-lspconfig", -- enable LSP
 
     "nvim-telescope/telescope-ui-select.nvim",
     "nvim-telescope/telescope-live-grep-args.nvim",
     "nvim-telescope/telescope-project.nvim",
+    "nvim-telescope/telescope-fzf-native.nvim", run = "make",
 	{
 		"nvim-telescope/telescope.nvim",
-    depedencies={
-	    { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-    },
     config = tele.setup,
 		event = "InsertEnter",
 	},
 
 
-  -- {"RRethy/vim-illuminate",config=illuminate.setup,event="BufReadPost"},
+   {"RRethy/vim-illuminate",config=illuminate.setup,event="BufReadPost"},
 
 	{"andymass/vim-matchup",config=matchup.setup,event="InsertEnter",dependencies={
 		"nvim-treesitter/nvim-treesitter"},

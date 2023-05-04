@@ -11,8 +11,8 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = { "qf", "help", "man", "lspinfo", "spectre_panel" },
   callback = function()
     vim.cmd [[
-      nnoremap <silent> <buffer> q :close<CR> 
-      set nobuflisted 
+      nnoremap <silent> <buffer> q :close<CR>
+      set nobuflisted
     ]]
   end,
 })
@@ -27,13 +27,6 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   end,
 })
 
-vim.api.nvim_create_autocmd({ "BufEnter" }, {
-  callback = function()
-    vim.cmd [[
-      if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
-    ]]
-  end,
-})
 
 vim.api.nvim_create_autocmd({ "VimResized" }, {
   callback = function()
@@ -59,12 +52,6 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
   end,
 })
 
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-  pattern = { "*.java" },
-  callback = function()
-    vim.lsp.codelens.refresh()
-  end,
-})
 
 vim.api.nvim_create_autocmd({ "VimEnter" }, {
   callback = function()
@@ -73,16 +60,4 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
 })
 
 
-
--- local function open_nvim_tree()
---   local path = vim.fn.expand('%:p') -- Get the full path of the current buffer
---   local is_directory = vim.fn.isdirectory(path) == 1 -- Check if the path is a directory
-
---   if is_directory then
---     -- If it's a directory, open nvim-tree without focusing it
---     require("nvim-tree.api").tree.toggle({ focus = false })
---   end
--- end
-
--- vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
 

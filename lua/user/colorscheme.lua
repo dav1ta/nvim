@@ -4,14 +4,12 @@
   })
 vim.cmd [[
 try
-  colorscheme neosolarized 
+  colorscheme neosolarized
   set termguicolors
-  " hi Visual  guifg=#000000 guibg=#FFFFFF gui=none
-  "  hi DiagnosticUnderlineError guifg=#000000 ctermfg=131 guibg=#fa967d ctermbg=234 cterm=bold gui=bold
-  "  hi DiagnosticUnderlineWarn guifg=#000000 ctermfg=131 guibg=#fa967d ctermbg=234 cterm=bold gui=bold
-  "  hi DiagnosticUnderlineInfo guifg=#000000 ctermfg=131 guibg=#fa967d ctermbg=234 cterm=bold gui=bold
-  "  hi DiagnosticUnderlineHint guifg=#000000 ctermfg=131 guibg=#fa967d ctermbg=234 cterm=bold gui=bold
-  "
+
+    hi def IlluminatedWordText gui=None guibg=#363636
+    hi def IlluminatedWordRead gui=None guibg=#363636
+    hi def IlluminatedWordWrite gui=None guibg=#363636
 catch /^Vim\%((\a\+)\)\=:E185/
   colorscheme default
   set background=dark
