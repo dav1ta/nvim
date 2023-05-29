@@ -89,3 +89,30 @@ end
 vim.cmd("command! TmuxHtop lua _G.tmux_run('htop', 'htop')")
 vim.cmd("command! LazyGit lua _G.tmux_run('lazygit', 'lazygit')")
 vim.cmd("command! LazyDocker lua _G.tmux_run('lazydocker', 'lazydocker')")
+
+
+
+local M = {}
+
+function M.attach_debugger(port)
+  local dap = require('dap')
+  dap.attach({
+    type = 'python',
+    request = 'attach',
+    connect = {
+      host = 'localhost',
+      port = port
+    },
+    configuration = {
+      name = "Python attach",
+      type = "python",
+      request = "attach",
+      connect = {
+        host = "localhost",
+        port = port
+      },
+    }
+  })
+end
+
+return M

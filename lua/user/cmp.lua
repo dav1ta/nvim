@@ -56,7 +56,7 @@ cmp.setup {
     -- Set `select` to `false` to only confirm explicitly selected items.
     ["<C-h>"] = cmp.mapping.confirm { select = true },
     ["<Right>"] = cmp.mapping.confirm { select = true },
-    ["<CR>"] = cmp.mapping.confirm ({ select = false, 
+    ["<CR>"] = cmp.mapping.confirm ({ select = false,
       behavior = cmp.ConfirmBehavior.Replace}),
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
@@ -109,7 +109,7 @@ cmp.setup {
 {
       name = "copilot",
       -- keyword_length = 0,
-      max_item_count = 10,
+      max_item_count = 3,
       trigger_characters = {
         {
           ".",
@@ -141,21 +141,19 @@ cmp.setup {
     { name = "buffer" ,group_index=2},
     { name = "path" ,group_index=2},
     { name = "luasnip",group_index=2},
-        { name = "dap" },
+        { name = "dap" ,group_index=2},
 
   },
 
 sorting = {
     priority_weight = 2,
     comparators = {
-      compare.offset,
-      compare.exact,
-      compare.score,
-      compare.recently_used,
-      compare.locality,
-      compare.sort_text,
-      compare.length,
-      compare.order,
+        compare.score,
+        compare.offset,
+        compare.exact,
+        compare.recently_used,
+        compare.sort_text,
+        compare.locality,
     },
   },
   formatters = {

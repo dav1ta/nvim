@@ -10,6 +10,26 @@ if not dap_ui_status_ok then
 	return
 end
 
+
+dap.adapters.python = {
+  type = 'executable',
+  command = 'python',
+  args = { '-m', 'debugpy.adapter' },
+}
+
+dap.configurations.python = {
+  {
+    type = 'python',
+    request = 'attach',
+    name = 'Attach',
+    connect = {
+      host = 'localhost',
+      port = 5678,
+    },
+  },
+}
+
+
 dapui.setup({
   icons = { expanded = "▾", collapsed = "▸", current_frame = "▸" },
   mappings = {
@@ -111,3 +131,18 @@ pcall(function()
 end)
 
 require("nvim-dap-virtual-text").setup()
+
+
+
+
+function _G.start_python_debug()
+  local dap = require('dap')
+  local configurations = dap.configurations.python
+  for _, config in ipairs(configurations) do
+    if config.request == 'python' then
+      dap.launch(config)
+      return
+    end
+  end
+end
+

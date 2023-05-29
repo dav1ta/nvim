@@ -36,7 +36,6 @@ term= require("user.toggleterm")
 which = require("user.whichkey")
 numb = require("user.numb")
 sig = require("user.lsp_signature")
-comp = require("user.completion")
 autopairs = require ("user.autopairs")
 comment = require ("user.comment")
 
@@ -150,7 +149,8 @@ return lazy.setup({
 
 	-- Git
 	{"lewis6991/gitsigns.nvim",config=gitsigns.setup,event="BufReadPre"},
-	{"https://github.com/rhysd/conflict-marker.vim",event="BufReadPost"},
+	{"akinsho/git-conflict.nvim",event="BufReadPost",config=true},
+    {"tpope/vim-fugitive"},
 
 	{"liuchengxu/vista.vim",event="BufReadPre"}, -- left side function panel
 	{"luukvbaal/stabilize.nvim"}, --stabilize text when splitting
@@ -161,7 +161,6 @@ return lazy.setup({
 	{"folke/trouble.nvim",config=trbl.setup,event="BufReadPost",depnedencies={'gitsigns'}}, --see problems in code
 	{"danymat/neogen",config=neogense.setup,event="BufReadPre"}, --Annotation
 	{"folke/todo-comments.nvim",event="BufReadPre"},
-	{"sindrets/diffview.nvim",event="BufReadPre"},
 	{"Mephistophiles/surround.nvim",config=surround.setup,event="BufReadPre"},
 	{ "iamcco/markdown-preview.nvim", run = "cd app && npm install" },
 
@@ -178,7 +177,6 @@ return lazy.setup({
   {"SmiteshP/nvim-navic",event="BufReadPost"},
 
   "dstein64/vim-startuptime",
-  {"TimUntersberger/neogit",event="BufReadPre"},
 
   "tpope/vim-dadbod",
   "kristijanhusak/vim-dadbod-ui",

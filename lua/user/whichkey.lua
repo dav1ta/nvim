@@ -102,7 +102,7 @@ local mappings = {
       "Find files",
     },
   ["5"] = {"<cmd>RunMakefile <cr>","Run"},
-  ["6"] = {"<cmd>RunMakefile debug;<cr>","Run"},
+  ["6"] = {"<cmd>RunMakefile debug; lua require'dap'.continue()<cr>","Debug"},
 
   ["t"] = {"<cmd>VimuxTogglePane <cr>", "Toggle Pane"},
   ["j"] = {"<cmd>VimuxInspectRunner <cr>", "Toggle Pane"},
