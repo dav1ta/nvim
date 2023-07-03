@@ -101,8 +101,8 @@ local mappings = {
       "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
       "Find files",
     },
-  ["5"] = {"<cmd>RunMakefile <cr>","Run"},
-  ["6"] = {"<cmd>RunMakefile debug; lua require'dap'.continue()<cr>","Debug"},
+  ["5"] = {"<cmd>RunProject <cr>","Run"},
+  ["6"] = {"<cmd>RunProject debug; lua require'dap'.continue()<cr>","Debug"},
 
   ["t"] = {"<cmd>VimuxTogglePane <cr>", "Toggle Pane"},
   ["j"] = {"<cmd>VimuxInspectRunner <cr>", "Toggle Pane"},

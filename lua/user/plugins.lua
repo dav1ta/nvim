@@ -126,9 +126,9 @@ return lazy.setup({
 
    {"RRethy/vim-illuminate",config=illuminate.setup,event="BufReadPost"},
 
-	{"andymass/vim-matchup",config=matchup.setup,event="InsertEnter",dependencies={
-		"nvim-treesitter/nvim-treesitter"},
-  },
+	-- {"andymass/vim-matchup",config=matchup.setup,event="InsertEnter",dependencies={
+	-- 	"nvim-treesitter/nvim-treesitter"},
+ --  },
 
 
 	{"windwp/nvim-autopairs",event="InsertEnter",
@@ -140,6 +140,7 @@ return lazy.setup({
 		"nvim-treesitter/nvim-treesitter",
 		-- :run = ":TSUpdate",
     config = tree.setup,
+    enabled = true,
     dependencies={"windwp/nvim-ts-autotag",
     "mrjones2014/nvim-ts-rainbow",
     "JoosepAlviste/nvim-ts-context-commentstring",

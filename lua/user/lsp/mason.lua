@@ -22,7 +22,8 @@ local servers = {
   -- "bashls",
   -- "clangd",
   -- "jdtls"
-  
+    "gopls"
+
 }
 
 

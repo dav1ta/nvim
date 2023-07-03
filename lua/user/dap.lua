@@ -135,14 +135,4 @@ require("nvim-dap-virtual-text").setup()
 
 
 
-function _G.start_python_debug()
-  local dap = require('dap')
-  local configurations = dap.configurations.python
-  for _, config in ipairs(configurations) do
-    if config.request == 'python' then
-      dap.launch(config)
-      return
-    end
-  end
-end
 

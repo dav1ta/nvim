@@ -3,6 +3,7 @@ require "user.keymaps"
 require "user.plugins"
 require "user.colorscheme"
 require "user.cmp"
+
 require "user.lsp"
 require "user.autopairs"
 require "user.nvim-tree"
@@ -22,6 +23,6 @@ require "user.dap"
 require "user.navic"
 require "user.winbar"
 
-require "user.runner"
+ require "user.runner"
 --require "user.diffview"
 

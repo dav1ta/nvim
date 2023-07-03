@@ -70,9 +70,9 @@ keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 -- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 -- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
-keymap('n', '<Up>', '<cmd> lua require("dap").step_out()<cr>', opts)
+keymap('n', '<Up>', '<cmd> lua require("dap").toggle_breakpoint()<cr>', opts)
 keymap('n', '<Down>', '<cmd> lua require("dap").step_over()<cr>', opts)
-keymap('n', '<Left>', '<cmd> lua require("dap").toggle_breakpoint()<cr>', opts)
+keymap('n', '<Left>', '<cmd> lua require("dap").step_out()<cr>', opts)
 keymap('n', '<Right>', '<cmd> lua require("dap").step_into()<cr>', opts)
 
 

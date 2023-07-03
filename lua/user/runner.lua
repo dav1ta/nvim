@@ -29,8 +29,7 @@ local function run_command_for_filetype(filetype)
 end
 
 
-
-function run_makefile(args)
+function run_project(args)
   local Project = require('project_nvim.project')
   local project_root = Project.get_project_root(vim.fn.expand('%:p'))
   local filetype = vim.bo.filetype
@@ -41,8 +40,34 @@ function run_makefile(args)
     if vim.fn.filereadable(makefile_path) ~= 1 then
       makefile_path = project_root .. '/makefile'
     end
+
+    local docker_compose_path = project_root .. '/docker-compose.yml'
+    local docker_compose_dev_path = project_root .. '/docker-compose-dev.yml'
+    local npm_path = project_root .. '/package.json'
+    local go_path = project_root .. '/go.mod'
+
     if vim.fn.filereadable(makefile_path) == 1 then
       make_cmd = "make -f " .. makefile_path
+      if args ~= nil and args ~= '' then
+        make_cmd = make_cmd .. ' ' .. args
+      end
+    elseif vim.fn.filereadable(docker_compose_dev_path) == 1 then
+      make_cmd = "docker-compose -f " .. docker_compose_dev_path .. " up"
+      if args ~= nil and args ~= '' then
+        make_cmd = make_cmd .. ' ' .. args
+      end
+    elseif vim.fn.filereadable(docker_compose_path) == 1 then
+      make_cmd = "docker-compose -f " .. docker_compose_path .." up"
+      if args ~= nil and args ~= '' then
+        make_cmd = make_cmd .. ' ' .. args
+      end
+    elseif vim.fn.filereadable(npm_path) == 1 then
+      make_cmd = "npm run"
+      if args ~= nil and args ~= '' then
+        make_cmd = make_cmd .. ' ' .. args
+      end
+    elseif vim.fn.filereadable(go_path) == 1 then
+      make_cmd = "go run ."
       if args ~= nil and args ~= '' then
         make_cmd = make_cmd .. ' ' .. args
       end
@@ -57,13 +82,14 @@ function run_makefile(args)
     end
   end
 
-
-  vim.cmd("VimuxInterruptRunner")
+    for _ = 1, 3 do
+      vim.cmd("VimuxInterruptRunner")
+    end
   vim.cmd("VimuxRunCommand '" .. make_cmd .. "'")
 end
 
 
-vim.cmd("command! -nargs=* RunMakefile lua run_makefile(<q-args>)")
+vim.cmd("command! -nargs=* RunProject lua run_project(<q-args>)")
 
 local function trim(s)
   return s:gsub("^%s*(.-)%s*$", "%1")
@@ -92,27 +118,3 @@ vim.cmd("command! LazyDocker lua _G.tmux_run('lazydocker', 'lazydocker')")
 
 
 
-local M = {}
-
-function M.attach_debugger(port)
-  local dap = require('dap')
-  dap.attach({
-    type = 'python',
-    request = 'attach',
-    connect = {
-      host = 'localhost',
-      port = port
-    },
-    configuration = {
-      name = "Python attach",
-      type = "python",
-      request = "attach",
-      connect = {
-        host = "localhost",
-        port = port
-      },
-    }
-  })
-end
-
-return M
