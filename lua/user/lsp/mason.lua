@@ -9,20 +9,23 @@ if not status_ok_1 then
 end
 
 local servers = {
-  -- "cssls",
+   "cssls",
   -- "cssmodules_ls",
   -- "emmet_ls",
   "html",
   -- "jsonls",
   -- "tflint",
   -- "terraformls",
-  -- "tsserver",
+  "tsserver",
   "pyright",
-  -- "yamlls",
-  -- "bashls",
+    -- "ruff_lsp",
+  "yamlls",
+   "bashls",
   -- "clangd",
   -- "jdtls"
-    "gopls"
+    "gopls",
+
+ 'angularls'
 
 }
 

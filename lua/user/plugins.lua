@@ -30,13 +30,13 @@ trbl= require("user.trouble")
 neogense= require("user.neogen")
 tele= require("user.telescope")
 illuminate= require("user.illuminate")
-matchup= require("user.matchup")
+-- matchup= require("user.matchup")
 surround= require("user.surround")
 term= require("user.toggleterm")
 which = require("user.whichkey")
 numb = require("user.numb")
 sig = require("user.lsp_signature")
-autopairs = require ("user.autopairs")
+-- autopairs = require ("user.autopairs")
 comment = require ("user.comment")
 
 
@@ -65,6 +65,7 @@ return lazy.setup({
 
 	{"mg979/vim-visual-multi"},
   {"christoomey/vim-tmux-navigator"},
+
 
 	-- Colorschemes
 	-- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
@@ -131,10 +132,18 @@ return lazy.setup({
  --  },
 
 
-	{"windwp/nvim-autopairs",event="InsertEnter",
-      dependencies = { "nvim-treesitter/nvim-treesitter", "hrsh7th/nvim-cmp" }
-    ,config=autopairs.setup}, -- Autopairs, integrates with both cmp and treesitter
+	-- {"windwp/nvim-autopairs",event="InsertEnter",
+ --      dependencies = { "nvim-treesitter/nvim-treesitter", "hrsh7th/nvim-cmp" }
+ --    ,config=autopairs.setup}, -- Autopairs, integrates with both cmp and treesitter
 
+    {
+    'altermo/ultimate-autopair.nvim',
+    event={'InsertEnter','CmdlineEnter'},
+    branch='v0.6',
+    opts={
+        --Config goes here
+    },
+        },
 	-- Treesitter
 	{
 		"nvim-treesitter/nvim-treesitter",

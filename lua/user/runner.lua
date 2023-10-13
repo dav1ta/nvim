@@ -112,9 +112,47 @@ end
   end
 end
 
+
+
+
+
 vim.cmd("command! TmuxHtop lua _G.tmux_run('htop', 'htop')")
 vim.cmd("command! LazyGit lua _G.tmux_run('lazygit', 'lazygit')")
 vim.cmd("command! LazyDocker lua _G.tmux_run('lazydocker', 'lazydocker')")
 
 
+
+
+
+
+_G.tmux_command = function(window_name, command)
+  -- Check if we're running inside tmux
+  if os.getenv("TMUX") then
+    -- We're inside tmux
+    local output = io.popen("tmux list-windows"):read("*all")
+
+    -- Check if the window already exists
+    if output:find(window_name) then
+      -- Window exists, clear the shell and send the command
+      vim.fn.system(string.format("tmux send-keys -t '%s' C-c C-l '%s' C-m", window_name, command))
+    else
+      -- Window doesn't exist, create new one
+      vim.fn.system(string.format("tmux new-window -n '%s'", window_name))
+      -- Send the command to the new window
+      vim.fn.system(string.format("tmux send-keys -t '%s' '%s' C-m", window_name, command))
+    end
+    -- Select the window
+    vim.fn.system(string.format("tmux select-window -t '%s'", window_name))
+  end
+end
+
+vim.api.nvim_command("command! -nargs=+ RunTmux call luaeval('_G.tmux_command(_A)', <f-args>)")
+
+
+vim.api.nvim_command("command! -nargs=+ RunTmux call luaeval('_G.tmux_command(_A)', <f-args>)")
+
+local filename = vim.api.nvim_buf_get_name(0)
+local profiling_cmd = ' python -m cProfile -o log.pst ' .. filename .. ' && gprof2dot -f pstats log.pst | dot -Tsvg -o log.svg && firefox log.svg'
+
+vim.cmd("command! Profile call luaeval('_G.tmux_command(\"profile\", \"" .. profiling_cmd .. "\")')")
 

@@ -35,6 +35,14 @@ local icons = require "user.icons"
 
 local kind_icons = icons.kind
 -- find more here: https://www.nerdfonts.com/cheat-sheet
+
+local has_words_before = function()
+  if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
+end
+
+
 cmp.setup {
   snippet = {
     expand = function(args)
@@ -61,6 +69,8 @@ cmp.setup {
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
+      elseif has_words_before() then
+        cmp.complete()
       elseif luasnip.expandable() then
         luasnip.expand()
       elseif luasnip.expand_or_jumpable() then
@@ -109,7 +119,7 @@ cmp.setup {
 {
       name = "copilot",
       -- keyword_length = 0,
-      max_item_count = 3,
+      max_item_count = 2,
       trigger_characters = {
         {
           ".",
@@ -160,9 +170,9 @@ sorting = {
     insert_text = require("copilot_cmp.format").remove_existing
   },
 
-  confirm_opts = {
-    behavior = cmp.ConfirmBehavior.Replace,
-    select = false,
-  },
+  -- confirm_opts = {
+  --   behavior = cmp.ConfirmBehavior.Replace,
+  --   select = false,
+  -- },
 }
 
