@@ -47,4 +47,8 @@ vim.cmd [[set iskeyword+=-]]
 vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
 vim.cmd [[set langmap=ქq,წw,ეe,რr,ტt,ყy,უu,იi,ოo,პp,აa,სs,დd,ფf,გg,ჰh,ჯj,კk,ლl,ზz,ხx,ცc,ვv,ბb,ნn,მm,ჭW,ღR,ძZ,ჩC,თT,შS]] -- TODO: this doesn't seem to work
 vim.cmd [[let g:db_ui_winwidth = 60]] -- TODO: this doesn't seem to work
+vim.cmd [[set title]] -- TODO: this doesn't seem to work
+vim.cmd("set titlestring=nvim\\ -\\ %F%M")
+
+
 

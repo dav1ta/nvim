@@ -37,14 +37,14 @@ configs.setup {
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
   },
-  indent = { enable = true, disable = { "python", "css", "rust" } },
+  indent = { enable = true, disable = {"css", "rust" } },
   context_commentstring = {
     enable = true,
     enable_autocmd = false,
   },
   autotag = {
     enable = true,
-    disable = { "xml", "markdown" },
+    disable = { "markdown" },
   },
   rainbow = {
     enable = true,

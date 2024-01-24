@@ -21,7 +21,7 @@ local servers = {
     -- "ruff_lsp",
   "yamlls",
    "bashls",
-  -- "clangd",
+  "clangd",
   -- "jdtls"
     "gopls",
 

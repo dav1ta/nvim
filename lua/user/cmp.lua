@@ -86,7 +86,19 @@ cmp.setup {
     }),
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
-        cmp.select_prev_item()
+         -- cmp.select_prev_item()
+         local is_insert_mode = function()
+            return vim.api.nvim_get_mode().mode:sub(1, 1) == "i"
+          end
+          if is_insert_mode() then -- prevent overwriting brackets
+            confirm_opts.behavior = ConfirmBehavior.Insert
+          end
+          local entry = cmp.get_selected_entry()
+          local is_copilot = entry and entry.source.name == "copilot"
+          if is_copilot then
+            confirm_opts.behavior = ConfirmBehavior.Insert
+            confirm_opts.select = true
+          end
       elseif luasnip.jumpable(-1) then
         luasnip.jump(-1)
       else
@@ -151,7 +163,7 @@ cmp.setup {
     { name = "buffer" ,group_index=2},
     { name = "path" ,group_index=2},
     { name = "luasnip",group_index=2},
-        { name = "dap" ,group_index=2},
+    { name = "dap" ,group_index=2},
 
   },
 

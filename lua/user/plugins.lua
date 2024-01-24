@@ -1,4 +1,7 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+
+vim.g.skip_ts_context_commentstring_module = true
+
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
     "git",
@@ -30,13 +33,11 @@ trbl= require("user.trouble")
 neogense= require("user.neogen")
 tele= require("user.telescope")
 illuminate= require("user.illuminate")
--- matchup= require("user.matchup")
 surround= require("user.surround")
 term= require("user.toggleterm")
 which = require("user.whichkey")
 numb = require("user.numb")
 sig = require("user.lsp_signature")
--- autopairs = require ("user.autopairs")
 comment = require ("user.comment")
 
 
@@ -73,6 +74,7 @@ return lazy.setup({
 	{"lunarvim/darkplus.nvim"},
   'Mofiqul/dracula.nvim',
   "svrana/neosolarized.nvim",
+    "projekt0n/github-nvim-theme",
 
 
 
@@ -107,7 +109,7 @@ return lazy.setup({
   "lvimuser/lsp-inlayhints.nvim",
   "williamboman/mason.nvim",
   "williamboman/mason-lspconfig.nvim",
-  "jose-elias-alvarez/null-ls.nvim", -- for formatters and linters
+  "nvimtools/none-ls.nvim", -- for formatters and linters
   {"ray-x/lsp_signature.nvim",event="BufReadPre",config=sig.setup},
 
   "simrat39/symbols-outline.nvim",
@@ -132,18 +134,11 @@ return lazy.setup({
  --  },
 
 
+
 	-- {"windwp/nvim-autopairs",event="InsertEnter",
  --      dependencies = { "nvim-treesitter/nvim-treesitter", "hrsh7th/nvim-cmp" }
  --    ,config=autopairs.setup}, -- Autopairs, integrates with both cmp and treesitter
 
-    {
-    'altermo/ultimate-autopair.nvim',
-    event={'InsertEnter','CmdlineEnter'},
-    branch='v0.6',
-    opts={
-        --Config goes here
-    },
-        },
 	-- Treesitter
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -155,6 +150,7 @@ return lazy.setup({
     "JoosepAlviste/nvim-ts-context-commentstring",
     "nvim-treesitter/nvim-treesitter-textobjects"},
 	},
+
 
 
 	-- Git
@@ -172,11 +168,17 @@ return lazy.setup({
 	{"danymat/neogen",config=neogense.setup,event="BufReadPre"}, --Annotation
 	{"folke/todo-comments.nvim",event="BufReadPre"},
 	{"Mephistophiles/surround.nvim",config=surround.setup,event="BufReadPre"},
-	{ "iamcco/markdown-preview.nvim", run = "cd app && npm install" },
+    {
+      "iamcco/markdown-preview.nvim",
+      cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+      build = "cd app && npm install",
+      init = function()
+        vim.g.mkdp_filetypes = { "markdown" }
+      end,
+      ft = { "markdown" },
+    },	-- DAP
 
-	--dap
 
-	-- DAP
 	{"mfussenegger/nvim-dap"},
 	{"theHamsta/nvim-dap-virtual-text"},
 	{"rcarriga/nvim-dap-ui"},

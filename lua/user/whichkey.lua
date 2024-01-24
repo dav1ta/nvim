@@ -84,7 +84,7 @@ local opts = {
 local mappings = {
   ["a"] = { "<cmd>Alpha<cr>", "Alpha" },
   ["w"] = {
-    "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown({  path_display = {'shorten'}}))<cr>",
+    "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown({layout_config={width=0.7}}))<cr>",
     "Buffers",
   },
 
