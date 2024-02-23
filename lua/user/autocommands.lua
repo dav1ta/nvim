@@ -61,3 +61,12 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
 
 
 
+vim.api.nvim_create_user_command(
+  'SudoWrite',
+  function()
+    local password = vim.fn.inputsecret("Enter sudo password: ")
+    vim.fn.system('echo ' .. password .. ' | sudo -S tee % >/dev/null', vim.fn.expand('%:p'))
+    vim.cmd('e!')
+  end,
+  {}
+)

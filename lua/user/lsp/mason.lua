@@ -18,12 +18,12 @@ local servers = {
   -- "terraformls",
   "tsserver",
   "pyright",
-    -- "ruff_lsp",
   "yamlls",
    "bashls",
   "clangd",
   -- "jdtls"
     "gopls",
+    -- "ruff_lsp",
 
  'angularls'
 

@@ -66,6 +66,7 @@ return lazy.setup({
 
 	{"mg979/vim-visual-multi"},
   {"christoomey/vim-tmux-navigator"},
+    {'tzachar/highlight-undo.nvim',config=true},
 
 
 	-- Colorschemes
@@ -168,15 +169,12 @@ return lazy.setup({
 	{"danymat/neogen",config=neogense.setup,event="BufReadPre"}, --Annotation
 	{"folke/todo-comments.nvim",event="BufReadPre"},
 	{"Mephistophiles/surround.nvim",config=surround.setup,event="BufReadPre"},
-    {
-      "iamcco/markdown-preview.nvim",
-      cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-      build = "cd app && npm install",
-      init = function()
-        vim.g.mkdp_filetypes = { "markdown" }
-      end,
-      ft = { "markdown" },
-    },	-- DAP
+   {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    build = function() vim.fn["mkdp#util#install"]() end,
+},
 
 
 	{"mfussenegger/nvim-dap"},

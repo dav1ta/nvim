@@ -24,7 +24,15 @@ project.setup({
 	detection_methods = { "pattern" },
 
 	---@usage patterns used to detect root dir, when **"pattern"** is in detection_methods
-	patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json","docker-compose.yml" },
+	-- patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json","docker-compose.yml" },
+
+    patterns = {
+    ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json", "docker-compose.yml",
+    ".env", "node_modules", "Cargo.lock", "Cargo.toml", "Gopkg.lock","main.py", "go.mod", "go.sum",
+    ".dockerignore", "Dockerfile", "requirements.txt", "pyproject.toml", "Pipfile", "Pipfile.lock",
+    ".venv", "venv", "env", "virtualenv", ".python-version", "yarn.lock", "package-lock.json",
+    "npm-debug.log", "cargo", "target", "vendor", ".cargo", ".rustup", "dist", "build", ".DS_Store"
+},
 
 	---@ Show hidden files in telescope when searching for files in a project
 	show_hidden = false,

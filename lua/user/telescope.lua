@@ -116,6 +116,19 @@ telescope.setup({
 			-- preview_cutoff = 120,
 		},
 
+         buffers = {
+            theme = "dropdown",
+            previewer = false,
+            initial_mode = "normal",
+            mappings = {
+              i = {
+                ["<C-d>"] = actions.delete_buffer,
+              },
+              n = {
+                ["dd"] = actions.delete_buffer,
+              },
+            },
+      },
 		-- layout_strategy = "horizontal",
 		-- layout_config = {
 		--     horizontal = {
@@ -198,7 +211,7 @@ telescope.setup({
 	},
 })
 -- telescope.load_extension("frecency")
--- telescope.load_extension("fzf")
+telescope.load_extension("fzf")
 -- telescope.load_extension("gh")
 telescope.load_extension("project")
 telescope.load_extension("ui-select")

@@ -19,6 +19,7 @@ return {
         diagnosticMode = "openFilesOnly",
         typeCheckingMode = "off",
         useFastTaintingAnalysis = true, -- use faster tainting analysis
+        useLibraryCodeForTypes = false,
       },
     },
   },

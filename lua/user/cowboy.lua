@@ -15,7 +15,7 @@ vim.cmd([[let &t_Ce = "\e[4:0m"]])
 			if vim.v.count > 0 then
 				count = 0
 			end
-			if count >= 10 then
+			if count >= 15 then
                     print("yee booi")
 				if not ok then
 					id = nil
@@ -23,7 +23,7 @@ vim.cmd([[let &t_Ce = "\e[4:0m"]])
 				end
 			else
 				count = count + 1
-				timer:start(2000, 0, function()
+				timer:start(1000, 0, function()
 					count = 0
 				end)
 				return map
