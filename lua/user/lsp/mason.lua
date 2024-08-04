@@ -24,6 +24,7 @@ local servers = {
   -- "jdtls"
     "gopls",
     -- "ruff_lsp",
+  "rust_analyzer",
 
  'angularls'
 

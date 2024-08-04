@@ -14,7 +14,6 @@ null_ls.setup {
   debug = false,
   sources = {
     formatting.prettier,
-    formatting.jq,
     formatting.black.with { extra_args = { "--fast" } },
     formatting.stylua,
     -- diagnostics.flake8,

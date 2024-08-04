@@ -114,7 +114,7 @@ nvim_tree.setup { -- BEGIN_DEFAULT_OPTS
         auto_open = true,
       },
       update_focused_file = {
-        enable = false,
+        enable = true,
         update_root = false,
         ignore_list = {},
       },
@@ -222,11 +222,7 @@ nvim_tree.setup { -- BEGIN_DEFAULT_OPTS
           trash = true,
         },
       },
-      experimental = {
-        git = {
-          async = true,
-        },
-      },
+
       log = {
         enable = false,
         truncate = false,

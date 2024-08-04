@@ -49,7 +49,7 @@ return lazy.setup({
 	{"kyazdani42/nvim-web-devicons"},
 	{"kyazdani42/nvim-tree.lua"},
 	{"moll/vim-bbye"},
-	{"nvim-lualine/lualine.nvim"},
+    {"nvim-lualine/lualine.nvim"},
 	{"akinsho/toggleterm.nvim",config=term.setup,event="BufReadPost"},
 	{"ahmedkhalf/project.nvim"},
 	{"lewis6991/impatient.nvim"},
@@ -179,7 +179,7 @@ return lazy.setup({
 
 	{"mfussenegger/nvim-dap"},
 	{"theHamsta/nvim-dap-virtual-text"},
-	{"rcarriga/nvim-dap-ui"},
+    { "rcarriga/nvim-dap-ui", dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} },
 	{"mfussenegger/nvim-dap-python"},
 	{"Pocco81/DAPInstall.nvim"},
 
