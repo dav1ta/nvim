@@ -1,5 +1,16 @@
 local neogit = require "neogit"
 
+
+  local wk = require "which-key"
+
+  wk.add {
+    {
+      "<leader>gg",
+      "<cmd>Neogit<CR>",
+      desc = "Neogit",
+    },
+  }
+
 neogit.setup {
   disable_signs = false,
   disable_hint = true,

@@ -7,6 +7,126 @@ end
 
 local actions = require("telescope.actions")
 
+
+  local wk = require "which-key"
+
+  wk.add {
+    {
+      "<leader>w",
+      "<cmd>Telescope buffers previewer=false<cr>",
+      desc = "Find",
+    },
+    {
+      "<leader>tb",
+      "<cmd>Telescope git_branches<cr>",
+      desc = "Checkout branch",
+    },
+    {
+      "<leader>tc",
+      "<cmd>Telescope colorscheme<cr>",
+      desc = "Colorscheme",
+    },
+    {
+      "<leader>f",
+      "<cmd>Telescope find_files<cr>",
+      desc = "Find files",
+    },
+    {
+      "<leader>tp",
+      "<cmd>lua require('telescope').extensions.projects.projects()<cr>",
+      desc = "Projects",
+    },
+    {
+      "<leader>H",
+      "<cmd>Telescope live_grep_args<cr>",
+      desc = "Find Text",
+    },
+    {
+      "<leader>ts",
+      "<cmd>Telescope grep_string<cr>",
+      desc = "Find String",
+    },
+    {
+      "<leader>th",
+      "<cmd>Telescope help_tags<cr>",
+      desc = "Help",
+    },
+    {
+      "<leader>ti",
+      "<cmd>lua require('telescope').extensions.media_files.media_files()<cr>",
+      desc = "Media",
+    },
+    {
+      "<leader>tl",
+      "<cmd>Telescope resume<cr>",
+      desc = "Last Search",
+    },
+    {
+      "<leader>tM",
+      "<cmd>Telescope man_pages<cr>",
+      desc = "Man Pages",
+    },
+    {
+      "<leader>tr",
+      "<cmd>Telescope oldfiles<cr>",
+      desc = "Recent File",
+    },
+    {
+      "<leader>tR",
+      "<cmd>Telescope registers<cr>",
+      desc = "Registers",
+    },
+    {
+      "<leader>tk",
+      "<cmd>Telescope keymaps<cr>",
+      desc = "Keymaps",
+    },
+    {
+      "<leader>tC",
+      "<cmd>Telescope commands<cr>",
+      desc = "Commands",
+    },
+    {
+      "<leader>go",
+      "<cmd>Telescope git_status<cr>",
+      desc = "Open changed file",
+    },
+    {
+      "<leader>gb",
+      "<cmd>Telescope git_branches<cr>",
+      desc = "Checkout branch",
+    },
+    {
+      "<leader>gc",
+      "<cmd>Telescope git_commits<cr>",
+      desc = "Checkout commit",
+    },
+    {
+      "<leader>gC",
+      "<cmd>Telescope git_bcommits<cr>",
+      desc = "Checkout commit(for current file)",
+    },
+    {
+      "<leader>ls",
+      "<cmd>Telescope lsp_document_symbols<cr>",
+      desc = "Document Symbols",
+    },
+    {
+      "<leader>lS",
+      "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+      desc = "Workspace Symbols",
+    },
+    {
+      "<leader>le",
+      "<cmd>Telescope quickfix<cr>",
+      desc = "Telescope Quickfix",
+    },
+  }
+
+
+
+
+
 telescope.setup({
 	defaults = {
 		vimgrep_arguments = {
