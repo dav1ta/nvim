@@ -16,7 +16,7 @@ local servers = {
   -- "jsonls",
   -- "tflint",
   -- "terraformls",
-  "tsserver",
+  -- "tsserver",
   "pyright",
   "yamlls",
    "bashls",

@@ -26,7 +26,7 @@ local st = {
         g = false,
       },
     },
-    delay = 0,
+    delay = 100,
     win = {
       border = "rounded",
       no_overlap = false,

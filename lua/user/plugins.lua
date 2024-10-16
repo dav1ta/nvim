@@ -147,10 +147,11 @@ return lazy.setup({
     config = tree.setup,
     enabled = true,
     dependencies={"windwp/nvim-ts-autotag",
-    "mrjones2014/nvim-ts-rainbow",
     "JoosepAlviste/nvim-ts-context-commentstring",
     "nvim-treesitter/nvim-treesitter-textobjects"},
 	},
+
+    {'HiPhish/rainbow-delimiters.nvim',setup=true},
 
 
 
@@ -215,6 +216,9 @@ return lazy.setup({
       }
     end,
   },
+
+    require("user.diffview"),
+    require("user.telescope-tabs"),
 
 
 })

@@ -88,13 +88,17 @@ local wk = require "which-key"
 
 
 dap.adapters.python = {
+    justMyCode = false,
+
   type = 'executable',
   command = 'python',
   args = { '-m', 'debugpy.adapter' },
 }
 
 dap.configurations.python = {
+
   {
+    justMyCode = false,
     type = 'python',
     request = 'attach',
     name = 'Attach',
@@ -104,6 +108,8 @@ dap.configurations.python = {
     },
   },
 }
+
+
 
 
 dapui.setup({
@@ -180,6 +186,7 @@ dapui.setup({
 })
 
 local icons = require "user.icons"
+
 
 
 

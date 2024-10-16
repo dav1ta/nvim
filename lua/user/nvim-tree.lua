@@ -8,7 +8,10 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 local icons = require("user.icons")
-
+local wk = require "which-key"
+wk.add{
+    { "<leader>e", "<cmd>NvimTreeToggle<CR>", desc = "Explorer" },
+  }
 
 nvim_tree.setup { -- BEGIN_DEFAULT_OPTS
       auto_reload_on_write = true,

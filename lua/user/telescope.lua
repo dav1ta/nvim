@@ -13,7 +13,7 @@ local actions = require("telescope.actions")
   wk.add {
     {
       "<leader>w",
-      "<cmd>Telescope buffers previewer=false<cr>",
+      "<cmd>Telescope buffers previewer=true<cr>",
       desc = "Find",
     },
     {
@@ -37,7 +37,7 @@ local actions = require("telescope.actions")
       desc = "Projects",
     },
     {
-      "<leader>H",
+      "<leader>F",
       "<cmd>Telescope live_grep_args<cr>",
       desc = "Find Text",
     },
@@ -238,8 +238,15 @@ telescope.setup({
 
          buffers = {
             theme = "dropdown",
-            previewer = false,
+            previewer = true,
             initial_mode = "normal",
+            sort_by = function(a, b)
+                    local path_a = vim.fn.expand(a.path) -- Get the full path of buffer A
+                    local path_b = vim.fn.expand(b.path) -- Get the full path of buffer B
+                    return path_a < path_b -- Sort alphabetically by file path
+                  end,
+            sort_mru = false, -- Disable MRU sorting
+            sort_lastused = false,
             mappings = {
               i = {
                 ["<C-d>"] = actions.delete_buffer,

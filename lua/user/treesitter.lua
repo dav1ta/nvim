@@ -46,17 +46,7 @@ configs.setup {
     enable = true,
     disable = { "markdown" },
   },
-  rainbow = {
-    enable = true,
-    extended_mode = false,
-    colors = {
-      "Gold",
-      "Orchid",
-      "DodgerBlue",
-    },
-    disable = { "html" },
-    max_file_lines = 1000,
-  },
+
   playground = {
     enable = false,
   },
@@ -123,6 +113,9 @@ configs.setup {
   },
 }
 end
+
+
+
 
 return {
   setup = setup
