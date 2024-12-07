@@ -136,9 +136,15 @@ return lazy.setup({
 
 
 
-	-- {"windwp/nvim-autopairs",event="InsertEnter",
- --      dependencies = { "nvim-treesitter/nvim-treesitter", "hrsh7th/nvim-cmp" }
- --    ,config=autopairs.setup}, -- Autopairs, integrates with both cmp and treesitter
+	{"windwp/nvim-autopairs",event="InsertEnter",
+      dependencies = { "nvim-treesitter/nvim-treesitter", "hrsh7th/nvim-cmp" }
+    ,config=true}, -- Autopairs, integrates with both cmp and treesitter
+
+
+
+	{"windwp/nvim-ts-autotag",event="InsertEnter",
+      dependencies = { "nvim-treesitter/nvim-treesitter", "hrsh7th/nvim-cmp" }
+    ,config=true}, -- aitotag, integrates with both cmp and treesitter
 
 	-- Treesitter
 	{
@@ -146,7 +152,7 @@ return lazy.setup({
 		-- :run = ":TSUpdate",
     config = tree.setup,
     enabled = true,
-    dependencies={"windwp/nvim-ts-autotag",
+    dependencies={
     "JoosepAlviste/nvim-ts-context-commentstring",
     "nvim-treesitter/nvim-treesitter-textobjects"},
 	},

@@ -42,10 +42,6 @@ configs.setup {
     enable = true,
     enable_autocmd = false,
   },
-  autotag = {
-    enable = true,
-    disable = { "markdown" },
-  },
 
   playground = {
     enable = false,

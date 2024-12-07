@@ -52,3 +52,7 @@ vim.cmd("set titlestring=nvim\\ -\\ %F%M")
 
 
 
+vim.cmd[[let g:VimuxRunnerType = "window"]]
+vim.cmd[[let g:VimuxRunnerName = "vimuxout"]]
+
+
