@@ -136,9 +136,9 @@ return lazy.setup({
 
 
 
-	{"windwp/nvim-autopairs",event="InsertEnter",
-      dependencies = { "nvim-treesitter/nvim-treesitter", "hrsh7th/nvim-cmp" }
-    ,config=true}, -- Autopairs, integrates with both cmp and treesitter
+	-- {"windwp/nvim-autopairs",event="InsertEnter",
+ --      dependencies = { "nvim-treesitter/nvim-treesitter", "hrsh7th/nvim-cmp" }
+ --    ,config=true}, -- Autopairs, integrates with both cmp and treesitter
 
 
 
@@ -201,30 +201,31 @@ return lazy.setup({
 
 
 
- {
-    "zbirenbaum/copilot.lua",
-    event = { "VimEnter" },
-    config = function()
-      vim.defer_fn(function()
-        require("copilot").setup {
-        }
-      end, 100)
-    end,
-  },
- {
-    "zbirenbaum/copilot-cmp",
-    after = { "copilot.lua" },
-    config = function()
-      require("copilot_cmp").setup {
-        formatters = {
-          insert_text = require("copilot_cmp.format").remove_existing,
-        },
-      }
-    end,
-  },
+ -- {
+ --    "zbirenbaum/copilot.lua",
+ --    event = { "VimEnter" },
+ --    config = function()
+ --      vim.defer_fn(function()
+ --        require("copilot").setup {
+ --        }
+ --      end, 100)
+ --    end,
+ --  },
+ -- {
+ --    "zbirenbaum/copilot-cmp",
+ --    after = { "copilot.lua" },
+ --    config = function()
+ --      require("copilot_cmp").setup {
+ --        formatters = {
+ --          insert_text = require("copilot_cmp.format").remove_existing,
+ --        },
+ --      }
+ --    end,
+ --  },
 
     require("user.diffview"),
     require("user.telescope-tabs"),
+    require("user.smartpairs"),
 
 
 })

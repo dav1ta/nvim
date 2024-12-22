@@ -77,11 +77,8 @@ keymap('n', '<Right>', '<cmd> lua require("dap").step_into()<cr>', opts)
 
 
 
-keymap('n', '<leader>1', '<cmd> BufferLineGoToBuffer 1 <cr>', opts)
-keymap('n', '<leader>2', '<cmd> BufferLineGoToBuffer 2 <cr>', opts)
-keymap('n', '<leader>3', '<cmd> BufferLineGoToBuffer 3 <cr>', opts)
-keymap('n', '<leader>4', '<cmd> BufferLineGoToBuffer 4 <cr>', opts)
-keymap('n','<leader>p','"0p',opts)
+keymap('n', '<leader>5', '<cmd> Ru<cr>', opts)
+
 
 
 keymap("n", ",1", '1gt', opts)

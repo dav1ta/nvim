@@ -1,26 +1,34 @@
 local null_ls_status_ok, null_ls = pcall(require, "null-ls")
 if not null_ls_status_ok then
+  vim.notify("null-ls not found", vim.log.levels.ERROR)
   return
 end
 
--- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
 local formatting = null_ls.builtins.formatting
--- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
 local diagnostics = null_ls.builtins.diagnostics
 
--- https://github.com/prettier-solidity/prettier-plugin-solidity
--- npm install --save-dev prettier prettier-plugin-solidity
 null_ls.setup {
   debug = false,
   sources = {
-    formatting.prettier,
+    formatting.prettier.with({
+      filetypes = { "javascript", "typescript", "json", "yaml", "markdown" },
+      extra_args = { "--print-width", "100" },
+    }),
     formatting.black.with { extra_args = { "--fast" } },
     formatting.stylua,
-    -- diagnostics.flake8,
+ --diagnostics.flake8.with { extra_args = { "--max-line-length", "88" } },
   },
-on_attach = function(client)
-      vim.cmd [[ command! Flake8Enable execute 'lua require("null-ls").register({require("null-ls").builtins.diagnostics.flake8})' ]]
-      vim.cmd [[ command! Flake8Disable execute 'lua require("null-ls").disable({require("null-ls").builtins.diagnostics.flake8})' ]]
+
+  on_attach = function(client, bufnr)
+    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+    local opts = { noremap = true, silent = true }
+
+    buf_set_keymap("n", "<leader>lf", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+
+    vim.cmd [[
+      command! Flake8Enable lua require("null-ls").enable({ require("null-ls").builtins.diagnostics.flake8 })
+      command! Flake8Disable lua require("null-ls").disable({ require("null-ls").builtins.diagnostics.flake8 })
+    ]]
   end,
 }
 
@@ -30,20 +38,16 @@ local unwrap = {
   generator = {
     fn = function(params)
       local diagnostics = {}
-      -- sources have access to a params object
-      -- containing info about the current file and editor state
       for i, line in ipairs(params.content) do
-        local col, end_col = line:find "unwrap()"
+        local col, end_col = line:find("unwrap()")
         if col and end_col then
-          -- null-ls fills in undefined positions
-          -- and converts source diagnostics into the required format
           table.insert(diagnostics, {
             row = i,
             col = col,
             end_col = end_col,
             source = "unwrap",
-            message = "hey " .. os.getenv("USER") .. ", don't forget to handle this" ,
-            severity = 2,
+            message = string.format("Hey %s, consider handling this unwrap!", os.getenv("USER")),
+            severity = 2, -- Warning level
           })
         end
       end
@@ -53,3 +57,4 @@ local unwrap = {
 }
 
 null_ls.register(unwrap)
+
