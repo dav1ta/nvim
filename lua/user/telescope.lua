@@ -224,21 +224,21 @@ telescope.setup({
 		--     preview_width = 0.6,
 		--   },
 		-- },
-		layout_strategy = "flex",
-		layout_config = {
-			horizontal = { width = 0.95, height = 0.95, preview_width = 0.5 },
-			vertical = { width = 0.95, height = 0.95, preview_height = 0.7 },
-			-- horizontal = {
-			--   prompt_position = "bottom",
-			--   preview_width = 0.55,
-			-- },
-			-- vertical = {
-			--   mirror = false,
-			-- },
-			-- width = 0.87,
-			-- height = 0.80,
-			-- preview_cutoff = 120,
-		},
+		-- layout_strategy = "flex",
+		-- layout_config = {
+		-- 	horizontal = { width = 0.95, height = 0.95, preview_width = 0.5 },
+		-- 	vertical = { width = 0.95, height = 0.95, preview_height = 0.7 },
+		-- 	-- horizontal = {
+		-- 	--   prompt_position = "bottom",
+		-- 	--   preview_width = 0.55,
+		-- 	-- },
+		-- 	-- vertical = {
+		-- 	--   mirror = false,
+		-- 	-- },
+		-- 	-- width = 0.87,
+		-- 	-- height = 0.80,
+		-- 	-- preview_cutoff = 120,
+		-- },
 
          buffers = {
             theme = "dropdown",
@@ -255,18 +255,15 @@ telescope.setup({
               },
             },
       },
-		-- layout_strategy = "horizontal",
-		-- layout_config = {
-		--     horizontal = {
-		--         prompt_position = "top",
-		--         preview_width = 0.55,
-		--         results_width = 0.8,
-		--     },
-		--     vertical = { mirror = false },
-		--     width = 0.87,
-		--     height = 0.80,
-		--     preview_cutoff = 120,
-		-- },
+        layout_strategy = "horizontal",
+    layout_config = {
+      prompt_position = "top",
+      horizontal = {
+        mirror = false,
+      },
+      vertical = {
+        mirror = false,
+      }},
 		-- layout_config = {horizontal = {mirror = false}, vertical = {mirror = false}},
 		file_sorter = require("telescope.sorters").get_fzy_sorter,
 		file_previewer = require("telescope.previewers").vim_buffer_cat.new,
@@ -305,7 +302,7 @@ telescope.setup({
 		-- 	"jpg",
 		-- 	"lua-language-server",
 		-- 		},
-		winblend = 15,
+		-- winblend = 15,
 		border = {},
 		color_devicons = false,
 		use_less = true,
@@ -330,7 +327,7 @@ telescope.setup({
 		},
 		["ui-select"] = {
 			require("telescope.themes").get_dropdown({
-				previewer = false,
+				previewer = true,
 				-- even more opts
 			}),
 		},

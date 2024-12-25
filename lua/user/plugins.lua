@@ -141,7 +141,6 @@ return lazy.setup({
  --    ,config=true}, -- Autopairs, integrates with both cmp and treesitter
 
 
-
 	{"windwp/nvim-ts-autotag",event="InsertEnter",
       dependencies = { "nvim-treesitter/nvim-treesitter", "hrsh7th/nvim-cmp" }
     ,config=true}, -- aitotag, integrates with both cmp and treesitter
@@ -226,6 +225,7 @@ return lazy.setup({
     require("user.diffview"),
     require("user.telescope-tabs"),
     require("user.smartpairs"),
+    require("user.codeium"),
 
 
 })
