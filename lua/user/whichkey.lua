@@ -211,18 +211,6 @@ which_key.setup(st)
       },
     },
     {
-      "<leader>w",
-      "<cmd>lua vim.wo.wrap = not vim.wo.wrap<CR>",
-      desc = "Wrap",
-      hidden = true,
-    },
-    {
-      "<leader>v",
-      "<cmd>vsplit<CR>",
-      desc = "Split",
-      hidden = true,
-    },
-    {
       "<leader>b",
       group = "Buffers",
     },
@@ -266,37 +254,6 @@ which_key.setup(st)
       "<leader>t",
       group = "Test",
     },
-    -- {
-    --   "<leader>a",
-    --   name = "Tab",
-    --   children = {
-    --     {
-    --       "<leader>an",
-    --       "<cmd>$tabnew<cr>",
-    --       desc = "New Empty Tab",
-    --     },
-    --     {
-    --       "<leader>aN",
-    --       "<cmd>tabnew %<cr>",
-    --       desc = "New Tab",
-    --     },
-    --     {
-    --       "<leader>ao",
-    --       "<cmd>tabonly<cr>",
-    --       desc = "Only",
-    --     },
-    --     {
-    --       "<leader>ah",
-    --       "<cmd>-tabmove<cr>",
-    --       desc = "Move Left",
-    --     },
-    --     {
-    --       "<leader>al",
-    --       "<cmd>+tabmove<cr>",
-    --       desc = "Move Right",
-    --     },
-    --   },
-    -- },
     {
       "<leader>T",
       group = "Treesitter",
@@ -304,6 +261,14 @@ which_key.setup(st)
   }
 
 
+which_key.add({
+  { "<leader>r", group = "LSP Rename" },
+  { "<leader>rr", function() vim.lsp.buf.rename() end, desc = "Rename symbol (LSP)" },
+})
+
 
 end
+
+
+vim.keymap.set('n', 's', '<Nop>', { noremap = true, silent = true })
 return {setup=setup}

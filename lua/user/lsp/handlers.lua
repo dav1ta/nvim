@@ -108,7 +108,6 @@ local function lsp_keymaps(bufnr)
 end
 
 M.on_attach = function(client, bufnr)
-   print("works")
   lsp_keymaps(bufnr)
   attach_navic(client, bufnr)
 

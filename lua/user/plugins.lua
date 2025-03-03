@@ -33,7 +33,6 @@ trbl= require("user.trouble")
 neogense= require("user.neogen")
 tele= require("user.telescope")
 illuminate= require("user.illuminate")
-surround= require("user.surround")
 term= require("user.toggleterm")
 which = require("user.whichkey")
 numb = require("user.numb")
@@ -56,7 +55,7 @@ return lazy.setup({
 	-- {"lukas-reineke/indent-blankline.nvim"},
 	{"goolord/alpha-nvim"},
 	{"antoinemadec/FixCursorHold.nvim"}, -- This is needed to fix lsp doc highlight
-	{"folke/which-key.nvim",config=which.setup,event="VeryLazy"},
+    {"folke/which-key.nvim",config=which.setup,event="VeryLazy",enabled=true},
 	-- {"unblevable/quick-scope"},
 	{"nacro90/numb.nvim",config=numb.setup,event="BufReadPre"},
 	{"kevinhwang91/nvim-bqf"},
@@ -93,6 +92,11 @@ return lazy.setup({
   --  config = comp.setup
   },
 
+{
+   "m4xshen/hardtime.nvim",
+   dependencies = { "MunifTanjim/nui.nvim" },
+   opts = {}
+},
 
 	{
 
@@ -153,7 +157,8 @@ return lazy.setup({
     enabled = true,
     dependencies={
     "JoosepAlviste/nvim-ts-context-commentstring",
-    "nvim-treesitter/nvim-treesitter-textobjects"},
+   "nvim-treesitter/nvim-treesitter-textobjects"
+    },
 	},
 
     {'HiPhish/rainbow-delimiters.nvim',setup=true},
@@ -174,7 +179,7 @@ return lazy.setup({
 	{"folke/trouble.nvim",config=trbl.setup,event="BufReadPost",depnedencies={'gitsigns'}}, --see problems in code
 	{"danymat/neogen",config=neogense.setup,event="BufReadPre"}, --Annotation
 	{"folke/todo-comments.nvim",event="BufReadPre"},
-	{"Mephistophiles/surround.nvim",config=surround.setup,event="BufReadPre"},
+	-- {"Mephistophiles/surround.nvim",config=surround.setup,event="BufReadPre"},
    {
     "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
@@ -225,7 +230,8 @@ return lazy.setup({
     require("user.diffview"),
     require("user.telescope-tabs"),
     require("user.smartpairs"),
-    require("user.codeium"),
+--require("user.codeium"),
+    require("user.mini-surround"),
 
 
 })

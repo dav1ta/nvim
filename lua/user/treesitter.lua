@@ -38,7 +38,7 @@ local function setup()
 
     matchup = {
       enable = true,
-      disable = { "html" },
+      disable = { "html","markdown" },
     },
 
     playground = {
@@ -55,10 +55,10 @@ local function setup()
         keymaps = {
           ["af"] = "@function.outer",
           ["if"] = "@function.inner",
-          ["at"] = "@class.outer",
-          ["it"] = "@class.inner",
-          ["aa"] = "@parameter.outer",
-          ["ia"] = "@parameter.inner",
+          ["ac"] = "@class.outer",
+          ["ic"] = "@class.inner",
+          ["ap"] = "@parameter.outer",
+          ["ip"] = "@parameter.inner",
         },
       },
 

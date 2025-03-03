@@ -132,3 +132,9 @@ local profiling_cmd = 'cd ' .. vim.fn.getcwd() .. ' && python -m cProfile -o log
 
 vim.cmd("command! Profile call luaeval('_G.tmux_command(\"profile\", \"" .. profiling_cmd .. "\")')")
 
+
+
+
+vim.g.dbs = {
+    mydb = 'pgsql://user:password@localhost:5432/mydatabase'
+}
