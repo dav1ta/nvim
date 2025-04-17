@@ -264,6 +264,9 @@ which_key.setup(st)
 which_key.add({
   { "<leader>r", group = "LSP Rename" },
   { "<leader>rr", function() vim.lsp.buf.rename() end, desc = "Rename symbol (LSP)" },
+  { "<leader>1", function() vim.cmd('bnext') end, desc = "go buffer 1" },
+  { "<leader>2", function() vim.cmd('bprev') end, desc = "go buffer 2" },
+
 })
 
 

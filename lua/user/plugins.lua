@@ -117,7 +117,6 @@ return lazy.setup({
   "nvimtools/none-ls.nvim", -- for formatters and linters
   {"ray-x/lsp_signature.nvim",event="BufReadPre",config=sig.setup},
 
-  "simrat39/symbols-outline.nvim",
   "b0o/SchemaStore.nvim" ,
   "neovim/nvim-lspconfig", -- enable LSP
 

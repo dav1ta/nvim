@@ -39,9 +39,12 @@ local function has_words_before()
 end
 
 cmp.setup {
-  enabled = function()
-    return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or is_dap_buffer()
-  end,
+    enabled = function()
+  if vim.b.large_buf then
+    return false
+  end
+  return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or is_dap_buffer()
+end,
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
@@ -103,16 +106,15 @@ cmp.setup {
   }),
   sorting = {
     priority_weight = 2,
-    comparators = {
-      compare.offset,
-      compare.exact,
-      compare.score,
-      compare.recently_used,
-      compare.locality,
-      compare.kind,
-      compare.sort_text,
-      compare.length,
-    },
-  },
+   comparators = {
+      compare.locality,         -- 👈 Near the cursor = top
+      compare.recently_used,    -- 👈 Things you typed recently = higher
+      compare.offset,           -- Start-of-word matches = higher
+      compare.score,            -- Fuzzy match score
+      compare.exact,            -- Exact match = bonus
+      compare.kind,             -- Favor some kinds (LSP)
+      compare.length,           -- Shorter = better
+      compare.order,            -- fallback
+    },  },
 }
 

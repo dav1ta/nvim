@@ -214,6 +214,8 @@ require("telescope").setup({
       "node_modules/*",
       ".git/*",
       "dist/*",
+      "venv/*",
+      "env/*",
       "vendor/*",
       "*.log",
       "*.min.js",

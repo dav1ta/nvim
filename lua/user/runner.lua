@@ -135,6 +135,3 @@ vim.cmd("command! Profile call luaeval('_G.tmux_command(\"profile\", \"" .. prof
 
 
 
-vim.g.dbs = {
-    mydb = 'pgsql://user:password@localhost:5432/mydatabase'
-}
