@@ -1,0 +1,48 @@
+-- local M = {
+--   "Saghen/blink.cmp",
+--   event = "BufReadPost",
+--   build = "cargo build --release",
+-- }
+
+-- function M.config()
+--   local cmp = require("blink.cmp")
+--   local luasnip = require("luasnip")
+
+--   cmp.setup({
+--     snippets = {
+--       expand = function(snippet, _)
+--         luasnip.lsp_expand(snippet)
+--       end,
+--     },
+--     appearance = {
+--       nerd_font_variant = "mono",
+--     },
+--     completion = {
+--       accept = {
+--         auto_brackets = {
+--           enabled = true,
+--         },
+--       },
+--       documentation = {
+--         auto_show = true,
+--         auto_show_delay_ms = 50,
+--       },
+--       ghost_text = {
+--         enabled = false,
+--       },
+--     },
+--     sources = {
+--       default = { "lsp", "path", "snippets", "buffer" },
+--     },
+--     keymap = {
+--       ["<CR>"] = { "select_and_accept", "fallback" },
+--       ["<Tab>"] = { "select_next", "fallback" },
+--       ["<S-Tab>"] = { "select_prev", "fallback" },
+--       ["<C-j>"] = { "select_next", "fallback" },
+--       ["<C-k>"] = { "select_prev", "fallback" },
+--     },
+--   })
+-- end
+
+-- return M
+
