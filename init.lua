@@ -23,6 +23,7 @@ require "user.navic"
 require "user.winbar"
 
 require "user.runner"
+-- require "user.copilot"
 --require "user.diffview"
-require("user.cowboy").cowboy()
+-- require("user.cowboy").cowboy()
 

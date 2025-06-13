@@ -106,15 +106,15 @@ end,
   }),
   sorting = {
     priority_weight = 2,
-   comparators = {
-      compare.locality,         -- 👈 Near the cursor = top
-      compare.recently_used,    -- 👈 Things you typed recently = higher
-      compare.offset,           -- Start-of-word matches = higher
-      compare.score,            -- Fuzzy match score
-      compare.exact,            -- Exact match = bonus
-      compare.kind,             -- Favor some kinds (LSP)
-      compare.length,           -- Shorter = better
-      compare.order,            -- fallback
-    },  },
+   comparators =   {
+   compare.offset,           -- 📌 Cursor prefix position = top
+   compare.exact,            -- ✅ Exact match should win
+   compare.score,            -- 🔍 Fuzzy match score
+   compare.recently_used,    -- 🧠 Frequency matters
+   compare.locality,         -- ✍️ Near cursor = better
+   compare.kind,             -- 🔤 Function > variable, etc.
+   compare.length,           -- 📏 Shorter = better
+   compare.order,            -- 🧩 Default fallback
+ },  },
 }
 

@@ -86,4 +86,8 @@ keymap("n", ",2", '2gt', opts)
 keymap("n", ",3", '3gt', opts)
 keymap("n", ",4", '4gt', opts)
 
+vim.api.nvim_set_keymap('n', 'p', ']p', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-p>', 'p', { noremap = true, silent = true })
 
+vim.keymap.set('n', '<C-d>', '8<C-e>', { noremap = true, silent = true }) -- scroll 10 lines down
+vim.keymap.set('n', '<C-u>', '8<C-y>', { noremap = true, silent = true }) -- scroll 10 lines up

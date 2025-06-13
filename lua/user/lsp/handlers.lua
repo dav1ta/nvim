@@ -47,7 +47,7 @@ vim.diagnostic.config({
       active = signs,
     },
     update_in_insert = true,
-    underline = False,
+    underline = false,
     severity_sort = true,
     float = {
       focusable = true,
@@ -83,7 +83,12 @@ local function attach_navic(client, bufnr)
   if not status_ok then
     return
   end
-  navic.attach(client, bufnr)
+
+
+    if not vim.b.large_buf then
+      navic.attach(client, bufnr)
+    end
+
 end
 
 local function lsp_keymaps(bufnr)

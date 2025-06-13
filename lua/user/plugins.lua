@@ -92,11 +92,6 @@ return lazy.setup({
   --  config = comp.setup
   },
 
-{
-   "m4xshen/hardtime.nvim",
-   dependencies = { "MunifTanjim/nui.nvim" },
-   opts = {}
-},
 
 	{
 
@@ -119,6 +114,7 @@ return lazy.setup({
 
   "b0o/SchemaStore.nvim" ,
   "neovim/nvim-lspconfig", -- enable LSP
+
 
     "nvim-telescope/telescope-ui-select.nvim",
     "nvim-telescope/telescope-live-grep-args.nvim",
@@ -231,6 +227,8 @@ return lazy.setup({
     require("user.smartpairs"),
 --require("user.codeium"),
     require("user.mini-surround"),
+    require("user.hardtime"),
+    require("user.copilot"),
 
 
 })
