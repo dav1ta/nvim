@@ -1,0 +1,220 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "key": "ctrl+i",
+        "command": "composerMode.agent"
+    },
+    // Additional keybindings to complement vim settings
+    {
+        "key": "ctrl+shift+e",
+        "command": "workbench.view.explorer"
+    },
+    {
+        "key": "ctrl+shift+g",
+        "command": "workbench.view.scm"
+    },
+    {
+        "key": "ctrl+shift+d",
+        "command": "workbench.view.debug"
+    },
+    {
+        "key": "ctrl+shift+x",
+        "command": "workbench.view.extensions"
+    },
+    {
+        "key": "ctrl+shift+y",
+        "command": "workbench.debug.action.toggleRepl"
+    },
+    {
+        "key": "ctrl+shift+u",
+        "command": "workbench.action.output.toggleOutput"
+    },
+    {
+        "key": "ctrl+shift+m",
+        "command": "workbench.actions.view.problems"
+    },
+    {
+        "key": "ctrl+shift+j",
+        "command": "workbench.action.togglePanel"
+    },
+    {
+        "key": "ctrl+shift+`",
+        "command": "workbench.action.terminal.new"
+    },
+    // Custom terminal commands
+    {
+        "key": "ctrl+alt+t",
+        "command": "workbench.action.terminal.toggleTerminal"
+    },
+    // Quick access to settings
+    {
+        "key": "ctrl+,",
+        "command": "workbench.action.openSettings"
+    },
+    {
+        "key": "ctrl+shift+,",
+        "command": "workbench.action.openSettingsJson"
+    },
+    // File operations
+    {
+        "key": "ctrl+shift+n",
+        "command": "workbench.action.files.newUntitledFile"
+    },
+    {
+        "key": "ctrl+shift+s",
+        "command": "workbench.action.files.saveAs"
+    },
+    // Buffer/Tab management (supplement vim settings)
+    {
+        "key": "ctrl+tab",
+        "command": "workbench.action.nextEditorInGroup"
+    },
+    {
+        "key": "ctrl+shift+tab",
+        "command": "workbench.action.previousEditorInGroup"
+    },
+    {
+        "key": "ctrl+w",
+        "command": "workbench.action.closeActiveEditor"
+    },
+    {
+        "key": "ctrl+shift+w",
+        "command": "workbench.action.closeAllEditors"
+    },
+    // Split management
+    {
+        "key": "ctrl+\\",
+        "command": "workbench.action.splitEditor"
+    },
+    {
+        "key": "ctrl+shift+\\",
+        "command": "workbench.action.splitEditorOrthogonal"
+    },
+    // Zoom
+    {
+        "key": "ctrl+shift+=",
+        "command": "workbench.action.zoomIn"
+    },
+    {
+        "key": "ctrl+shift+-",
+        "command": "workbench.action.zoomOut"
+    },
+    {
+        "key": "ctrl+shift+0",
+        "command": "workbench.action.zoomReset"
+    },
+    // Command palette enhancement
+    {
+        "key": "f1",
+        "command": "workbench.action.showCommands"
+    },
+    // Quick fix shortcut
+    {
+        "key": "ctrl+.",
+        "command": "editor.action.quickFix"
+    },
+    // Format document
+    {
+        "key": "shift+alt+f",
+        "command": "editor.action.formatDocument"
+    },
+    // Comment toggle
+    {
+        "key": "ctrl+/",
+        "command": "editor.action.commentLine"
+    },
+    {
+        "key": "ctrl+shift+/",
+        "command": "editor.action.blockComment"
+    },
+    // Multi-cursor
+    {
+        "key": "ctrl+alt+up",
+        "command": "editor.action.insertCursorAbove"
+    },
+    {
+        "key": "ctrl+alt+down",
+        "command": "editor.action.insertCursorBelow"
+    },
+    // Find and replace
+    {
+        "key": "ctrl+h",
+        "command": "editor.action.startFindReplaceAction"
+    },
+    // Go to line
+    {
+        "key": "ctrl+g",
+        "command": "workbench.action.gotoLine"
+    },
+    // Symbol search
+    {
+        "key": "ctrl+shift+o",
+        "command": "workbench.action.gotoSymbol"
+    },
+    // Workspace symbol search
+    {
+        "key": "ctrl+t",
+        "command": "workbench.action.showAllSymbols"
+    },
+    // Peek definition
+    {
+        "key": "alt+f12",
+        "command": "editor.action.peekDefinition"
+    },
+    // Peek references
+    {
+        "key": "shift+f12",
+        "command": "editor.action.referenceSearch.trigger"
+    },
+    // Rename symbol
+    {
+        "key": "f2",
+        "command": "editor.action.rename"
+    },
+    // Toggle word wrap
+    {
+        "key": "alt+z",
+        "command": "editor.action.toggleWordWrap"
+    },
+    // Fold/unfold
+    {
+        "key": "ctrl+shift+[",
+        "command": "editor.fold"
+    },
+    {
+        "key": "ctrl+shift+]",
+        "command": "editor.unfold"
+    },
+    // Bracket matching
+    {
+        "key": "ctrl+shift+\\",
+        "command": "editor.action.jumpToBracket"
+    },
+    // Git shortcuts
+    {
+        "key": "ctrl+shift+g g",
+        "command": "workbench.view.scm"
+    },
+    {
+        "key": "ctrl+shift+g c",
+        "command": "git.commitStaged"
+    },
+    {
+        "key": "ctrl+shift+g p",
+        "command": "git.push"
+    },
+    {
+        "key": "ctrl+shift+g s",
+        "command": "git.sync"
+    },
+    // Integrated terminal shortcuts
+    {
+        "key": "ctrl+shift+c",
+        "command": "workbench.action.terminal.openNativeConsole"
+    },
+    // Focus breadcrumbs
+    {
+        "key": "ctrl+shift+.",
+        "command": "breadcrumbs.focus"
+    }
+]

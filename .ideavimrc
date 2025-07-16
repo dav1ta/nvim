@@ -1,0 +1,216 @@
+" .ideavimrc - IdeaVim configuration for PyCharm
+" Replicates Neovim telescope and navigation settings
+
+" Enable IdeaVim extensions
+Plug 'machakann/vim-highlightedyank'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'preservim/nerdtree'
+
+" Basic settings
+set scrolloff=5
+set incsearch
+set ignorecase
+set smartcase
+set showmode
+set number
+set relativenumber
+set hlsearch
+set clipboard+=unnamed
+set clipboard+=ideaput
+
+" Leader key setup (Space as leader)
+let mapleader = " "
+let maplocalleader = " "
+
+" Window navigation (Ctrl+h/j/k/l)
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" File search and navigation (Telescope equivalents)
+" <leader>f - Find files (Go to File)
+nnoremap <leader>f :action GotoFile<CR>
+
+" <leader>F - Find text (Find in Files)
+nnoremap <leader>F :action FindInPath<CR>
+
+" <leader>w - Recent files/buffers (Recent Files)
+nnoremap <leader>w :action RecentFiles<CR>
+
+" Additional search shortcuts
+nnoremap <leader>tr :action RecentFiles<CR>
+nnoremap <leader>ts :action FindInPath<CR>
+nnoremap <leader>tc :action GotoClass<CR>
+nnoremap <leader>tl :action FindInPath<CR>
+
+" Tab navigation (,1, ,2, ,3, ,4)
+nnoremap ,1 :action GoToTab1<CR>
+nnoremap ,2 :action GoToTab2<CR>
+nnoremap ,3 :action GoToTab3<CR>
+nnoremap ,4 :action GoToTab4<CR>
+
+" Buffer navigation
+nnoremap ]b :action NextTab<CR>
+nnoremap [b :action PreviousTab<CR>
+
+" Code navigation (preview equivalents)
+nnoremap gp :action QuickImplementations<CR>
+nnoremap gP :action QuickJavaDoc<CR>
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gi :action GotoImplementation<CR>
+nnoremap gr :action ShowUsages<CR>
+
+" Debug shortcuts (DAP equivalents)
+nnoremap <Up> :action ToggleLineBreakpoint<CR>
+nnoremap <Down> :action StepOver<CR>
+nnoremap <Left> :action StepOut<CR>
+nnoremap <Right> :action StepInto<CR>
+
+" Run shortcuts
+nnoremap <leader>5 :action Run<CR>
+
+" Text manipulation (custom delete/yank behavior)
+nnoremap d "0d
+nnoremap x "_x
+
+" Visual mode indentation (stay in indent mode)
+vnoremap < <gv
+vnoremap > >gv
+
+" Move text up and down
+vnoremap <S-j> :m '>+1<CR>gv=gv
+vnoremap <S-k> :m '<-2<CR>gv=gv
+
+" Visual block text movement
+xnoremap J :move '>+1<CR>gv-gv
+xnoremap K :move '<-2<CR>gv-gv
+
+" Better paste in visual mode
+vnoremap p "_dP
+
+" Paste shortcuts
+nnoremap p ]p
+nnoremap <C-p> p
+
+" Scrolling
+nnoremap <C-d> 8<C-e>
+nnoremap <C-u> 8<C-y>
+
+" Git actions
+nnoremap <leader>go :action Vcs.Show.Local.Changes<CR>
+nnoremap <leader>gb :action Git.Branches<CR>
+nnoremap <leader>gc :action Vcs.Show.Log<CR>
+nnoremap <leader>gC :action Vcs.Show.Log<CR>
+
+" LSP actions
+nnoremap <leader>ls :action FileStructurePopup<CR>
+nnoremap <leader>lS :action GotoSymbol<CR>
+nnoremap <leader>le :action ShowErrorDescription<CR>
+nnoremap <leader>la :action ShowIntentionActions<CR>
+nnoremap <leader>lr :action RenameElement<CR>
+nnoremap <leader>lf :action ReformatCode<CR>
+
+" Project actions
+nnoremap <leader>tp :action ManageRecentProjects<CR>
+
+" Tool windows
+nnoremap <leader>e :action ActivateProjectToolWindow<CR>
+nnoremap <leader>tt :action ActivateTerminalToolWindow<CR>
+
+" Search actions
+nnoremap <leader>th :action HelpTopics<CR>
+nnoremap <leader>tk :action ShowKeymapReference<CR>
+nnoremap <leader>tC :action GotoAction<CR>
+
+" Refactoring
+nnoremap <leader>rr :action RenameElement<CR>
+nnoremap <leader>rf :action RenameFile<CR>
+nnoremap <leader>rm :action Move<CR>
+nnoremap <leader>ri :action Inline<CR>
+nnoremap <leader>rv :action IntroduceVariable<CR>
+nnoremap <leader>rc :action IntroduceConstant<CR>
+nnoremap <leader>rp :action IntroduceParameter<CR>
+
+" Code generation
+nnoremap <leader>cg :action Generate<CR>
+nnoremap <leader>co :action OverrideMethods<CR>
+nnoremap <leader>ci :action ImplementMethods<CR>
+
+" Debugging
+nnoremap <leader>db :action ToggleLineBreakpoint<CR>
+nnoremap <leader>dc :action Resume<CR>
+nnoremap <leader>dd :action Debug<CR>
+nnoremap <leader>ds :action Stop<CR>
+
+" Testing
+nnoremap <leader>ta :action RunAllTests<CR>
+nnoremap <leader>tf :action RunClass<CR>
+nnoremap <leader>tm :action RunMethod<CR>
+
+" Window management
+nnoremap <leader>v :action SplitVertically<CR>
+nnoremap <leader>s :action SplitHorizontally<CR>
+nnoremap <leader>q :action CloseContent<CR>
+nnoremap <leader>Q :action CloseAllEditors<CR>
+
+" Navigation in search results and lists
+" These work automatically with IdeaVim:
+" - j/k navigation in search results
+" - Enter to select
+" - Esc to close
+
+" Disable arrow keys in insert mode (optional, like your nvim setup)
+" inoremap <Up> <Nop>
+" inoremap <Down> <Nop>
+" inoremap <Left> <Nop>
+" inoremap <Right> <Nop>
+
+" Enable multiple cursors (like vim-visual-multi)
+" This works with IdeaVim's multiple cursors feature
+nnoremap <A-n> :action SelectNextOccurrence<CR>
+nnoremap <A-N> :action SelectAllOccurrences<CR>
+nnoremap <A-p> :action UnselectPreviousOccurrence<CR>
+
+" Code folding
+nnoremap zc :action CollapseRegion<CR>
+nnoremap zo :action ExpandRegion<CR>
+nnoremap zC :action CollapseAllRegions<CR>
+nnoremap zO :action ExpandAllRegions<CR>
+
+" Quickfix navigation
+nnoremap ]q :action GotoNextError<CR>
+nnoremap [q :action GotoPreviousError<CR>
+
+" Comment shortcuts
+nnoremap <leader>/ :action CommentByLineComment<CR>
+vnoremap <leader>/ :action CommentByLineComment<CR>
+
+" Highlight settings
+set highlightedyank
+let g:highlightedyank_highlight_duration = 200
+
+" Clear search highlighting
+nnoremap <leader><space> :nohlsearch<CR>
+
+" File explorer
+nnoremap <leader>e :NERDTree<CR>
+
+" Zen mode
+nnoremap <leader>z :action ToggleDistractionFreeMode<CR>
+
+" Show current file in project tree
+nnoremap <leader>o :action SelectInProjectView<CR>
+
+" Change case
+nnoremap <leader>u :action EditorToggleCase<CR>
+
+" System clipboard
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+nnoremap <leader>p "+p
+vnoremap <leader>p "+p
+
+" Configuration
+echo "IdeaVim configuration loaded successfully!"

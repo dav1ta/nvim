@@ -1,0 +1,329 @@
+{
+  // Enable Vim extension and set leader key (matches your Space leader)
+  "vim.leader": "<space>",
+
+  // Normal mode keybindings (non-recursive) - Based on your keymaps.lua
+  "vim.normalModeKeyBindingsNonRecursive": [
+    // Window navigation (matches your Ctrl+hjkl)
+    { "before": ["<C-h>"], "commands": ["workbench.action.focusLeftGroup"] },
+    { "before": ["<C-j>"], "commands": ["workbench.action.focusBelowGroup"] },
+    { "before": ["<C-k>"], "commands": ["workbench.action.focusAboveGroup"] },
+    { "before": ["<C-l>"], "commands": ["workbench.action.focusRightGroup"] },
+
+    // Buffer/Tab navigation (matches your ,1,2,3,4)
+    { "before": [",", "1"], "commands": ["workbench.action.openEditorAtIndex1"] },
+    { "before": [",", "2"], "commands": ["workbench.action.openEditorAtIndex2"] },
+    { "before": [",", "3"], "commands": ["workbench.action.openEditorAtIndex3"] },
+    { "before": [",", "4"], "commands": ["workbench.action.openEditorAtIndex4"] },
+
+    // Custom scrolling (matches your 8-line Ctrl+d/u)
+    { "before": ["<C-d>"], "commands": [{"command": "editorScroll", "args": {"to": "down", "by": "line", "value": 8}}] },
+    { "before": ["<C-u>"], "commands": [{"command": "editorScroll", "args": {"to": "up", "by": "line", "value": 8}}] },
+
+    // Custom paste behavior (matches your p -> ]p mapping)
+    { "before": ["p"], "after": ["]", "p"] },
+    { "before": ["<C-p>"], "after": ["p"] },
+
+    // Delete to register 0 (matches your d -> "0d)
+    { "before": ["d"], "after": ["\"", "0", "d"] },
+    { "before": ["x"], "after": ["\"", "_", "x"] },
+
+    // Debug mappings (matches your arrow key mappings)
+    { "before": ["<Up>"], "commands": ["editor.debug.action.toggleBreakpoint"] },
+    { "before": ["<Down>"], "commands": ["editor.debug.action.stepOver"] },
+    { "before": ["<Left>"], "commands": ["editor.debug.action.stepOut"] },
+    { "before": ["<Right>"], "commands": ["editor.debug.action.stepInto"] },
+
+    // Window resizing (matches your Ctrl+arrows)
+    { "before": ["<C-Up>"], "commands": ["workbench.action.decreaseViewHeight"] },
+    { "before": ["<C-Down>"], "commands": ["workbench.action.increaseViewHeight"] },
+    { "before": ["<C-Left>"], "commands": ["workbench.action.decreaseViewWidth"] },
+    { "before": ["<C-Right>"], "commands": ["workbench.action.increaseViewWidth"] },
+
+    // Leader key mappings based on your which-key setup
+    { "before": ["<leader>", "a"], "commands": ["workbench.action.showCommands"] },
+    { "before": ["<leader>", "w"], "commands": ["workbench.action.showAllEditorsByMostRecentlyUsed"] },
+    { "before": ["<leader>", "e"], "commands": ["workbench.view.explorer"] },
+    { "before": ["<leader>", "/"], "commands": ["workbench.action.findInFiles"] },
+    { "before": ["<leader>", "h"], "commands": ["workbench.action.closeActiveEditor"] },
+    { "before": ["<leader>", "f"], "commands": ["workbench.action.quickOpen"] },
+    { "before": ["<leader>", "F"], "commands": ["workbench.action.findInFiles"] },
+    { "before": ["<leader>", "P"], "commands": ["workbench.action.openRecent"] },
+    { "before": ["<leader>", "5"], "commands": ["workbench.action.tasks.runTask"] },
+    { "before": ["<leader>", "t"], "commands": ["workbench.action.terminal.toggleTerminal"] },
+    { "before": ["<leader>", "j"], "commands": ["workbench.action.terminal.focus"] },
+    { "before": ["<leader>", "r"], "commands": ["workbench.action.previousEditor"] },
+    { "before": ["<leader>", "1"], "commands": ["workbench.action.nextEditor"] },
+    { "before": ["<leader>", "2"], "commands": ["workbench.action.previousEditor"] },
+
+    // LSP mappings (matches your g commands)
+    { "before": ["g", "d"], "commands": ["editor.action.revealDefinition"] },
+    { "before": ["g", "D"], "commands": ["editor.action.revealDeclaration"] },
+    { "before": ["g", "r"], "commands": ["editor.action.referenceSearch.trigger"] },
+    { "before": ["g", "a"], "commands": ["editor.action.quickFix"] },
+    { "before": ["g", "p"], "commands": ["editor.action.peekDefinition"] },
+    { "before": ["g", "P"], "commands": ["editor.action.peekDefinition"] },
+
+    // Git mappings (leader+g group from your which-key)
+    { "before": ["<leader>", "g", "g"], "commands": ["workbench.view.scm"] },
+    { "before": ["<leader>", "g", "j"], "commands": ["workbench.action.editor.nextChange"] },
+    { "before": ["<leader>", "g", "k"], "commands": ["workbench.action.editor.previousChange"] },
+    { "before": ["<leader>", "g", "l"], "commands": ["gitlens.toggleFileBlame"] },
+    { "before": ["<leader>", "g", "p"], "commands": ["git.stageSelectedRanges"] },
+    { "before": ["<leader>", "g", "r"], "commands": ["git.revertSelectedRanges"] },
+    { "before": ["<leader>", "g", "s"], "commands": ["git.stage"] },
+    { "before": ["<leader>", "g", "u"], "commands": ["git.unstage"] },
+    { "before": ["<leader>", "g", "o"], "commands": ["git.openChange"] },
+    { "before": ["<leader>", "g", "b"], "commands": ["git.checkout"] },
+    { "before": ["<leader>", "g", "c"], "commands": ["git.commitStaged"] },
+    { "before": ["<leader>", "g", "d"], "commands": ["git.openChange"] },
+
+    // LSP mappings (leader+l group from your which-key)
+    { "before": ["<leader>", "l", "a"], "commands": ["editor.action.quickFix"] },
+    { "before": ["<leader>", "l", "d"], "commands": ["workbench.actions.view.problems"] },
+    { "before": ["<leader>", "l", "w"], "commands": ["workbench.actions.view.problems"] },
+    { "before": ["<leader>", "l", "f"], "commands": ["editor.action.formatDocument"] },
+    { "before": ["<leader>", "l", "i"], "commands": ["workbench.action.showRuntimeExtensions"] },
+    { "before": ["<leader>", "l", "j"], "commands": ["editor.action.marker.next"] },
+    { "before": ["<leader>", "l", "k"], "commands": ["editor.action.marker.prev"] },
+    { "before": ["<leader>", "l", "r"], "commands": ["editor.action.rename"] },
+    { "before": ["<leader>", "l", "s"], "commands": ["workbench.action.gotoSymbol"] },
+    { "before": ["<leader>", "l", "S"], "commands": ["workbench.action.showAllSymbols"] },
+
+    // Find mappings (leader+v group from your which-key)
+    { "before": ["<leader>", "v", "b"], "commands": ["git.checkout"] },
+    { "before": ["<leader>", "v", "c"], "commands": ["workbench.action.selectTheme"] },
+    { "before": ["<leader>", "v", "f"], "commands": ["workbench.action.quickOpen"] },
+    { "before": ["<leader>", "v", "t"], "commands": ["workbench.action.findInFiles"] },
+    { "before": ["<leader>", "v", "h"], "commands": ["workbench.action.showCommands"] },
+    { "before": ["<leader>", "v", "l"], "commands": ["workbench.action.openRecent"] },
+    { "before": ["<leader>", "v", "r"], "commands": ["workbench.action.openRecent"] },
+    { "before": ["<leader>", "v", "k"], "commands": ["workbench.action.openGlobalKeybindings"] },
+    { "before": ["<leader>", "v", "C"], "commands": ["workbench.action.showCommands"] },
+
+    // Debug mappings (leader+d group from your which-key)
+    { "before": ["<leader>", "d", "b"], "commands": ["editor.debug.action.toggleBreakpoint"] },
+    { "before": ["<leader>", "d", "c"], "commands": ["workbench.action.debug.continue"] },
+    { "before": ["<leader>", "d", "i"], "commands": ["workbench.action.debug.stepInto"] },
+    { "before": ["<leader>", "d", "o"], "commands": ["workbench.action.debug.stepOver"] },
+    { "before": ["<leader>", "d", "O"], "commands": ["workbench.action.debug.stepOut"] },
+    { "before": ["<leader>", "d", "r"], "commands": ["workbench.action.debug.start"] },
+    { "before": ["<leader>", "d", "x"], "commands": ["workbench.action.debug.stop"] },
+    { "before": ["<leader>", "d", "u"], "commands": ["workbench.view.debug"] },
+
+    // Rename mappings (leader+r from your which-key)
+    { "before": ["<leader>", "r", "r"], "commands": ["editor.action.rename"] },
+
+    // Disable 's' key (matches your keymap.set('n', 's', '<Nop>')
+    { "before": ["s"], "after": ["<nop>"] }
+  ],
+
+  // Visual mode keybindings (matches your visual mode settings)
+  "vim.visualModeKeyBindingsNonRecursive": [
+    // Stay in indent mode (matches your < and > with gv)
+    { "before": ["<"], "commands": ["editor.action.outdentLines"], "after": ["gv"] },
+    { "before": [">"], "commands": ["editor.action.indentLines"], "after": ["gv"] },
+    
+    // Move text up and down (matches your Shift+j/k)
+    { "before": ["<S-j>"], "commands": ["editor.action.moveLinesDownAction"] },
+    { "before": ["<S-k>"], "commands": ["editor.action.moveLinesUpAction"] },
+    
+    // Visual paste without losing register (matches your p -> "_dP)
+    { "before": ["p"], "after": ["\"", "_", "d", "P"] },
+
+    // Visual block mode - Move text up and down (matches your J/K mappings)
+    { "before": ["J"], "commands": ["editor.action.moveLinesDownAction"] },
+    { "before": ["K"], "commands": ["editor.action.moveLinesUpAction"] }
+  ],
+
+  // Insert mode keybindings
+  "vim.insertModeKeyBindings": [
+    // Add jk to escape if desired
+    // { "before": ["j", "k"], "after": ["<Esc>"] }
+  ],
+
+  // Vim extension settings (matches your options.lua)
+  "vim.useSystemClipboard": true,
+  "vim.hlsearch": true,
+  "vim.incsearch": true,
+  "vim.cursorStylePerMode": true,
+  "vim.enableNeovim": false,
+  "vim.smartcase": true,
+  "vim.ignorecase": true,
+  "vim.timeout": 1500,
+  "vim.scrolloff": 10,
+  "vim.sidescrolloff": 10,
+
+  // Editor settings (matches your options.lua)
+  "editor.lineNumbers": "on",
+  "editor.relativenumber": true,
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "editor.wordWrap": "off",
+  "editor.scrollBeyondLastLine": false,
+  "editor.cursorBlinking": "solid",
+  "editor.cursorSurroundingLines": 10,
+  "editor.cursorSurroundingLinesStyle": "default",
+  "editor.find.addExtraSpaceOnTop": false,
+  "editor.find.seedSearchStringFromSelection": "always",
+  "editor.minimap.enabled": false,
+  "editor.fontSize": 14,
+  "editor.fontFamily": "JetBrains Mono, Consolas, 'Courier New', monospace",
+  "editor.copyWithSyntaxHighlighting": false,
+  "editor.emptySelectionClipboard": false,
+  "editor.snippetSuggestions": "top",
+  "editor.suggest.insertMode": "replace",
+  "editor.suggest.filterGraceful": true,
+  "editor.suggest.localityBonus": true,
+  "editor.suggest.shareSuggestSelections": false,
+  "editor.suggest.snippetsPreventQuickSuggestions": false,
+  
+  // Workbench settings (matches your options for splits and previews)
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.enablePreviewFromQuickOpen": false,
+  "workbench.editor.closeOnFileDelete": true,
+  "workbench.editor.highlightModifiedTabs": true,
+  "workbench.editor.showTabs": true,
+  "workbench.editor.wrapTabs": false,
+  "workbench.editor.revealIfOpen": true,
+  "workbench.editor.restoreViewState": true,
+  "workbench.startupEditor": "newUntitledFile",
+  "workbench.settings.editor": "json",
+  
+  // Terminal settings
+  "terminal.integrated.scrollback": 5000,
+  "terminal.integrated.fontSize": 14,
+  "terminal.integrated.fontFamily": "JetBrains Mono, Consolas, 'Courier New', monospace",
+  
+  // Files settings (matches your no backup/swap files)
+  "files.autoSave": "off",
+  "files.hotExit": "onExitAndWindowClose",
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "**/.vscode": false
+  },
+  
+  // Search settings (optimized for ripgrep performance)
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/tmp": true,
+    "**/coverage": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/target": true,
+    "**/.vscode": true,
+    "**/logs": true,
+    "**/*.log": true,
+    "**/.cache": true,
+    "**/out": true,
+    "**/bin": true,
+    "**/obj": true
+  },
+  "search.useIgnoreFiles": true,
+  "search.smartCase": true,
+  "search.useGlobalIgnoreFiles": true,
+  "search.useParentIgnoreFiles": true,
+  "search.followSymlinks": false,
+  "search.quickOpen.includeSymbols": true,
+  "search.quickOpen.includeHistory": true,
+  "search.showLineNumbers": true,
+  "search.collapseResults": "auto",
+  "search.maxResults": 20000,
+  "search.defaultViewMode": "tree",
+  "search.maintainFileSearchCache": true,
+  "search.runInExtensionHost": false,
+  "search.searchOnType": true,
+  "search.searchOnTypeDebouncePeriod": 300,
+  "search.ripgrep.args": [
+    "--max-columns=1000",
+    "--max-count=20000",
+    "--smart-case",
+    "--hidden",
+    "--no-heading",
+    "--with-filename",
+    "--line-number",
+    "--column"
+  ],
+  
+  // Git settings
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
+  "git.autofetch": true,
+  "git.decorations.enabled": true,
+  "git.enableStatusBarSync": true,
+  "git.showPushSuccessNotification": true,
+  "git.pullTags": true,
+  "git.suggestSmartCommit": true,
+  "git.enableSmartCommit": true,
+  "git.requireGitUserConfig": true,
+  "git.useIntegratedAskPass": true,
+  "git.inputValidation": "warn",
+  "git.detectSubmodules": true,
+  "git.decorations.enabled": true,
+  
+  // Python settings (matches your python settings)
+  "python.createEnvironment.trigger": "off",
+  "python.defaultInterpreterPath": "/usr/bin/python3",
+  "python.showStartPage": false,
+  "python.terminal.activateEnvironment": true,
+  "python.terminal.executeInFileDir": false,
+  "python.terminal.focusAfterLaunch": false,
+  
+  // Cursor specific settings
+  "cursor.composer.shouldChimeAfterChatFinishes": true,
+  "cursor.general.enableWindowControlOverlay": false,
+  
+  // Debug settings
+  "debug.allowBreakpointsEverywhere": false,
+  "debug.openDebug": "openOnDebugBreak",
+  "debug.inlineValues": "auto",
+  "debug.toolBarLocation": "floating",
+  "debug.showInStatusBar": "onFirstSessionStart",
+  "debug.internalConsoleOptions": "neverOpen",
+  "debug.console.fontSize": 14,
+  "debug.console.fontFamily": "JetBrains Mono, Consolas, 'Courier New', monospace",
+  "debug.console.wordWrap": true,
+  "debug.onTaskErrors": "showErrors",
+  "debug.openExplorerOnEnd": false,
+  "debug.focusWindowOnBreak": true,
+  "debug.focusEditorOnBreak": true,
+  "debug.confirmOnExit": "never",
+  "debug.terminal.clearBeforeReusing": false,
+  
+  // Privacy/Telemetry settings (disable all telemetry)
+  "telemetry.telemetryLevel": "off",
+  "redhat.telemetry.enabled": false,
+  "gitlens.telemetry.enabled": false,
+  "dotnetAcquisitionExtension.enableTelemetry": false,
+  "cmake.telemetry.enableTelemetry": false,
+  "vs-kubernetes.telemetry.enabled": false,
+  "java.telemetry.enabled": false,
+  "sonarlint.telemetry.enabled": "off",
+  "update.enableWindowsBackgroundUpdates": false,
+  "update.showReleaseNotes": false,
+  "extensions.autoUpdate": false,
+  "extensions.autoCheckUpdates": false,
+  "workbench.enableExperiments": false,
+  "workbench.settings.enableNaturalLanguageSearch": false,
+  "npm.fetchOnlinePackageInfo": false,
+  "typescript.surveys.enabled": false,
+  "typescript.suggest.includePackageJsonAutoImports": "off",
+  "javascript.suggest.includePackageJsonAutoImports": "off",
+  "workbench.welcomePage.walkthroughs.openOnInstall": false,
+  "security.workspace.trust.enabled": false,
+  "security.workspace.trust.startupPrompt": "never",
+  "security.workspace.trust.banner": "never",
+  "security.workspace.trust.emptyWindow": false,
+  "update.mode": "none",
+  "extensions.ignoreRecommendations": true,
+  "workbench.tips.enabled": false
+}

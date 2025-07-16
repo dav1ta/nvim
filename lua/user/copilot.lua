@@ -11,7 +11,7 @@ local M = {
 function M.config()
   local select = require("CopilotChat.select")
   require("CopilotChat").setup({
-    model = "claude-3.5-sonnet",
+    model = "claude-sonnet-4",
     chat_autocomplete = false,
     selection = select.visual,
     remember_as_sticky = false,
