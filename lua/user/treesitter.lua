@@ -28,7 +28,7 @@ local function setup()
 
     indent = {
       enable = true,
-      disable = { "css", "rust" },
+      disable = {},
     },
 
     context_commentstring = {
