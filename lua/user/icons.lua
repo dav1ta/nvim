@@ -92,7 +92,7 @@
     diagnostics = {
       Error = "",
       Warning = "",
-      Information = "'",
+      Information = "",
       Question = "",
       Hint = "",
     },
@@ -103,4 +103,3 @@
       Watch = "",
     },
   }
-

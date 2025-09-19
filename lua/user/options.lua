@@ -17,7 +17,7 @@ local options = {
   splitbelow = true,                       -- force all horizontal splits to go below current window
   splitright = true,                       -- force all vertical splits to go to the right of current window
   swapfile = false,                        -- creates a swapfile
-  -- termguicolors = true,                    -- set term gui colors (most terminals support this)
+  termguicolors = true,                    -- set term gui colors (most terminals support this)
   timeoutlen = 1500,                        -- time to wait for a mapped sequence to complete (in milliseconds)
   undofile = true,                         -- enable persistent undo
   updatetime = 200,                        -- faster completion (4000ms default)
@@ -39,6 +39,11 @@ local options = {
 
 vim.opt.shortmess:append "c"
 
+-- Disable unused language providers for speed
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_node_provider = 0
+
 for k, v in pairs(options) do
   vim.opt[k] = v
 end
@@ -55,5 +60,3 @@ vim.cmd("set titlestring=nvim\\ -\\ %F%M")
 
 vim.cmd[[let g:VimuxRunnerType = "window"]]
 vim.cmd[[let g:VimuxRunnerName = "vimuxout"]]
-
-

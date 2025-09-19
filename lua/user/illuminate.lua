@@ -43,4 +43,4 @@ function setup()
     -- Update highlight groups for background highlighting
 
 end
-return {config=config}
+return {setup=setup}

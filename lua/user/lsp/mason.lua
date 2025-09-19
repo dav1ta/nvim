@@ -13,7 +13,7 @@ local servers = {
   -- "cssmodules_ls",
   -- "emmet_ls",
   "html",
-  -- "jsonls",
+  "jsonls",
   -- "tflint",
   -- "terraformls",
   -- "tsserver",
@@ -21,10 +21,11 @@ local servers = {
   "yamlls",
    "bashls",
   "clangd",
+  "lua_ls",
   -- "jdtls"
     "gopls",
     -- "ruff_lsp",
-  "rust_analyzer",
+  -- "rust_analyzer", -- not used
 
  'angularls'
 
@@ -72,10 +73,10 @@ for _, server in pairs(servers) do
     opts = vim.tbl_deep_extend("force", jsonls_opts, opts)
   end
 
-  -- if server == "yamlls" then
-  --   local yamlls_opts = require "user.lsp.settings.yamlls"
-  --   opts = vim.tbl_deep_extend("force", yamlls_opts, opts)
-  -- end
+  if server == "yamlls" then
+    local yamlls_opts = require "user.lsp.settings.yamlls"
+    opts = vim.tbl_deep_extend("force", yamlls_opts, opts)
+  end
 
   if server == "tsserver" then
     local tsserver_opts = require "user.lsp.settings.tsserver"
@@ -85,6 +86,11 @@ for _, server in pairs(servers) do
   if server == "pyright" then
     local pyright_opts = require "user.lsp.settings.pyright"
     opts = vim.tbl_deep_extend("force", pyright_opts, opts)
+  end
+
+  if server == "lua_ls" then
+    local lua_opts = require "user.lsp.settings.lua_ls"
+    opts = vim.tbl_deep_extend("force", lua_opts, opts)
   end
 
 -- if server == "jtdls" then

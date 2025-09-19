@@ -37,7 +37,7 @@ local actions = require("telescope.actions")
     },
     {
       "<leader>tp",
-      "<cmd>lua require('telescope').extensions.projects.projects()<cr>",
+      "<cmd>lua require('telescope').extensions.project.project()<cr>",
       desc = "Projects",
     },
 
@@ -75,11 +75,7 @@ local actions = require("telescope.actions")
       "<cmd>Telescope help_tags<cr>",
       desc = "Help",
     },
-    {
-      "<leader>ti",
-      "<cmd>lua require('telescope').extensions.media_files.media_files()<cr>",
-      desc = "Media",
-    },
+    -- Removed media_files mapping (plugin not installed)
     {
       "<leader>tl",
       "<cmd>Telescope resume<cr>",
@@ -160,7 +156,7 @@ require("telescope").setup({
       "--line-number",
       "--column",
       "--hidden",      -- Search hidden files
-      "--no-ignore",   -- Don't respect .gitignore
+      -- default respects .gitignore for speed; bind a separate picker if needed
       "--smart-case",  -- Case-sensitive only when uppercase is used
       "--follow",      -- Follow symlinks
       "--color=never",
@@ -173,6 +169,7 @@ require("telescope").setup({
         ["<C-j>"] = actions.move_selection_next,
         ["<C-k>"] = actions.move_selection_previous,
         ["<C-c>"] = actions.close,
+        ["q"] = actions.close,
         ["<Down>"] = actions.move_selection_next,
         ["<Up>"] = actions.move_selection_previous,
         ["<CR>"] = actions.select_default,
@@ -185,6 +182,7 @@ require("telescope").setup({
       },
       n = {
         ["<esc>"] = actions.close,
+        ["q"] = actions.close,
         ["<CR>"] = actions.select_default,
         ["<C-x>"] = actions.select_horizontal,
         ["<C-v>"] = actions.select_vertical,
@@ -221,7 +219,7 @@ require("telescope").setup({
       "*.min.js",
       "__pycache__/*",
     },
-    file_sorter = require("telescope.sorters").get_fzy_sorter,
+    -- Use fzf-native for sorting (configured via extension)
     file_previewer = require("telescope.previewers").vim_buffer_cat.new,
     grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
     qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,

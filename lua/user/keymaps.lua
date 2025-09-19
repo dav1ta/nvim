@@ -91,3 +91,6 @@ vim.api.nvim_set_keymap('n', '<C-p>', 'p', { noremap = true, silent = true })
 
 vim.keymap.set('n', '<C-d>', '8<C-e>', { noremap = true, silent = true }) -- scroll 10 lines down
 vim.keymap.set('n', '<C-u>', '8<C-y>', { noremap = true, silent = true }) -- scroll 10 lines up
+
+-- Formatting
+keymap("n", "<leader>lf", ":Format<CR>", opts)
