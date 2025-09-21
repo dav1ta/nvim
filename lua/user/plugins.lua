@@ -78,6 +78,8 @@ return lazy.setup({
 
 	-- cmp plugins
   {"hrsh7th/nvim-cmp" ,
+	event = "InsertEnter",
+    config = function() require("user.cmp") end,
 	dependencies = {
   "hrsh7th/cmp-buffer",
 	"hrsh7th/cmp-path" ,
@@ -109,7 +111,7 @@ return lazy.setup({
   {"ray-x/lsp_signature.nvim",event="BufReadPre",config=sig.setup},
 
   "b0o/SchemaStore.nvim" ,
-  "neovim/nvim-lspconfig", -- enable LSP
+  {"neovim/nvim-lspconfig", event = "BufReadPre", config = function() require("user.lsp") end }, -- enable LSP
 
   -- Formatting with conform.nvim
   { "stevearc/conform.nvim", event = "VeryLazy", config = function()
@@ -233,6 +235,7 @@ return lazy.setup({
  --  },
 
     require("user.diffview"),
+    require("user.octo"),
     require("user.telescope-tabs"),
     require("user.smartpairs"),
 --require("user.codeium"),
@@ -241,19 +244,4 @@ return lazy.setup({
     require("user.copilot"),
 
 
-}, {
-  performance = {
-    rtp = {
-      disabled_plugins = {
-        "gzip",
-        "matchit",
-        "matchparen",
-        "netrwPlugin",
-        "tarPlugin",
-        "tohtml",
-        "tutor",
-        "zipPlugin",
-      },
-    },
-  },
 })

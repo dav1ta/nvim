@@ -1,3 +1,12 @@
+-- NvimAutopairs quick cues:
+-- 1. Type `(` in insert mode → plugin inserts `()` and keeps the cursor centered.
+-- 2. Type `"` or `'` → automatic closing quote saves a keystroke.
+-- 3. `<M-e>` while inside text → trigger FastWrap to surround selections quickly.
+-- 4. `<BS>` on an empty pair → deletes both sides without leaving strays.
+-- 5. Confirm a completion with `<CR>` → autopairs adds matching brackets automatically.
+-- 6. `:lua require('nvim-autopairs').toggle()` → disable/enable when editing templates.
+-- 7. Adjust `disable_filetype` below if a picker needs raw input.
+
 local M = {
   "windwp/nvim-autopairs",
   event = "InsertEnter",

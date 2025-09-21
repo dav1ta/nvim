@@ -1,3 +1,12 @@
+-- Conform quick cues:
+-- 1. `:Format` → run the async formatter defined below for the current buffer.
+-- 2. `:lua require('conform').format({ async = false })` → force sync formatting.
+-- 3. `:ConformInfo` → inspect which formatters are available/configured.
+-- 4. Map `vim.lsp.buf.format()` as fallback when external tools are missing.
+-- 5. Extend `formatters_by_ft` to register project-specific formatter combos.
+-- 6. Toggle `format_on_save` if you switch to an auto-format workflow.
+-- 7. Watch `notify_on_error` to catch formatter failures right away.
+
 local M = {}
 
 function M.setup()

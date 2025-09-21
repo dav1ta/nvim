@@ -274,5 +274,5 @@ which_key.add({
 end
 
 
-vim.keymap.set('n', 's', '<Nop>', { noremap = true, silent = true })
+-- Allow 's' for mini.surround (sa/sd/sr...)
 return {setup=setup}

@@ -1,3 +1,12 @@
+-- Trouble quick cues:
+-- 1. `<leader>td` → open diagnostics scoped to the current buffer.
+-- 2. `btt` → toggle the workspace diagnostics list when debugging project-wide.
+-- 3. `<leader>tq` → load quickfix entries into the Trouble viewer.
+-- 4. `<leader>tl` → inspect location list issues without leaving context.
+-- 5. `gR` → jump into LSP references via Trouble's richer UI.
+-- 6. Inside the list press `p` to preview, `K` for hover, `r` to refresh.
+-- 7. Use `<C-v>` / `<C-x>` / `<C-t>` to open diagnostics in splits or tabs.
+
 function setup()
 local status_ok, trouble = pcall(require, "trouble")
 if not status_ok then
@@ -47,12 +56,12 @@ trouble.setup({
   },
 })
 
-vim.api.nvim_set_keymap("n", "btt", "<cmd>TroubleToggle<cr>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("n", "btw", "<cmd>Trouble workspace_diagnostics<cr>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>td", "<cmd>Trouble document_diagnostics<cr>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>tl", "<cmd>Trouble loclist<cr>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>tq", "<cmd>Trouble quickfix<cr>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("n", "gR", "<cmd>Trouble lsp_references<cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap("n", "btt", ":Trouble diagnostics toggle<cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap("n", "btw", ":Trouble diagnostics filter.buf=0<cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>td", ":Trouble diagnostics filter.buf=0<cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>tl", ":Trouble loclist<cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>tq", ":Trouble qflist<cr>", { silent = true, noremap = true })
+vim.api.nvim_set_keymap("n", "gR", ":Trouble lsp_references<cr>", { silent = true, noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>lua require('user.functions').toggle_diagnostics()<CR>", { noremap = true, silent = true })
 
 end

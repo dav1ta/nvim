@@ -1,3 +1,11 @@
+-- Illuminate quick cues:
+-- 1. `]]` → jump to the next reference of the symbol under cursor.
+-- 2. `[[` → move back to the previous highlighted reference.
+-- 3. `:IlluminatePause` → suspend highlighting for a distraction-free moment.
+-- 4. `:IlluminateResume` → resume automatic highlights afterwards.
+-- 5. `:IlluminatePauseBuf` → pause highlights just for the current buffer.
+-- 6. `:IlluminateToggle` → quickly flip the feature on/off if diagnostics clash.
+-- 7. Adjust `delay` here when highlights feel too eager or too slow.
 
 function setup()
 

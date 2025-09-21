@@ -1,3 +1,12 @@
+-- Gitsigns quick cues:
+-- 1. `<leader>gj` / `<leader>gk` → hop between hunks while reviewing.
+-- 2. `<leader>gs` → stage a hunk during incremental commits.
+-- 3. `<leader>gr` → reset a hunk when you spot a mistake.
+-- 4. `<leader>gp` → preview the current hunk before staging.
+-- 5. `<leader>gl` → blame the current line to recall authorship.
+-- 6. `<leader>gR` → reset the whole buffer in case of bad edits.
+-- 7. `<leader>gd` → open a diff against HEAD for broader context.
+
 function setup()
 
 local status_ok, gitsigns = pcall(require, "gitsigns")

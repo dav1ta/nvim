@@ -129,6 +129,6 @@ function M.remove_augroup(name)
   end
 end
 
-  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format()']]
+  -- Format command now provided by Conform (:Format); avoid duplicate
 
 return M

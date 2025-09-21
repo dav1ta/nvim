@@ -36,10 +36,7 @@ local function setup()
       enable_autocmd = false,
     },
 
-    matchup = {
-      enable = true,
-      disable = { "html","markdown" },
-    },
+    -- matchup removed (plugin not installed)
 
     -- playground removed: plugin not installed and you don't use it
 

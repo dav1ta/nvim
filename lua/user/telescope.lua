@@ -1,3 +1,12 @@
+-- Telescope quick cues:
+-- 1. `<leader>f` → fuzzy find project files when jumping around.
+-- 2. `<leader>L` → live grep across repo (passes hidden files too).
+-- 3. `<leader>w` → switch buffers via MRU list while multitasking.
+-- 4. `<leader>tb` → change git branches without leaving Neovim.
+-- 5. `<leader>ts` → grep word under cursor for quick reference.
+-- 6. `<leader>tp` → jump between projects you touched recently.
+-- 7. `<leader>tl` → resume the last picker to refine prior searches.
+
 function setup()
 local status_ok, telescope = pcall(require, "telescope")
 if not status_ok then
@@ -36,8 +45,19 @@ local actions = require("telescope.actions")
       desc = "Find files",
     },
     {
+      "<leader>L",
+      function()
+        require("telescope").extensions.live_grep_args.live_grep_args({
+          additional_args = function()
+            return { "--hidden", "--no-ignore" }
+          end,
+        })
+      end,
+      desc = "Live grep (all)",
+    },
+    {
       "<leader>tp",
-      "<cmd>lua require('telescope').extensions.project.project()<cr>",
+      "<cmd>lua require('telescope').extensions.projects.projects()<cr>",
       desc = "Projects",
     },
 
@@ -75,7 +95,11 @@ local actions = require("telescope.actions")
       "<cmd>Telescope help_tags<cr>",
       desc = "Help",
     },
-    -- Removed media_files mapping (plugin not installed)
+    {
+      "<leader>ti",
+      "<cmd>lua require('telescope').extensions.media_files.media_files()<cr>",
+      desc = "Media",
+    },
     {
       "<leader>tl",
       "<cmd>Telescope resume<cr>",
@@ -156,7 +180,7 @@ require("telescope").setup({
       "--line-number",
       "--column",
       "--hidden",      -- Search hidden files
-      -- default respects .gitignore for speed; bind a separate picker if needed
+      -- "--no-ignore",   -- Don't respect .gitignore
       "--smart-case",  -- Case-sensitive only when uppercase is used
       "--follow",      -- Follow symlinks
       "--color=never",
@@ -169,7 +193,6 @@ require("telescope").setup({
         ["<C-j>"] = actions.move_selection_next,
         ["<C-k>"] = actions.move_selection_previous,
         ["<C-c>"] = actions.close,
-        ["q"] = actions.close,
         ["<Down>"] = actions.move_selection_next,
         ["<Up>"] = actions.move_selection_previous,
         ["<CR>"] = actions.select_default,
@@ -182,7 +205,6 @@ require("telescope").setup({
       },
       n = {
         ["<esc>"] = actions.close,
-        ["q"] = actions.close,
         ["<CR>"] = actions.select_default,
         ["<C-x>"] = actions.select_horizontal,
         ["<C-v>"] = actions.select_vertical,
@@ -219,7 +241,6 @@ require("telescope").setup({
       "*.min.js",
       "__pycache__/*",
     },
-    -- Use fzf-native for sorting (configured via extension)
     file_previewer = require("telescope.previewers").vim_buffer_cat.new,
     grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
     qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,

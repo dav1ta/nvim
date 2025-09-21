@@ -1,3 +1,12 @@
+-- MiniSurround quick cues:
+-- 1. `saiw'` → wrap the word under cursor in quotes when toggling strings.
+-- 2. `sda"` → strip surrounding quotes before refactoring arguments.
+-- 3. `sr'"` → swap single quotes for double quotes without retyping text.
+-- 4. `sf)` → jump forward to inspect the next surrounding pair.
+-- 5. `sF)` → search left to confirm the previous surround boundary.
+-- 6. `sh` → highlight the active surround before replacing it.
+-- 7. `sn5` → widen the search window when editing multi-line blocks.
+
 local M = {
   "echasnovski/mini.surround",
   version = "*",
