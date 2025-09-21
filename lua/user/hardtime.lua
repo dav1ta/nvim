@@ -1,3 +1,12 @@
+-- Hardtime quick cues:
+-- 1. `:Hardtime toggle` → pause the trainer when you need to spam arrows.
+-- 2. `:Hardtime enable` → re-enable discipline once the exception is over.
+-- 3. `:Hardtime disable` → fully stop enforcement during demos pair work.
+-- 4. `:Hardtime report` → review which motions still trigger hints.
+-- 5. Lean on `w`/`b`/`f` motions instead of repeating `l` or `h`.
+-- 6. Jump blocks with `{`/`}` to avoid stacking `j` or `k` presses.
+-- 7. Page with `<C-d>` / `<C-u>` rather than holding the down arrow.
+
 local M = {
   "m4xshen/hardtime.nvim",
   dependencies = { "MunifTanjim/nui.nvim" },
@@ -32,4 +41,3 @@ function M.config()
 end
 
 return M
-

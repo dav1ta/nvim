@@ -25,9 +25,11 @@ vim.diagnostic.config({
 
 
   local config = {
-    -- disable virtual text
+    -- virtual diagnostics
     virtual_lines = false,
-    virtual_text = true,
+    virtual_text = {
+      severity = { min = vim.diagnostic.severity.WARN },
+    },
 
 
     -- virtual_text = {
@@ -42,10 +44,7 @@ vim.diagnostic.config({
     --   -- end,
     -- },
 
-    -- show signs
-    signs = {
-      active = signs,
-    },
+    -- signs handled by vim.diagnostic.config above; remove stale reference
     update_in_insert = true,
     underline = false,
     severity_sort = true,
@@ -115,6 +114,11 @@ M.on_attach = function(client, bufnr)
   lsp_keymaps(bufnr)
   attach_navic(client, bufnr)
 
+  -- Enable built-in inlay hints on 0.11+
+  if vim.lsp.inlay_hint then
+    pcall(vim.lsp.inlay_hint.enable, bufnr, true)
+  end
+
 
  end
 
@@ -125,6 +129,6 @@ function M.remove_augroup(name)
   end
 end
 
-  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format()']]
+  -- Format command now provided by Conform (:Format); avoid duplicate
 
 return M

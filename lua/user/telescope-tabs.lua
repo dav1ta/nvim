@@ -1,3 +1,12 @@
+-- Telescope Tabs quick cues:
+-- 1. `<leader>aa` → open the tabs picker for fast workspace hopping.
+-- 2. `dd` inside the picker → close a tab while staying in list view.
+-- 3. `<C-d>` in insert mode → same close action without leaving insert.
+-- 4. Start typing → fuzzy-match tab labels by active buffer names.
+-- 5. `Tab` / `<C-n>` → cycle through candidates when indecisive.
+-- 6. Adjust `entry_formatter` below to surface project metadata.
+-- 7. Flip `show_preview` if you ever want per-tab previews.
+
 local M = {
   "LukasPietzschmann/telescope-tabs",
   event = "VeryLazy",

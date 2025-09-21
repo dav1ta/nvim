@@ -14,8 +14,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.g.mapleader= " "
-vim.g.maplocalleader= " "
+-- leader is set in keymaps.lua to avoid timing issues
 
 
 
@@ -45,23 +44,21 @@ return lazy.setup({
 	-- My plugins here
 	{"nvim-lua/popup.nvim"}, -- An implementation of the Popup API from vim in Neovim
 	{"nvim-lua/plenary.nvim"}, -- Useful lua functions used ny lots of plugins
-	{"kyazdani42/nvim-web-devicons"},
-	{"kyazdani42/nvim-tree.lua"},
+	{"nvim-tree/nvim-web-devicons"},
+	{ "nvim-tree/nvim-tree.lua", event = "VeryLazy", config = function() require("user.nvim-tree") end },
 	{"moll/vim-bbye"},
-    {"nvim-lualine/lualine.nvim"},
-	{"akinsho/toggleterm.nvim",config=term.setup,event="BufReadPost"},
-	{"ahmedkhalf/project.nvim"},
-	{"lewis6991/impatient.nvim"},
+    { "nvim-lualine/lualine.nvim", event = "VeryLazy", config = function() require("user.lualine") end },
+	{"akinsho/toggleterm.nvim",config=term.setup,event="VeryLazy"},
+	{"ahmedkhalf/project.nvim", event = "VeryLazy", config = function() require("user.project") end },
 	-- {"lukas-reineke/indent-blankline.nvim"},
-	{"goolord/alpha-nvim"},
-	{"antoinemadec/FixCursorHold.nvim"}, -- This is needed to fix lsp doc highlight
+	{"goolord/alpha-nvim", event = "VimEnter", config = function() require("user.alpha") end },
     {"folke/which-key.nvim",config=which.setup,event="VeryLazy",enabled=true},
 	-- {"unblevable/quick-scope"},
 	{"nacro90/numb.nvim",config=numb.setup,event="BufReadPre"},
-	{"kevinhwang91/nvim-bqf"},
+	{"kevinhwang91/nvim-bqf", ft = "qf"},
 	{"tpope/vim-repeat"},
-	{"numToStr/Comment.nvim",config=comment.setup,event="BufReadPost"},
-	{"norcalli/nvim-colorizer.lua"},
+	{"numToStr/Comment.nvim",config=comment.setup,event="VeryLazy"},
+	{ "norcalli/nvim-colorizer.lua", event = "BufReadPre", config = function() require("user.colorizer") end },
 
 	{"mg979/vim-visual-multi"},
   {"christoomey/vim-tmux-navigator"},
@@ -81,6 +78,8 @@ return lazy.setup({
 
 	-- cmp plugins
   {"hrsh7th/nvim-cmp" ,
+	event = "InsertEnter",
+    config = function() require("user.cmp") end,
 	dependencies = {
   "hrsh7th/cmp-buffer",
 	"hrsh7th/cmp-path" ,
@@ -100,34 +99,38 @@ return lazy.setup({
 			require("scope").setup()
 		end,
 	},
-  "preservim/vimux",
+  { "preservim/vimux", cmd = {"VimuxRunCommand","VimuxTogglePane","VimuxInterruptRunner"} },
 	-- snippets
-	"L3MON4D3/LuaSnip", --snippet engine
+	{ "L3MON4D3/LuaSnip", config = function() require("user.snippets") end }, --snippet engine
 	"rafamadriz/friendly-snippets", -- a bunch of snippets to use
 
 	-- LSP
-  "lvimuser/lsp-inlayhints.nvim",
+  -- use built-in inlay hints on 0.11+
   "williamboman/mason.nvim",
   "williamboman/mason-lspconfig.nvim",
-  "nvimtools/none-ls.nvim", -- for formatters and linters
   {"ray-x/lsp_signature.nvim",event="BufReadPre",config=sig.setup},
 
   "b0o/SchemaStore.nvim" ,
-  "neovim/nvim-lspconfig", -- enable LSP
+  {"neovim/nvim-lspconfig", event = "BufReadPre", config = function() require("user.lsp") end }, -- enable LSP
+
+  -- Formatting with conform.nvim
+  { "stevearc/conform.nvim", event = "VeryLazy", config = function()
+      require("user.formatting").setup()
+    end },
 
 
     "nvim-telescope/telescope-ui-select.nvim",
     "nvim-telescope/telescope-live-grep-args.nvim",
     "nvim-telescope/telescope-project.nvim",
-    "nvim-telescope/telescope-fzf-native.nvim", run = "make",
+    "nvim-telescope/telescope-fzf-native.nvim", build = "make",
 	{
 		"nvim-telescope/telescope.nvim",
     config = tele.setup,
-		event = "InsertEnter",
+		event = "VeryLazy",
 	},
 
 
-   {"RRethy/vim-illuminate",config=illuminate.setup,event="BufReadPost"},
+   {"RRethy/vim-illuminate",config=illuminate.setup,event="VeryLazy"},
 
 	-- {"andymass/vim-matchup",config=matchup.setup,event="InsertEnter",dependencies={
 	-- 	"nvim-treesitter/nvim-treesitter"},
@@ -156,24 +159,24 @@ return lazy.setup({
     },
 	},
 
-    {'HiPhish/rainbow-delimiters.nvim',setup=true},
+    { 'HiPhish/rainbow-delimiters.nvim' },
 
 
 
 	-- Git
 	{"lewis6991/gitsigns.nvim",config=gitsigns.setup,event="BufReadPre"},
-	{"akinsho/git-conflict.nvim",event="BufReadPost",config=true},
-    {"tpope/vim-fugitive"},
+	{"akinsho/git-conflict.nvim",event="VeryLazy",config=true},
+    {"tpope/vim-fugitive", cmd = {"Git", "Gdiffsplit", "Gblame", "Gread", "Gwrite"}},
 
-	{"liuchengxu/vista.vim",event="BufReadPre"}, -- left side function panel
-	{"luukvbaal/stabilize.nvim"}, --stabilize text when splitting
-	{"ethanholz/nvim-lastplace"}, --open file in last curso pos
-	{"rmagatti/goto-preview",event="BufReadPre"}, --preview goto
+	-- removed vista.vim (old/slow); use Telescope LSP symbols instead
+	{"luukvbaal/stabilize.nvim", event = "VeryLazy", config = function() require("user.stabilize") end }, --stabilize text when splitting
+	{"ethanholz/nvim-lastplace", event = "BufReadPre", config = function() require("user.lastplace") end }, --open file in last curso pos
+	{"rmagatti/goto-preview",event="BufReadPre", config = function() require("user.preview") end }, --preview goto
 	{"tpope/vim-eunuch",event="BufReadPre"}, --unix coomands mkdir
 
-	{"folke/trouble.nvim",config=trbl.setup,event="BufReadPost",depnedencies={'gitsigns'}}, --see problems in code
+	{"folke/trouble.nvim",config=trbl.setup,event="VeryLazy",dependencies={"nvim-tree/nvim-web-devicons"}}, --see problems in code
 	{"danymat/neogen",config=neogense.setup,event="BufReadPre"}, --Annotation
-	{"folke/todo-comments.nvim",event="BufReadPre"},
+	{ "folke/todo-comments.nvim", event = "BufReadPre", config = require("user.todo-comments").setup },
 	-- {"Mephistophiles/surround.nvim",config=surround.setup,event="BufReadPre"},
    {
     "iamcco/markdown-preview.nvim",
@@ -183,20 +186,29 @@ return lazy.setup({
 },
 
 
-	{"mfussenegger/nvim-dap"},
-	{"theHamsta/nvim-dap-virtual-text"},
-    { "rcarriga/nvim-dap-ui", dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} },
-	{"mfussenegger/nvim-dap-python"},
-	{"Pocco81/DAPInstall.nvim"},
+	{ "mfussenegger/nvim-dap",
+      cmd = {
+        "DapContinue","DapToggleBreakpoint","DapStepInto","DapStepOver","DapStepOut",
+        "DapTerminate","DapPause","DapRestartFrame","DapLoadLaunchJSON","DapREPL"
+      },
+      keys = {"<leader>dt","<leader>db","<leader>dc","<leader>dC","<leader>dd","<leader>dg","<leader>di","<leader>do","<leader>du","<leader>dp","<leader>dr","<leader>ds","<leader>dq","<leader>dU","<Up>","<Down>","<Left>","<Right>"},
+      config = function() require("user.dap") end
+    },
+	{ "theHamsta/nvim-dap-virtual-text", event = "VeryLazy" },
+    { "rcarriga/nvim-dap-ui", dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"}, event = "VeryLazy" },
+	{ "mfussenegger/nvim-dap-python", event = "VeryLazy" },
+    {"jay-babu/mason-nvim-dap.nvim", dependencies = {"williamboman/mason.nvim", "mfussenegger/nvim-dap"}, event = "VeryLazy", config = function()
+      require("mason-nvim-dap").setup()
+    end},
 
 
-  {"SmiteshP/nvim-navic",event="BufReadPost"},
+  {"SmiteshP/nvim-navic",event="VeryLazy", config = function() require("user.navic") end },
 
-  "dstein64/vim-startuptime",
+  {"dstein64/vim-startuptime", cmd = "StartupTime"},
 
   "tpope/vim-dadbod",
   "kristijanhusak/vim-dadbod-ui",
-"mbbill/undotree",
+{"mbbill/undotree", cmd = "UndotreeToggle"},
 
 
 
@@ -223,6 +235,7 @@ return lazy.setup({
  --  },
 
     require("user.diffview"),
+    require("user.octo"),
     require("user.telescope-tabs"),
     require("user.smartpairs"),
 --require("user.codeium"),

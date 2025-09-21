@@ -1,3 +1,12 @@
+-- Telescope quick cues:
+-- 1. `<leader>f` → fuzzy find project files when jumping around.
+-- 2. `<leader>L` → live grep across repo (passes hidden files too).
+-- 3. `<leader>w` → switch buffers via MRU list while multitasking.
+-- 4. `<leader>tb` → change git branches without leaving Neovim.
+-- 5. `<leader>ts` → grep word under cursor for quick reference.
+-- 6. `<leader>tp` → jump between projects you touched recently.
+-- 7. `<leader>tl` → resume the last picker to refine prior searches.
+
 function setup()
 local status_ok, telescope = pcall(require, "telescope")
 if not status_ok then
@@ -34,6 +43,17 @@ local actions = require("telescope.actions")
       "<leader>f",
       "<cmd>Telescope find_files<cr>",
       desc = "Find files",
+    },
+    {
+      "<leader>L",
+      function()
+        require("telescope").extensions.live_grep_args.live_grep_args({
+          additional_args = function()
+            return { "--hidden", "--no-ignore" }
+          end,
+        })
+      end,
+      desc = "Live grep (all)",
     },
     {
       "<leader>tp",
@@ -160,7 +180,7 @@ require("telescope").setup({
       "--line-number",
       "--column",
       "--hidden",      -- Search hidden files
-      "--no-ignore",   -- Don't respect .gitignore
+      -- "--no-ignore",   -- Don't respect .gitignore
       "--smart-case",  -- Case-sensitive only when uppercase is used
       "--follow",      -- Follow symlinks
       "--color=never",
@@ -221,7 +241,6 @@ require("telescope").setup({
       "*.min.js",
       "__pycache__/*",
     },
-    file_sorter = require("telescope.sorters").get_fzy_sorter,
     file_previewer = require("telescope.previewers").vim_buffer_cat.new,
     grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
     qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,

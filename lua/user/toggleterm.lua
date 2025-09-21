@@ -1,3 +1,12 @@
+-- ToggleTerm quick cues:
+-- 1. `<C-\>` → open or hide the last terminal in a split instantly.
+-- 2. `jk` inside terminal → drop back to normal mode without leaving insert.
+-- 3. `<C-h/j/k/l>` in terminal → hop between editor windows seamlessly.
+-- 4. `:ToggleTerm direction=float` → pop a one-off floating shell when needed.
+-- 5. `:lua _LAZYGIT_TOGGLE()` → launch LazyGit for fast repo triage.
+-- 6. `:lua _RUN_TOGGLE()` → spin up the custom `run` command shell.
+-- 7. Adjust `direction`/`size` below to suit project-specific terminal layouts.
+
 function setup()
 local status_ok, toggleterm = pcall(require, "toggleterm")
 if not status_ok then

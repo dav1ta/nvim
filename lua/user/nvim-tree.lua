@@ -1,3 +1,12 @@
+-- NvimTree quick cues:
+-- 1. `<leader>e` → toggle the file explorer when changing files.
+-- 2. `a` inside the tree → create a new file or folder in place.
+-- 3. `r` → rename the selected node to keep things organized.
+-- 4. `d` → delete files after double-checking they are tracked.
+-- 5. `R` → refresh the tree when git status feels out of sync.
+-- 6. `<CR>` → open the highlighted file in the current window.
+-- 7. `<C-v>` / `<C-x>` → split open files without losing context.
+
 local status_ok, nvim_tree = pcall(require, "nvim-tree")
 if not status_ok then
   print("nvim-tree not found")
@@ -15,7 +24,7 @@ wk.add{
 
 nvim_tree.setup { -- BEGIN_DEFAULT_OPTS
       auto_reload_on_write = true,
-      disable_netrw = false,
+      disable_netrw = true,
       hijack_cursor = false,
       hijack_netrw = true,
       hijack_unnamed_buffer_when_opening = false,

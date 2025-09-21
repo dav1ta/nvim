@@ -7,7 +7,7 @@ local function setup()
 
   configs.setup {
     ensure_installed = {
-      "c", "lua", "python", "bash", "dockerfile", "gitignore", "go", "tsx",
+      "c", "lua", "python", "bash", "dockerfile", "gitignore", "go", "tsx", "typescript",
       "html", "scss", "css", "javascript", "yaml"
     },
     sync_install = false,
@@ -36,17 +36,9 @@ local function setup()
       enable_autocmd = false,
     },
 
-    matchup = {
-      enable = true,
-      disable = { "html","markdown" },
-    },
+    -- matchup removed (plugin not installed)
 
-    playground = {
-      enable = true,
-      disable = {},
-      updatetime = 25,
-      persist_queries = false,
-    },
+    -- playground removed: plugin not installed and you don't use it
 
     textobjects = {
       select = {
@@ -99,4 +91,3 @@ end
 return {
   setup = setup
 }
-
