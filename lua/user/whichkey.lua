@@ -219,10 +219,6 @@ which_key.setup(st)
       group = "Debug",
     },
     {
-      "<leader>f",
-      group = "Find",
-    },
-    {
       "<leader>g",
       group = "Git",
     },
@@ -267,6 +263,17 @@ which_key.add({
   { "<leader>lf", ":Format<CR>", desc = "Format (Conform)" },
   { "<leader>1", function() vim.cmd('bnext') end, desc = "go buffer 1" },
   { "<leader>2", function() vim.cmd('bprev') end, desc = "go buffer 2" },
+
+  -- Buffers group actions (keep <leader>w as fast path)
+  { "<leader>bb", function()
+      require('telescope.builtin').buffers({
+        sort_lastused = true,
+        previewer = true,
+      })
+    end, desc = "Pick buffer" },
+  { "<leader>bn", function() vim.cmd('bnext') end, desc = "Next buffer" },
+  { "<leader>bp", function() vim.cmd('bprevious') end, desc = "Prev buffer" },
+  { "<leader>bd", ":Bdelete<CR>", desc = "Delete buffer" },
 
 })
 

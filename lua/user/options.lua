@@ -48,6 +48,17 @@ for k, v in pairs(options) do
   vim.opt[k] = v
 end
 
+-- Add 'popup' to completeopt on Neovim >= 0.11 for better chat completion UI
+do
+  local v = vim.version() or { major = 0, minor = 0 }
+  local is_011 = (v.major > 0) or (v.major == 0 and (v.minor or 0) >= 11)
+  if is_011 then
+    pcall(function()
+      vim.opt.completeopt:append("popup")
+    end)
+  end
+end
+
 vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.cmd [[set iskeyword+=-]]
 vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work

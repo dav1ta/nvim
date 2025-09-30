@@ -31,10 +31,23 @@ hi def TelescopeResultsTitle guifg=#282a36 guibg=#50fa7b
 hi def TelescopePromptBottom guifg=#f8f8f2 guibg=#44475a
 hi def TelescopePromptBottom guibg=#44475a guifg=#f8f8f2
 
+" --- Git diff highlights (Dracula-like backgrounds) ---
+" Use subtle background fills for diffs instead of underlines
+" Tweak these hex colors to taste if they feel too strong/weak.
+hi DiffAdd    guifg=NONE guibg=#203a2a gui=NONE
+hi DiffDelete guifg=NONE guibg=#3a2028 gui=NONE
+hi DiffChange guifg=NONE guibg=#1f2f3a gui=NONE
+hi DiffText   guifg=NONE guibg=#2f4a6a gui=NONE
+
+" Make Diffview use the same palette
+hi! link DiffviewDiffAdd    DiffAdd
+hi! link DiffviewDiffDelete DiffDelete
+hi! link DiffviewDiffChange DiffChange
+hi! link DiffviewDiffText   DiffText
+
 catch /^Vim\%((\a\+)\)\=:E185/
   colorscheme default
   set background=dark
 endtry
 ]]
-
 

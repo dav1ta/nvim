@@ -27,7 +27,7 @@ local actions = require("telescope.actions")
                 sort_lastused = true,   -- Enable MRU sorting
                 previewer = true,       -- Enable previewer
             })
-        end,      desc = "Find",
+        end,      desc = "Buffers",
     },
     {
       "<leader>tb",
@@ -42,7 +42,7 @@ local actions = require("telescope.actions")
     {
       "<leader>f",
       "<cmd>Telescope find_files<cr>",
-      desc = "Find files",
+      desc = "Files",
     },
     {
       "<leader>L",
@@ -53,7 +53,7 @@ local actions = require("telescope.actions")
           end,
         })
       end,
-      desc = "Live grep (all)",
+      desc = "Grep (all, hidden)",
     },
     {
       "<leader>tp",
@@ -74,13 +74,13 @@ local actions = require("telescope.actions")
     require("telescope").extensions.live_grep_args.live_grep_args({default_text = text})
   end,
   mode = "v",
-  desc = "Find Selected Text",
+  desc = "Grep (selection)",
 },
 
     {
       "<leader>F",
       "<cmd>Telescope live_grep_args<cr>",
-      desc = "Find Text",
+      desc = "Grep (all)",
 
 
     },

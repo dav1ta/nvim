@@ -99,7 +99,7 @@ return lazy.setup({
 			require("scope").setup()
 		end,
 	},
-  { "preservim/vimux", cmd = {"VimuxRunCommand","VimuxTogglePane","VimuxInterruptRunner"} },
+  { "preservim/vimux", cmd = {"VimuxRunCommand","VimuxTogglePane","VimuxInterruptRunner","VimuxOpenRunner"} },
 	-- snippets
 	{ "L3MON4D3/LuaSnip", config = function() require("user.snippets") end }, --snippet engine
 	"rafamadriz/friendly-snippets", -- a bunch of snippets to use

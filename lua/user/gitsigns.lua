@@ -58,11 +58,6 @@ end
       "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
       desc = "Undo Stage Hunk",
     },
-    {
-      "<leader>gd",
-      "<cmd>Gitsigns diffthis HEAD<cr>",
-      desc = "Git Diff",
-    },
   }
 
 gitsigns.setup {
