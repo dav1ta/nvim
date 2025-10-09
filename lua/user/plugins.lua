@@ -45,7 +45,7 @@ return lazy.setup({
 	{"nvim-lua/popup.nvim"}, -- An implementation of the Popup API from vim in Neovim
 	{"nvim-lua/plenary.nvim"}, -- Useful lua functions used ny lots of plugins
 	{"nvim-tree/nvim-web-devicons"},
-	{ "nvim-tree/nvim-tree.lua", event = "VeryLazy", config = function() require("user.nvim-tree") end },
+	{ "nvim-tree/nvim-tree.lua", lazy = false, priority = 1000, config = function() require("user.nvim-tree") end },
 	{"moll/vim-bbye"},
     { "nvim-lualine/lualine.nvim", event = "VeryLazy", config = function() require("user.lualine") end },
 	{"akinsho/toggleterm.nvim",config=term.setup,event="VeryLazy"},

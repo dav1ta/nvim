@@ -20,14 +20,13 @@ local servers = {
   "pyright",
   "yamlls",
    "bashls",
-  "clangd",
-  "lua_ls",
+  -- "clangd",
+  -- "lua_ls",
   -- "jdtls"
-    "gopls",
+    -- "gopls",
     -- "ruff_lsp",
   -- "rust_analyzer", -- not used
-
- 'angularls'
+     -- 'angularls'
 
 }
 

@@ -13,9 +13,6 @@ if not status_ok then
   return
 end
 
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
 local icons = require("user.icons")
 local wk = require "which-key"
 wk.add{
@@ -27,7 +24,7 @@ nvim_tree.setup { -- BEGIN_DEFAULT_OPTS
       disable_netrw = true,
       hijack_cursor = false,
       hijack_netrw = true,
-      hijack_unnamed_buffer_when_opening = false,
+      hijack_unnamed_buffer_when_opening = true,
       sort_by = "name",
       root_dirs = {},
       prefer_startup_root = false,
