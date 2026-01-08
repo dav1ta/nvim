@@ -1,17 +1,16 @@
-local opts = { noremap = true, silent = true }
-
-local term_opts = { silent = true }
-
--- Shorten function name
-local keymap = vim.api.nvim_set_keymap
-
---Remap space as leader key
-keymap("", "<Space>", "<Nop>", opts)
+-- Set leader keys early
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-vim.api.nvim_set_keymap("n", "gp", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", {noremap=true})
-vim.api.nvim_set_keymap("n", "gP", "<cmd>lua require('goto-preview').close_all_win()<CR>", {noremap=true})
+local keymap = vim.keymap.set
+local opts = { noremap = true, silent = true }
+
+-- Disable space in normal/visual mode (leader key)
+keymap({"n", "v"}, "<Space>", "<Nop>", opts)
+
+-- Goto-preview bindings
+keymap("n", "gp", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", opts)
+keymap("n", "gP", "<cmd>lua require('goto-preview').close_all_win()<CR>", opts)
 
 -- Modes
 --   normal_mode = "n",
@@ -34,18 +33,9 @@ keymap("n", "<C-Down>", ":resize +2<CR>", opts)
 keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
-
-keymap("n", "d", '"0d', opts)
-keymap("n", "x", '"_x', opts)
-
--- Navigate buffers
-
--- Move text up and down
--- keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
--- keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
-
--- Insert --
--- Press jk fast to enter
+-- Better delete/cut behavior
+keymap("n", "d", '"0d', opts)  -- Delete to black hole, yank stays in "0
+keymap("n", "x", '"_x', opts)  -- x deletes to black hole
 
 -- Visual --
 -- Stay in indent mode
@@ -62,35 +52,33 @@ keymap("v", "p", '"_dP', opts)
 keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 
-
--- Terminal --
--- Better terminal navigation
--- keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
--- keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
--- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
--- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
-
-keymap('n', '<Up>', '<cmd> lua require("dap").toggle_breakpoint()<cr>', opts)
-keymap('n', '<Down>', '<cmd> lua require("dap").step_over()<cr>', opts)
-keymap('n', '<Left>', '<cmd> lua require("dap").step_out()<cr>', opts)
-keymap('n', '<Right>', '<cmd> lua require("dap").step_into()<cr>', opts)
+-- DAP (Debug Adapter Protocol) - F-keys for debugging
+keymap('n', '<F5>', '<cmd>lua require("dap").continue()<cr>', opts)
+keymap('n', '<F9>', '<cmd>lua require("dap").toggle_breakpoint()<cr>', opts)
+keymap('n', '<F10>', '<cmd>lua require("dap").step_over()<cr>', opts)
+keymap('n', '<F11>', '<cmd>lua require("dap").step_into()<cr>', opts)
+keymap('n', '<F12>', '<cmd>lua require("dap").step_out()<cr>', opts)
 
 
 
-keymap('n', '<leader>5', '<cmd> Ru<cr>', opts)
+-- Runner command
+keymap('n', '<leader>5', '<cmd>Ru<cr>', opts)
 
-
-
+-- Tab navigation
 keymap("n", ",1", '1gt', opts)
 keymap("n", ",2", '2gt', opts)
 keymap("n", ",3", '3gt', opts)
 keymap("n", ",4", '4gt', opts)
 
-vim.api.nvim_set_keymap('n', 'p', ']p', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-p>', 'p', { noremap = true, silent = true })
+-- Smooth scrolling (8 lines at a time)
+keymap('n', '<C-d>', '8<C-e>', opts)
+keymap('n', '<C-u>', '8<C-y>', opts)
 
-vim.keymap.set('n', '<C-d>', '8<C-e>', { noremap = true, silent = true }) -- scroll 10 lines down
-vim.keymap.set('n', '<C-u>', '8<C-y>', { noremap = true, silent = true }) -- scroll 10 lines up
+-- Diagnostic navigation
+keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
+keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
+keymap('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+keymap('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 
 -- Formatting
 keymap("n", "<leader>lf", ":Format<CR>", opts)

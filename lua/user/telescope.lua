@@ -53,7 +53,7 @@ local actions = require("telescope.actions")
           end,
         })
       end,
-      desc = "Grep (all, hidden)",
+      desc = "Grep (all + hidden + no-ignore)",
     },
     {
       "<leader>tp",
@@ -173,18 +173,21 @@ local actions = require("telescope.actions")
 
 require("telescope").setup({
   defaults = {
+    history = {
+      path = vim.fn.stdpath("data") .. "/telescope_history.sqlite3",
+      limit = 2000,
+    },
     vimgrep_arguments = {
       "rg",
       "--with-filename",
       "--no-heading",
       "--line-number",
       "--column",
-      "--hidden",      -- Search hidden files
-      -- "--no-ignore",   -- Don't respect .gitignore
       "--smart-case",  -- Case-sensitive only when uppercase is used
       "--follow",      -- Follow symlinks
       "--color=never",
       "--pcre2"        -- Better regex support
+      -- Use <leader>L for --hidden --no-ignore search
     },
     mappings = {
       i = {
@@ -280,6 +283,7 @@ telescope.load_extension("fzf")
 telescope.load_extension("project")
 telescope.load_extension("ui-select")
 telescope.load_extension("live_grep_args")
+telescope.load_extension("smart_history")
 
 end
 return {setup=setup}

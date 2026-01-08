@@ -83,11 +83,10 @@ local function attach_navic(client, bufnr)
     return
   end
 
-
-    if not vim.b.large_buf then
-      navic.attach(client, bufnr)
-    end
-
+  local utils = require("user.utils")
+  if not utils.is_large_file(bufnr) then
+    navic.attach(client, bufnr)
+  end
 end
 
 local function lsp_keymaps(bufnr)

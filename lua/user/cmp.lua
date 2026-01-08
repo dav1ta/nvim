@@ -19,7 +19,7 @@ end
 local compare = require("cmp.config.compare")
 
 local function is_dap_buffer()
-  return vim.api.nvim_buf_get_option(0, "buftype") == "prompt" and cmp_dap.is_dap_buffer()
+  return vim.bo[0].buftype == "prompt" and cmp_dap.is_dap_buffer()
 end
 
 local function check_backspace()
@@ -40,10 +40,11 @@ end
 
 cmp.setup {
     enabled = function()
-  if vim.b.large_buf then
+  local utils = require("user.utils")
+  if utils.is_large_file(0) then
     return false
   end
-  return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt" or is_dap_buffer()
+  return vim.bo[0].buftype ~= "prompt" or is_dap_buffer()
 end,
   snippet = {
     expand = function(args)
@@ -97,11 +98,13 @@ end,
     end,
   },
   sources = cmp.config.sources({
+    { name = "lazydev" },
     { name = "nvim_lsp" },
-
-    { name = "luasnip" },
+    { name = "nvim_lua" },
+    { name = "async_path" },
+  }, {
     { name = "buffer" },
-    { name = "path" },
+    { name = "luasnip" },
     { name = "dap" },
   }),
   sorting = {
@@ -117,4 +120,3 @@ end,
    compare.order,            -- 🧩 Default fallback
  },  },
 }
-

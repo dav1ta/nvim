@@ -7,7 +7,7 @@ require "user.colorscheme"
 -- nvim-tree and lualine load via lazy plugin configs
 -- toggleterm, project, alpha configured via lazy plugin specs
 require "user.autocommands"
--- stabilize, lastplace, goto-preview, snippets, dap, navic configured via lazy plugin specs
+-- lastplace, goto-preview, snippets, dap, navic configured via lazy plugin specs
 require "user.winbar"
 
 require "user.runner"

@@ -23,7 +23,7 @@ local servers = {
   -- "clangd",
   -- "lua_ls",
   -- "jdtls"
-    -- "gopls",
+  "gopls",
     -- "ruff_lsp",
   -- "rust_analyzer", -- not used
      -- 'angularls'

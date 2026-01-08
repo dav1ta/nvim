@@ -35,6 +35,8 @@ local options = {
   sidescrolloff = 10,
   scroll = 10,
   guifont = "monospace:h17",               -- the font used in graphical neovim applications
+  undofile = true,                         -- enable persistent undo
+  undodir = vim.fn.stdpath("data") .. "/undo", -- set undo directory
 }
 
 vim.opt.shortmess:append "c"

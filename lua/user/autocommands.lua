@@ -61,14 +61,15 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
 
 
 
+-- Secure sudo write: uses vim's built-in :write with sudo tee
+-- Usage: :SudoWrite
 vim.api.nvim_create_user_command(
   'SudoWrite',
   function()
-    local password = vim.fn.inputsecret("Enter sudo password: ")
-    vim.fn.system('echo ' .. password .. ' | sudo -S tee % >/dev/null', vim.fn.expand('%:p'))
-    vim.cmd('e!')
+    vim.cmd('write !sudo tee % > /dev/null')
+    vim.cmd('edit!')
   end,
-  {}
+  { desc = "Write file with sudo" }
 )
 
 
@@ -77,21 +78,9 @@ vim.api.nvim_create_user_command(
 -- Disable heavy features for large files
 vim.api.nvim_create_autocmd("BufReadPre", {
   callback = function(args)
-    local file = args.file
-    local size = vim.fn.getfsize(file)
-    if size > 1000000 then -- ~1MB
-      vim.b.large_buf = true
-      vim.cmd("syntax off")
-      vim.opt_local.foldmethod = "manual"
-
-      -- Disable Treesitter highlighting if available
-      pcall(vim.cmd, "TSBufDisable highlight")
-
-      -- Pause illuminate if available
-      pcall(vim.cmd, "IlluminatePauseBuf")
-
-      -- Optional: notify
-      vim.notify("Large file detected: disabled highlighting and folding for performance.", vim.log.levels.WARN)
+    local utils = require("user.utils")
+    if utils.is_large_file(args.buf) then
+      utils.disable_heavy_features(args.buf)
     end
   end
 })
