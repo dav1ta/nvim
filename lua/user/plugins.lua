@@ -38,52 +38,52 @@ return lazy.setup({
   -- ===========================
   -- UI & Navigation
   -- ===========================
-  { 
+  {
     "nvim-tree/nvim-tree.lua",
     lazy = false,
     priority = 1000,
-    config = function() 
-      require("user.nvim-tree") 
+    config = function()
+      require("user.nvim-tree")
     end,
   },
 
-  { 
-    "nvim-lualine/lualine.nvim", 
-    event = "VeryLazy", 
-    config = function() 
-      require("user.lualine") 
+  {
+    "nvim-lualine/lualine.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("user.lualine")
     end,
   },
 
-  { 
-    "goolord/alpha-nvim", 
-    event = "VimEnter", 
-    config = function() 
-      require("user.alpha") 
+  {
+    "goolord/alpha-nvim",
+    event = "VimEnter",
+    config = function()
+      require("user.alpha")
     end,
   },
 
-  { 
+  {
     "folke/which-key.nvim",
     event = "VeryLazy",
-    config = function() 
-      require("user.whichkey").setup() 
+    config = function()
+      require("user.whichkey").setup()
     end,
   },
 
-  { 
+  {
     "akinsho/toggleterm.nvim",
     event = "VeryLazy",
-    config = function() 
-      require("user.toggleterm").setup() 
+    config = function()
+      require("user.toggleterm").setup()
     end,
   },
 
-  { 
-    "ahmedkhalf/project.nvim", 
-    event = "VeryLazy", 
-    config = function() 
-      require("user.project") 
+  {
+    "ahmedkhalf/project.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("user.project")
     end,
   },
 
@@ -94,47 +94,47 @@ return lazy.setup({
   { "tpope/vim-repeat" },
   { "mg979/vim-visual-multi" },
   { "christoomey/vim-tmux-navigator" },
-  
-  { 
+
+  {
     "tzachar/highlight-undo.nvim",
     event = "BufReadPre",
     config = true,
   },
 
-  { 
+  {
     "nacro90/numb.nvim",
     event = "BufReadPre",
-    config = function() 
-      require("user.numb").setup() 
+    config = function()
+      require("user.numb").setup()
     end,
   },
 
-  { 
+  {
     "karb94/neoscroll.nvim",
     event = "VeryLazy",
-    config = function() 
-      require("user.neoscroll").setup() 
+    config = function()
+      require("user.neoscroll").setup()
     end,
   },
 
-  { 
-    "kevinhwang91/nvim-bqf", 
+  {
+    "kevinhwang91/nvim-bqf",
     ft = "qf",
   },
 
-  { 
+  {
     "numToStr/Comment.nvim",
     event = "VeryLazy",
-    config = function() 
-      require("user.comment").setup() 
+    config = function()
+      require("user.comment").setup()
     end,
   },
 
-  { 
-    "norcalli/nvim-colorizer.lua", 
-    event = "BufReadPre", 
-    config = function() 
-      require("user.colorizer") 
+  {
+    "norcalli/nvim-colorizer.lua",
+    event = "BufReadPre",
+    config = function()
+      require("user.colorizer")
     end,
   },
 
@@ -166,20 +166,20 @@ return lazy.setup({
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-nvim-lua",
     },
-    config = function() 
-      require("user.cmp") 
+    config = function()
+      require("user.cmp")
     end,
   },
 
-  { 
+  {
     "L3MON4D3/LuaSnip",
     event = "InsertEnter",
-    config = function() 
-      require("user.snippets") 
+    config = function()
+      require("user.snippets")
     end,
   },
 
-  { 
+  {
     "rafamadriz/friendly-snippets",
     event = "InsertEnter",
   },
@@ -195,8 +195,8 @@ return lazy.setup({
     end,
   },
 
-  { 
-    "preservim/vimux", 
+  {
+    "preservim/vimux",
     cmd = { "VimuxRunCommand", "VimuxTogglePane", "VimuxInterruptRunner", "VimuxOpenRunner" },
   },
 
@@ -208,10 +208,10 @@ return lazy.setup({
   { "b0o/SchemaStore.nvim" },
 
   {
-    "neovim/nvim-lspconfig", 
-    event = "BufReadPre", 
-    config = function() 
-      require("user.lsp") 
+    "neovim/nvim-lspconfig",
+    event = "BufReadPre",
+    config = function()
+      require("user.lsp")
     end,
   },
 
@@ -221,9 +221,9 @@ return lazy.setup({
     cmd = "LazyDev",
   },
 
-  { 
-    "stevearc/conform.nvim", 
-    event = "VeryLazy", 
+  {
+    "stevearc/conform.nvim",
+    event = "VeryLazy",
     config = function()
       require("user.formatting").setup()
     end,
@@ -237,24 +237,24 @@ return lazy.setup({
   { "nvim-telescope/telescope-project.nvim" },
   { "nvim-telescope/telescope-smart-history.nvim" },
   { "kkharji/sqlite.lua" },
-  { 
-    "nvim-telescope/telescope-fzf-native.nvim", 
+  {
+    "nvim-telescope/telescope-fzf-native.nvim",
     build = "make",
   },
 
   {
     "nvim-telescope/telescope.nvim",
     event = "VeryLazy",
-    config = function() 
-      require("user.telescope").setup() 
+    config = function()
+      require("user.telescope").setup()
     end,
   },
 
   {
     "RRethy/vim-illuminate",
     event = "VeryLazy",
-    config = function() 
-      require("user.illuminate").setup() 
+    config = function()
+      require("user.illuminate").setup()
     end,
   },
 
@@ -269,12 +269,12 @@ return lazy.setup({
       "JoosepAlviste/nvim-ts-context-commentstring",
       "nvim-treesitter/nvim-treesitter-textobjects",
     },
-    config = function() 
-      require("user.treesitter").setup() 
+    config = function()
+      require("user.treesitter").setup()
     end,
   },
 
-  { 
+  {
     "HiPhish/rainbow-delimiters.nvim",
     event = "BufReadPre",
   },
@@ -294,8 +294,8 @@ return lazy.setup({
   {
     "lewis6991/gitsigns.nvim",
     event = "BufReadPre",
-    config = function() 
-      require("user.gitsigns").setup() 
+    config = function()
+      require("user.gitsigns").setup()
     end,
   },
 
@@ -305,8 +305,8 @@ return lazy.setup({
     config = true,
   },
 
-  { 
-    "tpope/vim-fugitive", 
+  {
+    "tpope/vim-fugitive",
     cmd = { "Git", "Gdiffsplit", "Gblame", "Gread", "Gwrite" },
   },
 
@@ -316,22 +316,22 @@ return lazy.setup({
   -- Code Navigation & Utilities
   -- ===========================
   {
-    "ethanholz/nvim-lastplace", 
-    event = "BufReadPre", 
-    config = function() 
-      require("user.lastplace") 
+    "ethanholz/nvim-lastplace",
+    event = "BufReadPre",
+    config = function()
+      require("user.lastplace")
     end,
   },
 
   {
     "rmagatti/goto-preview",
-    event = "BufReadPre", 
-    config = function() 
-      require("user.preview") 
+    event = "BufReadPre",
+    config = function()
+      require("user.preview")
     end,
   },
 
-  { 
+  {
     "tpope/vim-eunuch",
     event = "BufReadPre",
   },
@@ -340,22 +340,22 @@ return lazy.setup({
     "folke/trouble.nvim",
     event = "VeryLazy",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function() 
-      require("user.trouble").setup() 
+    config = function()
+      require("user.trouble").setup()
     end,
   },
 
   {
     "danymat/neogen",
     event = "BufReadPre",
-    config = function() 
-      require("user.neogen").setup() 
+    config = function()
+      require("user.neogen").setup()
     end,
   },
 
-  { 
-    "folke/todo-comments.nvim", 
-    event = "BufReadPre", 
+  {
+    "folke/todo-comments.nvim",
+    event = "BufReadPre",
     config = function()
       require("user.todo-comments").setup()
     end,
@@ -365,8 +365,8 @@ return lazy.setup({
     "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     ft = { "markdown" },
-    build = function() 
-      vim.fn["mkdp#util#install"]() 
+    build = function()
+      vim.fn["mkdp#util#install"]()
     end,
   },
 
@@ -374,7 +374,7 @@ return lazy.setup({
   -- ===========================
   -- Debug Adapter Protocol (DAP)
   -- ===========================
-  { 
+  {
     "mfussenegger/nvim-dap",
     cmd = {
       "DapContinue", "DapToggleBreakpoint", "DapStepInto", "DapStepOver", "DapStepOut",
@@ -386,31 +386,31 @@ return lazy.setup({
       "<leader>dr", "<leader>ds", "<leader>dq", "<leader>dU",
       "<F5>", "<F9>", "<F10>", "<F11>", "<F12>"
     },
-    config = function() 
-      require("user.dap") 
+    config = function()
+      require("user.dap")
     end,
   },
 
-  { 
-    "theHamsta/nvim-dap-virtual-text", 
-    event = "VeryLazy",
-  },
-
-  { 
-    "rcarriga/nvim-dap-ui", 
-    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" }, 
-    event = "VeryLazy",
-  },
-
-  { 
-    "mfussenegger/nvim-dap-python", 
+  {
+    "theHamsta/nvim-dap-virtual-text",
     event = "VeryLazy",
   },
 
   {
-    "jay-babu/mason-nvim-dap.nvim", 
-    dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" }, 
-    event = "VeryLazy", 
+    "rcarriga/nvim-dap-ui",
+    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+    event = "VeryLazy",
+  },
+
+  {
+    "mfussenegger/nvim-dap-python",
+    event = "VeryLazy",
+  },
+
+  {
+    "jay-babu/mason-nvim-dap.nvim",
+    dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
+    event = "VeryLazy",
     config = function()
       require("mason-nvim-dap").setup()
     end,
@@ -421,26 +421,28 @@ return lazy.setup({
   -- ===========================
   {
     "SmiteshP/nvim-navic",
-    event = "VeryLazy", 
-    config = function() 
-      require("user.navic") 
+    event = "VeryLazy",
+    config = function()
+      require("user.navic")
     end,
   },
 
   -- ===========================
   -- Utilities
   -- ===========================
-  { 
-    "dstein64/vim-startuptime", 
+  {
+    "dstein64/vim-startuptime",
     cmd = "StartupTime",
   },
 
   { "tpope/vim-dadbod" },
   { "kristijanhusak/vim-dadbod-ui" },
-  
-  { 
-    "mbbill/undotree", 
-    cmd = "UndotreeToggle",
+
+  {
+    "mbbill/undotree",
+    keys = { -- load the plugin only when using its keybinding:
+      { "<leader>u", "<cmd>UndotreeToggle<cr>" },
+    },
   },
 
 
@@ -453,7 +455,7 @@ return lazy.setup({
   -- ===========================
   -- Additional Plugin Modules
   -- ===========================
-  require("user.octo"),
+  -- require("user.octo"),
   require("user.smartpairs"),
   require("user.mini-surround"),
   require("user.hardtime"),

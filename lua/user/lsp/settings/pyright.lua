@@ -1,5 +1,4 @@
 
-local lspconfig = require('lspconfig')
 local python_root_files = {
   'WORKSPACE', -- added for Bazel; items below are from default config
   'pyproject.toml',
@@ -11,7 +10,7 @@ local python_root_files = {
 }
 
 return {
-  root_dir = lspconfig.util.root_pattern(unpack(python_root_files)),
+  root_markers = python_root_files,
   settings = {
     python = {
       analysis = {

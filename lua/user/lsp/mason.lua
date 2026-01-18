@@ -45,16 +45,6 @@ local settings = {
 }
 
 mason.setup(settings)
-mason_lspconfig.setup {
-  ensure_installed = servers,
-  automatic_installation = true,
-}
-
-local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
-if not lspconfig_status_ok then
-  return
-end
-
 
 local opts = {}
 
@@ -105,6 +95,9 @@ for _, server in pairs(servers) do
 
 
 
-  lspconfig[server].setup(opts)
-  ::continue::
+  vim.lsp.config(server, opts)
 end
+
+mason_lspconfig.setup {
+  ensure_installed = servers,
+}
