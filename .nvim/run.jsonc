@@ -1,0 +1,23 @@
+{
+  "entries": [
+    {
+      "name": "Batch job",
+      "cmd": "python %{file}",
+      "env": {
+        "AMOUNT": "?10", // prompt: default 10
+        "MODE": "safe"    // no prompt, fixed value
+      },
+      "priority": 900
+    },
+    {
+      "name": "Publish",
+      "cmd": "python %{file}",
+      "env": {
+        "AMOUNT": "?", // prompt: no default
+        "TOKEN": "?",  // prompt: no default
+        "ENV": "prod"  // fixed value
+      }
+    }
+  ]
+}
+
