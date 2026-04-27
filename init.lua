@@ -11,5 +11,7 @@ require "user.autocommands"
 require "user.winbar"
 
 require "user.runner"
+require "user.aitmux"
+require "user.codereview"
 --require "user.diffview"
 -- require("user.cowboy").cowboy()
