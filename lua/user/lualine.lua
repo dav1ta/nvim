@@ -127,7 +127,7 @@ end
 local function spaces()
   return {
     function()
-      return " " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
+      return " " .. vim.api.nvim_get_option_value("shiftwidth", { buf = 0 })
     end,
     cond = conditions.hide_in_width,
   }
@@ -162,4 +162,3 @@ lualine.setup {
   tabline = {},
   extensions = {},
 }
-

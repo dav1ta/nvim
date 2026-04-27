@@ -183,14 +183,6 @@ which_key.setup(st)
 -- which_key.register(mappings, opts)
  which_key.add {
     {
-      "<leader>a",
-      group = "AI",
-      icon = {
-        icon = " ",
-        color = "blue",
-      },
-    },
-    {
       "<leader>q",
       "<cmd>confirm q<CR>",
       desc = "Quit",

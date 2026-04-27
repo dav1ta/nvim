@@ -20,7 +20,6 @@ trouble.setup({
   focus = true,
   warn_no_results = false,
   open_no_results = false,
-  use_diagnostic_signs = true,
   keys = {
     ["q"] = "close",
     ["<esc>"] = "cancel",
@@ -56,13 +55,15 @@ trouble.setup({
   },
 })
 
-vim.api.nvim_set_keymap("n", "btt", ":Trouble diagnostics toggle<cr>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("n", "btw", ":Trouble diagnostics filter.buf=0<cr>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>td", ":Trouble diagnostics filter.buf=0<cr>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>tl", ":Trouble loclist<cr>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>tq", ":Trouble qflist<cr>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("n", "gR", ":Trouble lsp_references<cr>", { silent = true, noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>lua require('user.functions').toggle_diagnostics()<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "btt", "<cmd>Trouble diagnostics toggle<cr>", { silent = true, desc = "Trouble diagnostics" })
+vim.keymap.set("n", "btw", "<cmd>Trouble diagnostics filter.buf=0<cr>", { silent = true, desc = "Trouble buffer diagnostics" })
+vim.keymap.set("n", "<leader>td", "<cmd>Trouble diagnostics filter.buf=0<cr>", { silent = true, desc = "Trouble buffer diagnostics" })
+vim.keymap.set("n", "<leader>tl", "<cmd>Trouble loclist<cr>", { silent = true, desc = "Trouble loclist" })
+vim.keymap.set("n", "<leader>tq", "<cmd>Trouble qflist<cr>", { silent = true, desc = "Trouble qflist" })
+vim.keymap.set("n", "gR", "<cmd>Trouble lsp_references<cr>", { silent = true, desc = "Trouble LSP references" })
+vim.keymap.set("n", "<leader>xx", function()
+  require("user.functions").toggle_diagnostics()
+end, { silent = true, desc = "Toggle diagnostics" })
 
 end
 return {setup=setup}

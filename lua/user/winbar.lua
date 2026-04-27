@@ -12,7 +12,6 @@ M.winbar_filetype_exclude = {
   "lir",
   "Outline",
   "spectre_panel",
-  "toggleterm",
   "DressingSelect",
   "Jaq",
   "harpoon",

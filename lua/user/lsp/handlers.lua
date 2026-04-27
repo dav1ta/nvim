@@ -10,41 +10,20 @@ M.capabilities.textDocument.completion.completionItem.snippetSupport = true
 M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
 
 M.setup = function()
-  local icons = require "user.icons"
-vim.diagnostic.config({
-  signs = {
-    text = {
-      [vim.diagnostic.severity.ERROR] = "",
-      [vim.diagnostic.severity.WARN] = "",
-      [vim.diagnostic.severity.HINT] = "",
-      [vim.diagnostic.severity.INFO] = "",
+  local d = require("user.icons").diagnostics
+  vim.diagnostic.config({
+    signs = {
+      text = {
+        [vim.diagnostic.severity.ERROR] = d.Error,
+        [vim.diagnostic.severity.WARN] = d.Warning,
+        [vim.diagnostic.severity.HINT] = d.Hint,
+        [vim.diagnostic.severity.INFO] = d.Information,
+      },
     },
-  },
-})
-
-
-
-  local config = {
-    -- virtual diagnostics
     virtual_lines = false,
     virtual_text = {
       severity = { min = vim.diagnostic.severity.WARN },
     },
-
-
-    -- virtual_text = {
-    --   -- spacing = 7,
-    --   -- update_in_insert = false,
-    --   -- severity_sort = true,
-    --   -- prefix = "<-",
-    --   prefix = " ●",
-    --   source = "if_many", -- Or "always"
-    --   -- format = function(diag)
-    --   --   return diag.message .. "blah"
-    --   -- end,
-    -- },
-
-    -- signs handled by vim.diagnostic.config above; remove stale reference
     update_in_insert = true,
     underline = false,
     severity_sort = true,
@@ -52,26 +31,10 @@ vim.diagnostic.config({
       focusable = true,
       style = "minimal",
       border = "rounded",
-      -- border = {"▄","▄","▄","█","▀","▀","▀","█"},
-      source = "if_many", -- Or "always"
+      source = "if_many",
       header = "",
       prefix = "",
-      -- width = 40,
     },
-  }
-
-  vim.diagnostic.config(config)
-
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-    border = "rounded",
-    -- width = 60,
-    -- height = 30,
-  })
-
-  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    border = "rounded",
-    -- width = 60,
-    -- height = 30,
   })
 end
 
@@ -90,16 +53,22 @@ local function attach_navic(client, bufnr)
 end
 
 local function lsp_keymaps(bufnr)
-  local opts = { noremap = true, silent = true }
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>Telescope lsp_declarations<CR>", opts)
+  local opts = { buffer = bufnr, silent = true }
+  vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
+  vim.keymap.set("n", "gD", "<cmd>Telescope lsp_declarations<CR>", opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gI", "<cmd>Telescope lsp_implementations<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "<M-f>", "<cmd>Format<cr>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "ga", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+  vim.keymap.set("n", "gI", "<cmd>Telescope lsp_implementations<CR>", opts)
+  vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
+  vim.keymap.set("n", "gl", function()
+    vim.diagnostic.open_float()
+  end, opts)
+  vim.keymap.set("n", "gs", function()
+    vim.lsp.buf.signature_help({ border = "rounded" })
+  end, opts)
+  vim.keymap.set("n", "<M-f>", "<cmd>Format<cr>", opts)
+  vim.keymap.set("n", "ga", function()
+    vim.lsp.buf.code_action()
+  end, opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<M-s>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)

@@ -5,10 +5,21 @@ if not status_ok then
   return
 end
 
+local ts_context_ok, ts_context = pcall(require, "ts_context_commentstring.integrations.comment_nvim")
+local pre_hook = nil
+if ts_context_ok then
+  local hook = ts_context.create_pre_hook()
+  pre_hook = function(...)
+    local ok, result = pcall(hook, ...)
+    if ok then
+      return result
+    end
+  end
+end
+
 comment.setup(
 {
     active = true,
-    on_config_done = nil,
     ---Add a space b/w comment and the line
     ---@type boolean
     padding = true,
@@ -50,7 +61,7 @@ comment.setup(
 
     ---Pre-hook, called before commenting the line
     ---@type function|nil
-    pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+    pre_hook = pre_hook,
 
     ---Post-hook, called after commenting is done
     ---@type function|nil

@@ -33,7 +33,6 @@ function setup()
             "lir",
             "Outline",
             "spectre_panel",
-            "toggleterm",
             "DressingSelect",
             "TelescopePrompt",
         },

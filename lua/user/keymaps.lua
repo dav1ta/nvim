@@ -75,10 +75,27 @@ keymap('n', '<C-d>', '8<C-e>', opts)
 keymap('n', '<C-u>', '8<C-y>', opts)
 
 -- Diagnostic navigation
-keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
-keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
+keymap('n', '[d', function()
+  vim.diagnostic.jump({
+    count = -1,
+    on_jump = function()
+      vim.diagnostic.open_float()
+    end,
+  })
+end, opts)
+keymap('n', ']d', function()
+  vim.diagnostic.jump({
+    count = 1,
+    on_jump = function()
+      vim.diagnostic.open_float()
+    end,
+  })
+end, opts)
 keymap('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 keymap('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+
+-- Built-in undo tree (Nvim 0.12+ :Undotree)
+keymap("n", "<leader>u", "<cmd>Undotree<cr>", opts)
 
 -- Formatting
 keymap("n", "<leader>lf", ":Format<CR>", opts)

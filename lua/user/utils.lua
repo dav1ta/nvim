@@ -4,6 +4,36 @@ local M = {}
 -- Large file detection threshold (in bytes)
 M.LARGE_FILE_THRESHOLD = 500 * 1024 -- 500 KB
 
+M.ROOT_PATTERNS = {
+  ".git",
+  "_darcs",
+  ".hg",
+  ".bzr",
+  ".svn",
+  "Makefile",
+  "package.json",
+  "docker-compose.yml",
+  ".env",
+  "Cargo.lock",
+  "Cargo.toml",
+  "go.mod",
+  "go.sum",
+  "requirements.txt",
+  "pyproject.toml",
+  "Pipfile",
+  "Pipfile.lock",
+  ".python-version",
+  "yarn.lock",
+  "package-lock.json",
+  "Dockerfile",
+}
+
+function M.find_project_root(path)
+  path = path ~= "" and path or vim.uv.cwd()
+  local root = vim.fs.root(path, M.ROOT_PATTERNS)
+  return root or vim.uv.cwd()
+end
+
 -- Check if a file/buffer is large and should have features disabled
 function M.is_large_file(bufnr)
   bufnr = bufnr or 0
@@ -18,7 +48,7 @@ function M.is_large_file(bufnr)
     return false
   end
   
-  local ok, stats = pcall(vim.loop.fs_stat, filepath)
+  local ok, stats = pcall(vim.uv.fs_stat, filepath)
   if ok and stats and stats.size > M.LARGE_FILE_THRESHOLD then
     vim.b[bufnr].large_buf = true
     return true
@@ -53,8 +83,6 @@ function M.disable_heavy_features(bufnr)
 end
 
 return M
-
-
 
 
 

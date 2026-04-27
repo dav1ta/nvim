@@ -15,7 +15,9 @@ local choice = ls.choice_node
 local dynamicn = ls.dynamic_node
 
 ls.config.set_config {
-    history = true,
+    keep_roots = true,
+    link_roots = true,
+    link_children = true,
     -- treesitter-hl has 100, use something higher (default is 200).
     ext_base_prio = 200,
     -- minimal increase in priority.

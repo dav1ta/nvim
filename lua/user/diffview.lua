@@ -28,13 +28,12 @@ local M = {
     local ok, wk = pcall(require, "which-key")
     if ok then
       wk.add({
-        { "<leader>gd", ":DiffviewOpen<CR>", desc = "DiffView Open" },
-        { "<leader>gD", ":DiffviewClose<CR>", desc = "DiffView Close" },
-        { "<leader>gh", ":DiffviewFileHistory %<CR>", desc = "File History" },
+        { "<leader>gd", "<cmd>DiffviewOpen<CR>", desc = "DiffView Open" },
+        { "<leader>gD", "<cmd>DiffviewClose<CR>", desc = "DiffView Close" },
+        { "<leader>gh", "<cmd>DiffviewFileHistory %<CR>", desc = "File History" },
       })
     end
   end,
 }
 
 return M
-

@@ -16,7 +16,7 @@ local M = {
 function M.config()
   require("hardtime").setup({
     max_count = 5, -- How many bad keypresses before warning
-    disable_mouse = true, -- Allow mouse usage
+    disable_mouse = true, -- Block mouse usage
     hint = true, -- Show hint after bad behavior
     notification = true, -- Use notifications
     restricted_keys = {

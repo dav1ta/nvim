@@ -11,20 +11,11 @@ if not snip_status_ok then
 end
 
 local cmp_dap_status_ok, cmp_dap = pcall(require, "cmp_dap")
-if not cmp_dap_status_ok then
-  vim.notify("cmp_dap not found", vim.log.levels.ERROR)
-  return
-end
 
 local compare = require("cmp.config.compare")
 
 local function is_dap_buffer()
-  return vim.bo[0].buftype == "prompt" and cmp_dap.is_dap_buffer()
-end
-
-local function check_backspace()
-  local col = vim.fn.col(".") - 1
-  return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
+  return cmp_dap_status_ok and vim.bo[0].buftype == "prompt" and cmp_dap.is_dap_buffer()
 end
 
 require("luasnip/loaders/from_vscode").lazy_load()
@@ -36,6 +27,22 @@ local kind_icons = icons.kind
 local function has_words_before()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and not vim.api.nvim_buf_get_text(0, line - 1, col - 1, line - 1, col, {})[1]:match("^%s*$")
+end
+
+local sources = {
+  { name = "lazydev" },
+  { name = "nvim_lsp" },
+  { name = "nvim_lua" },
+  { name = "async_path" },
+}
+
+local fallback_sources = {
+  { name = "buffer" },
+  { name = "luasnip" },
+}
+
+if cmp_dap_status_ok then
+  table.insert(fallback_sources, { name = "dap" })
 end
 
 cmp.setup {
@@ -65,7 +72,7 @@ end,
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
+      elseif luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
       elseif has_words_before() then
         cmp.complete()
@@ -76,7 +83,7 @@ end,
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
+      elseif luasnip.locally_jumpable(-1) then
         luasnip.jump(-1)
       else
         fallback()
@@ -97,16 +104,7 @@ end,
       return vim_item
     end,
   },
-  sources = cmp.config.sources({
-    { name = "lazydev" },
-    { name = "nvim_lsp" },
-    { name = "nvim_lua" },
-    { name = "async_path" },
-  }, {
-    { name = "buffer" },
-    { name = "luasnip" },
-    { name = "dap" },
-  }),
+  sources = cmp.config.sources(sources, fallback_sources),
   sorting = {
     priority_weight = 2,
    comparators =   {

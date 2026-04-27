@@ -1,4 +1,4 @@
-local uv = vim.loop
+local uv = vim.uv
 
 local M = {}
 
@@ -102,20 +102,9 @@ local function gather_context()
   local file = vim.api.nvim_buf_get_name(buf)
   local filetype = vim.bo[buf].filetype or ''
   local extension = vim.fn.fnamemodify(file, ':e')
-  local cwd = vim.loop.cwd()
+  local cwd = vim.uv.cwd()
 
-  local project_root = nil
-  local ok, Project = pcall(require, 'project_nvim.project')
-  if ok then
-    local root = Project.get_project_root(file)
-    if root and root ~= '' then
-      project_root = root
-    end
-  end
-
-  if not project_root or project_root == '' then
-    project_root = cwd
-  end
+  local project_root = require("user.utils").find_project_root(file ~= "" and file or cwd)
 
   local relative_file = relpath(file, project_root)
 
@@ -159,7 +148,7 @@ local function resolve_prompted_env(entry_name, env)
 end
 
 local function run_in_tmux(result)
-  local cwd = result.cwd or vim.loop.cwd()
+  local cwd = result.cwd or vim.uv.cwd()
   local env_prefix = format_env(result.env or {})
   local cd_cmd = string.format('cd %s', vim.fn.shellescape(cwd))
   local full = string.format('%s && %s%s', cd_cmd, env_prefix, result.cmd)
@@ -486,6 +475,10 @@ local function project_config_exists(root)
   return file_exists(join_paths(dir, 'run.jsonc')) or file_exists(join_paths(dir, 'run.json'))
 end
 
+local project_config_path
+local substitute_vars
+local build_config_commands
+
 local function collect_commands(ctx)
   local commands = {}
   local alias_map = {}
@@ -520,7 +513,6 @@ local function collect_commands(ctx)
 
   local had_config = false
   -- Load project-defined run entries from .nvim/run.json(.jsonc)
-  build_config_commands = build_config_commands -- forward decl (noop if defined later)
   if type(build_config_commands) == 'function' then
     local ok, res = pcall(build_config_commands, ctx, add)
     if ok and res then
@@ -747,7 +739,7 @@ vim.api.nvim_create_user_command('RuLast', function()
 end, { desc = 'Re-run last project command' })
 
 -- Project config support (.nvim/run.json)
-local function project_config_path(root)
+project_config_path = function(root)
   -- Prefer .jsonc, fallback to .json
   local dir = join_paths(root, '.nvim')
   local jsonc = join_paths(dir, 'run.jsonc')
@@ -757,7 +749,7 @@ local function project_config_path(root)
   return join_paths(dir, 'run.json')
 end
 
-local function substitute_vars(s, ctx)
+substitute_vars = function(s, ctx)
   if type(s) ~= 'string' then
     return s
   end
@@ -769,7 +761,7 @@ local function substitute_vars(s, ctx)
   return out
 end
 
-function build_config_commands(ctx, add)
+build_config_commands = function(ctx, add)
   local path = project_config_path(ctx.project_root)
   if not file_exists(path) then
     return false
@@ -855,7 +847,7 @@ end, { desc = 'Open lazydocker in tmux' })
 
 _G.tmux_command = function(window_name, command)
   if os.getenv('TMUX') then
-    local output = io.popen('tmux list-windows'):read('*all')
+    local output = table.concat(vim.fn.systemlist('tmux list-windows'), '\n')
 
     if output:find(window_name, 1, true) then
       vim.fn.system(string.format("tmux send-keys -t '%s' C-c C-l 'cd %s && %s' C-m", window_name, vim.fn.getcwd(), command))

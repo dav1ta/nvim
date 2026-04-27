@@ -57,7 +57,9 @@ local actions = require("telescope.actions")
     },
     {
       "<leader>tp",
-      "<cmd>lua require('telescope').extensions.projects.projects()<cr>",
+      function()
+        require("telescope").extensions.project.project({})
+      end,
       desc = "Projects",
     },
 
@@ -94,11 +96,6 @@ local actions = require("telescope.actions")
       "<leader>th",
       "<cmd>Telescope help_tags<cr>",
       desc = "Help",
-    },
-    {
-      "<leader>ti",
-      "<cmd>lua require('telescope').extensions.media_files.media_files()<cr>",
-      desc = "Media",
     },
     {
       "<leader>tl",

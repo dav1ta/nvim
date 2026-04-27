@@ -35,7 +35,6 @@ local options = {
   sidescrolloff = 10,
   scroll = 10,
   guifont = "monospace:h17",               -- the font used in graphical neovim applications
-  undofile = true,                         -- enable persistent undo
   undodir = vim.fn.stdpath("data") .. "/undo", -- set undo directory
 }
 
@@ -65,15 +64,16 @@ do
   end
 end
 
-vim.cmd "set whichwrap+=<,>,[,],h,l"
-vim.cmd [[set iskeyword+=-]]
-vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
-vim.cmd [[set langmap=ქq,წw,ეe,რr,ტt,ყy,უu,იi,ოo,პp,აa,სs,დd,ფf,გg,ჰh,ჯj,კk,ლl,ზz,ხx,ცc,ვv,ბb,ნn,მm,ჭW,ღR,ძZ,ჩC,თT,შS]] -- TODO: this doesn't seem to work
-vim.cmd [[let g:db_ui_winwidth = 60]] -- TODO: this doesn't seem to work
-vim.cmd [[set title]] -- TODO: this doesn't seem to work
-vim.cmd("set titlestring=nvim\\ -\\ %F%M")
+vim.opt.whichwrap:append("<,>,[,],h,l")
+vim.opt.iskeyword:append("-")
+vim.opt.formatoptions:remove({ "c", "r", "o" })
+vim.opt.langmap =
+  "ქq,წw,ეe,რr,ტt,ყy,უu,იi,ოo,პp,აa,სs,დd,ფf,გg,ჰh,ჯj,კk,ლl,ზz,ხx,ცc,ვv,ბb,ნn,მm,ჭW,ღR,ძZ,ჩC,თT,შS"
+vim.g.db_ui_winwidth = 60
+vim.opt.title = true
+vim.opt.titlestring = "nvim - %F%M"
 
 
 
-vim.cmd[[let g:VimuxRunnerType = "window"]]
-vim.cmd[[let g:VimuxRunnerName = "vimuxout"]]
+vim.g.VimuxRunnerType = "window"
+vim.g.VimuxRunnerName = "vimuxout"

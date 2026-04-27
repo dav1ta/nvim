@@ -2,7 +2,7 @@ local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 vim.g.skip_ts_context_commentstring_module = true
 
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
   vim.fn.system({
     "git",
     "clone",
@@ -31,7 +31,6 @@ return lazy.setup({
   -- ===========================
   -- Core Dependencies
   -- ===========================
-  { "nvim-lua/popup.nvim" },
   { "nvim-lua/plenary.nvim" },
   { "nvim-tree/nvim-web-devicons" },
 
@@ -71,28 +70,11 @@ return lazy.setup({
     end,
   },
 
-  {
-    "akinsho/toggleterm.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("user.toggleterm").setup()
-    end,
-  },
-
-  {
-    "ahmedkhalf/project.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("user.project")
-    end,
-  },
-
   -- ===========================
   -- Editor Enhancements
   -- ===========================
   { "moll/vim-bbye" },
   { "tpope/vim-repeat" },
-  { "mg979/vim-visual-multi" },
   { "christoomey/vim-tmux-navigator" },
 
   {
@@ -131,7 +113,7 @@ return lazy.setup({
   },
 
   {
-    "norcalli/nvim-colorizer.lua",
+    "catgoose/nvim-colorizer.lua",
     event = "BufReadPre",
     config = function()
       require("user.colorizer")
@@ -142,11 +124,10 @@ return lazy.setup({
   -- ===========================
   -- Colorschemes
   -- ===========================
-  { "tjdevries/colorbuddy.nvim" },
-  { "lunarvim/darkplus.nvim" },
-  { "Mofiqul/dracula.nvim" },
-  { "svrana/neosolarized.nvim" },
-  { "projekt0n/github-nvim-theme" },
+  {
+    "svrana/neosolarized.nvim",
+    dependencies = { "tjdevries/colorbuddy.nvim" },
+  },
 
 
 
@@ -160,7 +141,6 @@ return lazy.setup({
     dependencies = {
       "hrsh7th/cmp-buffer",
       "https://codeberg.org/FelipeLema/cmp-async-path.git",
-      "hrsh7th/cmp-cmdline",
       "rcarriga/cmp-dap",
       "saadparwaiz1/cmp_luasnip",
       "hrsh7th/cmp-nvim-lsp",
@@ -188,14 +168,6 @@ return lazy.setup({
   -- Buffer & Session Management
   -- ===========================
   {
-    "tiagovla/scope.nvim",
-    event = "VeryLazy",
-    config = function()
-      require("scope").setup()
-    end,
-  },
-
-  {
     "preservim/vimux",
     cmd = { "VimuxRunCommand", "VimuxTogglePane", "VimuxInterruptRunner", "VimuxOpenRunner" },
   },
@@ -203,8 +175,8 @@ return lazy.setup({
   -- ===========================
   -- LSP & Language Support
   -- ===========================
-  { "williamboman/mason.nvim" },
-  { "williamboman/mason-lspconfig.nvim" },
+  { "mason-org/mason.nvim" },
+  { "mason-org/mason-lspconfig.nvim" },
   { "b0o/SchemaStore.nvim" },
 
   {
@@ -263,10 +235,16 @@ return lazy.setup({
   -- ===========================
   {
     "nvim-treesitter/nvim-treesitter",
-    event = "BufReadPre",
+    branch = "master",
+    lazy = false,
     build = ":TSUpdate",
     dependencies = {
-      "JoosepAlviste/nvim-ts-context-commentstring",
+      {
+        "JoosepAlviste/nvim-ts-context-commentstring",
+        opts = {
+          enable_autocmd = false,
+        },
+      },
       "nvim-treesitter/nvim-treesitter-textobjects",
     },
     config = function()
@@ -326,14 +304,10 @@ return lazy.setup({
   {
     "rmagatti/goto-preview",
     event = "BufReadPre",
+    dependencies = { "rmagatti/logger.nvim" },
     config = function()
       require("user.preview")
     end,
-  },
-
-  {
-    "tpope/vim-eunuch",
-    event = "BufReadPre",
   },
 
   {
@@ -346,30 +320,12 @@ return lazy.setup({
   },
 
   {
-    "danymat/neogen",
-    event = "BufReadPre",
-    config = function()
-      require("user.neogen").setup()
-    end,
-  },
-
-  {
     "folke/todo-comments.nvim",
     event = "BufReadPre",
     config = function()
       require("user.todo-comments").setup()
     end,
   },
-
-  {
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    ft = { "markdown" },
-    build = function()
-      vim.fn["mkdp#util#install"]()
-    end,
-  },
-
 
   -- ===========================
   -- Debug Adapter Protocol (DAP)
@@ -409,11 +365,24 @@ return lazy.setup({
 
   {
     "jay-babu/mason-nvim-dap.nvim",
-    dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
+    dependencies = { "mason-org/mason.nvim", "mfussenegger/nvim-dap" },
     event = "VeryLazy",
     config = function()
       require("mason-nvim-dap").setup()
     end,
+  },
+
+  {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    event = "VeryLazy",
+    cmd = { "MasonToolsInstall", "MasonToolsInstallSync", "MasonToolsUpdate", "MasonToolsUpdateSync" },
+    dependencies = { "mason-org/mason.nvim" },
+    opts = {
+      ensure_installed = {
+        "prettier",
+        "stylua",
+      },
+    },
   },
 
   -- ===========================
@@ -435,23 +404,6 @@ return lazy.setup({
     cmd = "StartupTime",
   },
 
-  { "tpope/vim-dadbod" },
-  { "kristijanhusak/vim-dadbod-ui" },
-
-  {
-    "mbbill/undotree",
-    keys = { -- load the plugin only when using its keybinding:
-      { "<leader>u", "<cmd>UndotreeToggle<cr>" },
-    },
-  },
-
-
-
-  -- ===========================
-  -- AI & Copilot (Optional)
-  -- ===========================
-  require("user.copilot"),
-
   -- ===========================
   -- Additional Plugin Modules
   -- ===========================
@@ -459,4 +411,8 @@ return lazy.setup({
   require("user.smartpairs"),
   require("user.mini-surround"),
   require("user.hardtime"),
+}, {
+  rocks = {
+    enabled = false,
+  },
 })

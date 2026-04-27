@@ -20,42 +20,58 @@ end
   wk.add {
     {
       "<leader>gj",
-      "<cmd>lua require 'gitsigns'.next_hunk({navigation_message = false})<cr>",
+      function()
+        require("gitsigns").nav_hunk("next")
+      end,
       desc = "Next Hunk",
     },
     {
       "<leader>gk",
-      "<cmd>lua require 'gitsigns'.prev_hunk({navigation_message = false})<cr>",
+      function()
+        require("gitsigns").nav_hunk("prev")
+      end,
       desc = "Prev Hunk",
     },
     {
       "<leader>gp",
-      "<cmd>lua require 'gitsigns'.preview_hunk()<cr>",
+      function()
+        require("gitsigns").preview_hunk()
+      end,
       desc = "Preview Hunk",
     },
     {
       "<leader>gr",
-      "<cmd>lua require 'gitsigns'.reset_hunk()<cr>",
+      function()
+        require("gitsigns").reset_hunk()
+      end,
       desc = "Reset Hunk",
     },
     {
       "<leader>gl",
-      "<cmd>lua require 'gitsigns'.blame_line()<cr>",
+      function()
+        require("gitsigns").blame_line()
+      end,
       desc = "Blame",
     },
     {
       "<leader>gR",
-      "<cmd>lua require 'gitsigns'.reset_buffer()<cr>",
+      function()
+        require("gitsigns").reset_buffer()
+      end,
       desc = "Reset Buffer",
     },
     {
       "<leader>gs",
-      "<cmd>lua require 'gitsigns'.stage_hunk()<cr>",
+      function()
+        require("gitsigns").stage_hunk()
+      end,
       desc = "Stage Hunk",
     },
     {
       "<leader>gu",
-      "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
+      function()
+        require("gitsigns").undo_stage_hunk()
+      end,
       desc = "Undo Stage Hunk",
     },
   }

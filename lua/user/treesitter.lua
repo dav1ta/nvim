@@ -7,7 +7,7 @@ local function setup()
 
   configs.setup {
     ensure_installed = {
-      "c", "lua", "python", "bash", "dockerfile", "gitignore", "go", "tsx", "typescript",
+      "c", "lua", "python", "bash", "diff", "dockerfile", "gitignore", "go", "tsx", "typescript",
       "html", "scss", "css", "javascript", "yaml"
     },
     sync_install = false,
@@ -25,11 +25,6 @@ local function setup()
     indent = {
       enable = true,
       disable = {},
-    },
-
-    context_commentstring = {
-      enable = true,
-      enable_autocmd = false,
     },
 
     -- matchup removed (plugin not installed)
