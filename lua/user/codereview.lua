@@ -6,8 +6,11 @@ local state = {
   idx = 1,
   root = nil,
   tabnr = nil,
-  bufnr = nil,
+  tempdirs = {},
 }
+
+local python_bin = "/home/davit/Desktop/env/bin/python"
+local textual_diff_script = vim.fn.stdpath("config") .. "/scripts/codereview_textual_diff.py"
 
 local function trim(s)
   return (s or ""):gsub("^%s+", ""):gsub("%s+$", "")
@@ -18,6 +21,15 @@ local function git_cmd(root, args)
   local out = vim.fn.systemlist(cmd)
   if vim.v.shell_error ~= 0 then
     return nil, table.concat(out, "\n")
+  end
+  return out, nil
+end
+
+local function git_blob(root, file)
+  local cmd = string.format("git -C %s show %s", vim.fn.shellescape(root), vim.fn.shellescape(":" .. file))
+  local out = vim.fn.system(cmd)
+  if vim.v.shell_error ~= 0 then
+    return nil, trim(out)
   end
   return out, nil
 end
@@ -35,18 +47,30 @@ local function close_review_tab()
     pcall(vim.api.nvim_set_current_tabpage, state.tabnr)
     pcall(vim.cmd, "tabclose")
   end
+  state.tabnr = nil
 end
 
-local function finish_review(close_view)
+local function cleanup_tempdirs()
+  for _, dir in ipairs(state.tempdirs) do
+    pcall(vim.fn.delete, dir, "rf")
+  end
+  state.tempdirs = {}
+end
+
+local function finish_review(close_view, completed)
   if close_view then
     close_review_tab()
+  end
+  cleanup_tempdirs()
+  if completed then
+    vim.notify("CodeReview: completed", vim.log.levels.INFO)
   end
   state.active = false
   state.files = {}
   state.idx = 1
   state.root = nil
   state.tabnr = nil
-  state.bufnr = nil
+  state.tempdirs = {}
 end
 
 local function current_file()
@@ -56,7 +80,7 @@ end
 local function next_file()
   state.idx = state.idx + 1
   if not current_file() then
-    finish_review(true)
+    finish_review(true, true)
     return
   end
 
@@ -65,102 +89,108 @@ local function next_file()
   end)
 end
 
-local function set_buffer_content(buf, lines)
-  vim.bo[buf].modifiable = true
-  vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
-  vim.bo[buf].modifiable = false
-end
-
-local function apply_review_keymaps(buf)
-  vim.keymap.set("n", "s", function()
-    if not state.active then
-      return
-    end
-
-    local file = current_file()
-    if not file then
-      finish_review(true)
-      return
-    end
-
-    local _, err = git_cmd(state.root, "add -- " .. vim.fn.shellescape(file))
-    if err then
-      vim.notify("CodeReview stage failed: " .. err, vim.log.levels.ERROR)
-      return
-    end
-
-    next_file()
-  end, { buffer = buf, silent = true, nowait = true, desc = "CodeReview stage file and next" })
-
-  vim.keymap.set("n", "n", function()
-    if not state.active then
-      return
-    end
-    next_file()
-  end, { buffer = buf, silent = true, nowait = true, desc = "CodeReview next file" })
-
-  vim.keymap.set("n", "q", function()
-    if state.active then
-      finish_review(true)
-    end
-  end, { buffer = buf, silent = true, nowait = true, desc = "CodeReview quit" })
-end
-
-local function ensure_review_tab_and_buf()
-  if state.tabnr and vim.api.nvim_tabpage_is_valid(state.tabnr) and state.bufnr and vim.api.nvim_buf_is_valid(state.bufnr) then
-    pcall(vim.api.nvim_set_current_tabpage, state.tabnr)
-    local win = vim.api.nvim_tabpage_get_win(state.tabnr)
-    pcall(vim.api.nvim_win_set_buf, win, state.bufnr)
-    return
+local function prepare_original_file(file)
+  local contents, err = git_blob(state.root, file)
+  if err then
+    return nil, err
   end
 
-  vim.cmd("tabnew")
-  state.tabnr = vim.api.nvim_get_current_tabpage()
-  state.bufnr = vim.api.nvim_get_current_buf()
+  local dir = vim.fn.tempname()
+  local name = vim.fn.fnamemodify(file, ":t")
+  if name == "" then
+    name = "original"
+  end
+  local path = dir .. "/" .. name
 
-  local buf = state.bufnr
-  vim.bo[buf].buftype = "nofile"
-  vim.bo[buf].bufhidden = "wipe"
-  vim.bo[buf].swapfile = false
-  vim.bo[buf].modifiable = false
-  vim.bo[buf].filetype = "diff"
-  apply_review_keymaps(buf)
+  vim.fn.mkdir(dir, "p")
+  vim.fn.writefile(vim.split(contents, "\n", { plain = true }), path, "b")
+  table.insert(state.tempdirs, dir)
+  return path, nil
 end
 
 function M.open_current()
   local file = current_file()
   if not file then
-    finish_review(true)
+    finish_review(true, true)
     return
   end
 
-  ensure_review_tab_and_buf()
-
-  local lines, err = git_cmd(state.root, "diff --no-color -- " .. vim.fn.shellescape(file))
+  local original, err = prepare_original_file(file)
   if err then
-    vim.notify("CodeReview diff failed: " .. err, vim.log.levels.ERROR)
-    finish_review(true)
+    vim.notify("CodeReview original failed: " .. err, vim.log.levels.ERROR)
+    finish_review(true, false)
     return
   end
 
-  if #lines == 0 then
-    next_file()
+  local modified = state.root .. "/" .. file
+  if vim.fn.filereadable(modified) == 0 then
+    vim.notify("CodeReview modified file missing: " .. file, vim.log.levels.ERROR)
+    finish_review(true, false)
     return
   end
 
-  local header = {
-    string.format("# CodeReview %d/%d", state.idx, #state.files),
-    string.format("# File: %s", file),
-    "# Keys: s stage+next | n next | q quit",
-    "",
-  }
+  close_review_tab()
+  vim.cmd("tabnew")
+  state.tabnr = vim.api.nvim_get_current_tabpage()
+  vim.cmd("tcd " .. vim.fn.fnameescape(state.root))
 
-  local all_lines = vim.list_extend(header, lines)
-  set_buffer_content(state.bufnr, all_lines)
-  vim.api.nvim_buf_set_name(state.bufnr, "CodeReview://" .. file)
-  vim.bo[state.bufnr].modifiable = false
-  vim.bo[state.bufnr].readonly = true
-  vim.api.nvim_win_set_cursor(0, { 1, 0 })
+  local title = string.format("%d/%d %s", state.idx, #state.files, file)
+  local cmd = { python_bin, textual_diff_script, original, modified, title }
+  vim.fn.termopen(cmd, {
+    on_exit = function(_, code)
+      vim.schedule(function()
+        close_review_tab()
+        if code == 10 then
+          M.stage_current()
+        elseif code == 11 then
+          M.skip_current()
+        elseif code == 12 then
+          finish_review(false, false)
+        elseif state.active then
+          vim.notify("CodeReview diff viewer exited: " .. code, vim.log.levels.ERROR)
+          finish_review(false, false)
+        end
+      end)
+    end,
+  })
+  vim.cmd("startinsert")
+  vim.notify(string.format("CodeReview %d/%d: %s", state.idx, #state.files, file), vim.log.levels.INFO)
+end
+
+function M.stage_current()
+  if not state.active then
+    return
+  end
+
+  local file = current_file()
+  if not file then
+    finish_review(true, true)
+    return
+  end
+
+  local _, err = git_cmd(state.root, "add -- " .. vim.fn.shellescape(file))
+  if err then
+    vim.notify("CodeReview stage failed: " .. err, vim.log.levels.ERROR)
+    return
+  end
+
+  vim.notify("CodeReview: staged " .. file, vim.log.levels.INFO)
+  next_file()
+end
+
+function M.skip_current()
+  if not state.active then
+    return
+  end
+
+  local file = current_file()
+  if not file then
+    finish_review(true, true)
+    return
+  end
+
+  vim.notify("CodeReview: skipped " .. file, vim.log.levels.INFO)
+  next_file()
 end
 
 function M.start()
@@ -190,7 +220,7 @@ function M.start()
   state.idx = 1
   state.root = root
   state.tabnr = nil
-  state.bufnr = nil
+  state.tempdirs = {}
 
   M.open_current()
 end
@@ -198,7 +228,7 @@ end
 vim.api.nvim_create_user_command("CodeReview", function()
   M.start()
 end, {
-  desc = "Review unstaged files one-by-one: s=stage+next, n=next, q=quit",
+  desc = "Review unstaged files one-by-one in Textual diff view: s=stage+next, n=skip+next, q=quit",
 })
 
 return M
