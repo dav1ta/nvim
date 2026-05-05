@@ -97,7 +97,9 @@ local function start_command(command)
   local pane_id, err = system_ok({
     "tmux",
     "split-window",
-    "-v",
+    "-h",
+    "-p",
+    "20",
     "-c",
     vim.fn.getcwd(),
     "-P",
@@ -139,6 +141,12 @@ local function send_to_pane(pane_id, text)
   local _, err2 = system_ok({ "tmux", "paste-buffer", "-d", "-t", pane_id })
   if err2 then
     vim.notify("tmux paste-buffer failed: " .. err2, vim.log.levels.ERROR)
+    return
+  end
+
+  local _, err3 = system_ok({ "tmux", "select-pane", "-t", pane_id })
+  if err3 then
+    vim.notify("tmux select-pane failed: " .. err3, vim.log.levels.ERROR)
     return
   end
 
@@ -222,7 +230,7 @@ end, {
   desc = "Pick default tmux pane for AI send",
 })
 
-vim.keymap.set("n", "<leader>aa", "<cmd>AITmuxStart<CR>", { silent = true, desc = "AI TUI start" })
+vim.keymap.set("n", "<leader>a", "<cmd>AITmuxStart<CR>", { silent = true, desc = "AI TUI start" })
 vim.keymap.set("v", "<leader>as", "<cmd>AITmuxSend<CR>", { silent = true, desc = "AI send selection" })
 
 return M

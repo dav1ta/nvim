@@ -72,7 +72,7 @@ local function set_buffer_content(buf, lines)
 end
 
 local function apply_review_keymaps(buf)
-  vim.keymap.set("n", " ", function()
+  vim.keymap.set("n", "s", function()
     if not state.active then
       return
     end
@@ -92,12 +92,12 @@ local function apply_review_keymaps(buf)
     next_file()
   end, { buffer = buf, silent = true, nowait = true, desc = "CodeReview stage file and next" })
 
-  vim.keymap.set("n", "s", function()
+  vim.keymap.set("n", "n", function()
     if not state.active then
       return
     end
     next_file()
-  end, { buffer = buf, silent = true, nowait = true, desc = "CodeReview skip file and next" })
+  end, { buffer = buf, silent = true, nowait = true, desc = "CodeReview next file" })
 
   vim.keymap.set("n", "q", function()
     if state.active then
@@ -151,7 +151,7 @@ function M.open_current()
   local header = {
     string.format("# CodeReview %d/%d", state.idx, #state.files),
     string.format("# File: %s", file),
-    "# Keys: <Space> stage+next | s skip | q quit",
+    "# Keys: s stage+next | n next | q quit",
     "",
   }
 
@@ -198,7 +198,7 @@ end
 vim.api.nvim_create_user_command("CodeReview", function()
   M.start()
 end, {
-  desc = "Review unstaged files one-by-one: <Space>=stage+next, s=skip, q=quit",
+  desc = "Review unstaged files one-by-one: s=stage+next, n=next, q=quit",
 })
 
 return M
