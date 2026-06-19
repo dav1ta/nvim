@@ -92,7 +92,7 @@ keymap('n', ']d', function()
   })
 end, opts)
 keymap('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-keymap('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+keymap('n', '<leader>le', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 
 -- Built-in undo tree (Nvim 0.12+ :Undotree)
 keymap("n", "<leader>u", "<cmd>Undotree<cr>", opts)

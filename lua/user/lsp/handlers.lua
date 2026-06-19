@@ -3,11 +3,10 @@ local M = {}
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 
 local status_cmp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not status_cmp_ok then
-  return
+if status_cmp_ok then
+  M.capabilities.textDocument.completion.completionItem.snippetSupport = true
+  M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
 end
-M.capabilities.textDocument.completion.completionItem.snippetSupport = true
-M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
 
 M.setup = function()
   local d = require("user.icons").diagnostics
@@ -86,9 +85,7 @@ M.on_attach = function(client, bufnr)
   if vim.lsp.inlay_hint then
     pcall(vim.lsp.inlay_hint.enable, bufnr, true)
   end
-
-
- end
+end
 
 
 function M.remove_augroup(name)
@@ -97,6 +94,6 @@ function M.remove_augroup(name)
   end
 end
 
-  -- Format command now provided by Conform (:Format); avoid duplicate
+-- Format command now provided by Conform (:Format); avoid duplicate
 
 return M

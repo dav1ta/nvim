@@ -1,4 +1,5 @@
 local uv = vim.uv
+local tmux = require('user.tmux')
 
 local M = {}
 
@@ -163,7 +164,7 @@ local function run_in_tmux(result)
   local quoted = vim.fn.shellescape(full)
   pcall(vim.cmd, string.format('silent! VimuxRunCommand %s', quoted))
 
-  vim.fn.system("tmux select-window -t 'vimuxout'")
+  tmux.select_window('vimuxout')
 end
 
 ---@param raw string
@@ -176,6 +177,22 @@ local function split_tokens(raw)
     table.insert(tokens, token)
   end
   return tokens
+end
+
+local function command_label(entry)
+  if entry.description and entry.description ~= '' then
+    return string.format('%s → %s', entry.name, entry.description)
+  end
+  return entry.name
+end
+
+local function build_runtime(argline)
+  local runtime = {
+    argline = argline or '',
+  }
+  runtime.tokens = split_tokens(runtime.argline)
+  runtime.args = ''
+  return runtime
 end
 
 local function build_python_commands(ctx, add)
@@ -602,12 +619,7 @@ local function run_raw_command(ctx, command)
 end
 
 function M.run(argline)
-  local runtime = {
-    argline = argline or '',
-  }
-  runtime.tokens = split_tokens(runtime.argline)
-  runtime.args = ''
-
+  local runtime = build_runtime(argline)
   local ctx = gather_context()
   local commands, alias_map = collect_commands(ctx)
 
@@ -644,12 +656,7 @@ function M.run(argline)
 
   vim.ui.select(items, {
     prompt = 'Run command',
-    format_item = function(item)
-      if item.description and item.description ~= '' then
-        return string.format('%s → %s', item.name, item.description)
-      end
-      return item.name
-    end,
+    format_item = command_label,
   }, function(choice)
     if not choice then
       return
@@ -664,7 +671,7 @@ end, { nargs = '*', desc = 'Run project command via Vimux' })
 
 -- Telescope-powered picker for run commands
 function M.run_picker(argline)
-  local ok_telescope, telescope = pcall(require, 'telescope')
+  local ok_telescope = pcall(require, 'telescope')
   if not ok_telescope then
     vim.notify('telescope.nvim not available; falling back to :Ru', vim.log.levels.WARN)
     return M.run(argline)
@@ -676,7 +683,8 @@ function M.run_picker(argline)
   local actions = require('telescope.actions')
   local action_state = require('telescope.actions.state')
 
-  local runtime = { argline = argline or '', tokens = {}, args = argline or '' }
+  local runtime = build_runtime(argline)
+  runtime.args = runtime.argline
   local ctx = gather_context()
   local commands = select(1, collect_commands(ctx))
 
@@ -695,10 +703,7 @@ function M.run_picker(argline)
     finder = finders.new_table({
       results = entries,
       entry_maker = function(item)
-        local display = item.name
-        if item.description and item.description ~= '' then
-          display = string.format('%s → %s', item.name, item.description)
-        end
+        local display = command_label(item)
         return {
           value = item,
           display = display,
@@ -821,43 +826,17 @@ build_config_commands = function(ctx, add)
   return added_any
 end
 
-local function tmux_run(cmd_name, cmd)
-  local window_id = trim(vim.fn.system(string.format("tmux list-windows -F '#{window_name} #{window_id}' | grep '^%s ' | awk '{print $2}'", cmd_name)))
-
-  if window_id == '' then
-    vim.fn.system(string.format("tmux new-window -n '%s' '%s'", cmd_name, cmd))
-  else
-    vim.fn.system(string.format("tmux select-window -t '%s'", window_id))
-  end
-end
-
-_G.tmux_run = tmux_run
-
 vim.api.nvim_create_user_command('TmuxHtop', function()
-  tmux_run('htop', 'htop')
+  tmux.open_or_select_window('htop', 'htop')
 end, { desc = 'Open htop in a tmux window' })
 
 vim.api.nvim_create_user_command('LazyGit', function()
-  tmux_run('lazygit', 'lazygit')
+  tmux.open_or_select_window('lazygit', 'lazygit')
 end, { desc = 'Open lazygit in tmux' })
 
 vim.api.nvim_create_user_command('LazyDocker', function()
-  tmux_run('lazydocker', 'lazydocker')
+  tmux.open_or_select_window('lazydocker', 'lazydocker')
 end, { desc = 'Open lazydocker in tmux' })
-
-_G.tmux_command = function(window_name, command)
-  if os.getenv('TMUX') then
-    local output = table.concat(vim.fn.systemlist('tmux list-windows'), '\n')
-
-    if output:find(window_name, 1, true) then
-      vim.fn.system(string.format("tmux send-keys -t '%s' C-c C-l 'cd %s && %s' C-m", window_name, vim.fn.getcwd(), command))
-    else
-      vim.fn.system(string.format("tmux new-window -n '%s'", window_name))
-      vim.fn.system(string.format("tmux send-keys -t '%s' 'cd %s && %s' C-m", window_name, vim.fn.getcwd(), command))
-    end
-    vim.fn.system(string.format("tmux select-window -t '%s'", window_name))
-  end
-end
 
 vim.api.nvim_create_user_command('RunTmux', function(opts)
   local args = opts.fargs
@@ -867,7 +846,7 @@ vim.api.nvim_create_user_command('RunTmux', function(opts)
   end
   local window_name = table.remove(args, 1)
   local command = table.concat(args, ' ')
-  _G.tmux_command(window_name, command)
+  tmux.send_to_window(window_name, command)
 end, { nargs = '+', desc = 'Send command to named tmux window' })
 
 vim.api.nvim_create_user_command('Profile', function()
@@ -881,7 +860,7 @@ vim.api.nvim_create_user_command('Profile', function()
     vim.fn.shellescape(ctx.cwd),
     vim.fn.shellescape(ctx.file)
   )
-  _G.tmux_command('profile', profiling_cmd)
+  tmux.send_to_window('profile', profiling_cmd, { cwd = ctx.cwd })
 end, { desc = 'Profile current Python file using cProfile' })
 
 return M

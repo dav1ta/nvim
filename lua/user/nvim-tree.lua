@@ -21,7 +21,7 @@ nvim_tree.setup({
     sorter = "name",
   },
   view = {
-    width = 30,
+    width = 40,
     side = "left",
     signcolumn = "yes",
   },

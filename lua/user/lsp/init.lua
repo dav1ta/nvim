@@ -1,4 +1,4 @@
-M = {}
+local M = {}
 
 M.server_capabilities = function()
   local clients = vim.lsp.get_clients({})

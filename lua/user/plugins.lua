@@ -235,7 +235,7 @@ return lazy.setup({
   -- ===========================
   {
     "nvim-treesitter/nvim-treesitter",
-    branch = "master",
+    branch = "main",
     lazy = false,
     build = ":TSUpdate",
     dependencies = {
@@ -245,7 +245,10 @@ return lazy.setup({
           enable_autocmd = false,
         },
       },
-      "nvim-treesitter/nvim-treesitter-textobjects",
+      {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        branch = "main",
+      },
     },
     config = function()
       require("user.treesitter").setup()

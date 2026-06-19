@@ -188,6 +188,11 @@ which_key.setup(st)
       desc = "Quit",
     },
     {
+      "<leader>e",
+      "<cmd>NvimTreeToggle<CR>",
+      desc = "Explorer",
+    },
+    {
       "<leader>h",
       "<cmd>nohlsearch<CR>",
       desc = "NOHL",
@@ -252,6 +257,7 @@ which_key.setup(st)
 which_key.add({
   { "<leader>r", group = "LSP Rename" },
   { "<leader>rr", function() vim.lsp.buf.rename() end, desc = "Rename symbol (LSP)" },
+  { "<leader>le", "<cmd>lua vim.diagnostic.setloclist()<CR>", desc = "Diagnostics loclist" },
   { "<leader>lf", ":Format<CR>", desc = "Format (Conform)" },
   { "<leader>1", function() vim.cmd('bnext') end, desc = "go buffer 1" },
   { "<leader>2", function() vim.cmd('bprev') end, desc = "go buffer 2" },

@@ -1,3 +1,5 @@
+vim.env.NVIM_LOG_FILE = "/dev/null"
+
 require "user.options"
 require "user.keymaps"
 require "user.plugins"
