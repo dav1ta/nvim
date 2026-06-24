@@ -7,14 +7,73 @@
 -- 6. `<leader>tp` → jump between projects you touched recently.
 -- 7. `<leader>tl` → resume the last picker to refine prior searches.
 
-function setup()
-local status_ok, telescope = pcall(require, "telescope")
-if not status_ok then
-    print("telescope not found")
-	return
+local M = {}
+
+local function search_cwd()
+  local name = vim.api.nvim_buf_get_name(0)
+  local path = name ~= "" and name or vim.uv.cwd()
+  return require("user.utils").find_project_root(path)
 end
 
-local actions = require("telescope.actions")
+local find_command = {
+  "fd",
+  "--type",
+  "f",
+  "--hidden",
+  "--follow",
+  "--exclude",
+  ".git",
+  "--exclude",
+  "node_modules",
+  "--exclude",
+  "dist",
+  "--exclude",
+  "venv",
+  "--exclude",
+  "env",
+  "--exclude",
+  "vendor",
+}
+
+local vimgrep_arguments = {
+  "rg",
+  "--with-filename",
+  "--no-heading",
+  "--line-number",
+  "--column",
+  "--smart-case",
+  "--follow",
+  "--hidden",
+  "--color=never",
+  "--glob",
+  "!.git/*",
+  "--glob",
+  "!node_modules/*",
+  "--glob",
+  "!dist/*",
+  "--glob",
+  "!venv/*",
+  "--glob",
+  "!env/*",
+  "--glob",
+  "!vendor/*",
+}
+
+function M.find_files()
+  require("telescope.builtin").find_files({
+    cwd = search_cwd(),
+    find_command = find_command,
+  })
+end
+
+function M.setup()
+  local status_ok, telescope = pcall(require, "telescope")
+  if not status_ok then
+    print("telescope not found")
+    return
+  end
+
+  local actions = require("telescope.actions")
 
 
   local wk = require "which-key"
@@ -41,7 +100,7 @@ local actions = require("telescope.actions")
     },
     {
       "<leader>f",
-      "<cmd>Telescope find_files<cr>",
+      M.find_files,
       desc = "Files",
     },
     {
@@ -174,18 +233,7 @@ require("telescope").setup({
       path = vim.fn.stdpath("data") .. "/telescope_history.sqlite3",
       limit = 2000,
     },
-    vimgrep_arguments = {
-      "rg",
-      "--with-filename",
-      "--no-heading",
-      "--line-number",
-      "--column",
-      "--smart-case",  -- Case-sensitive only when uppercase is used
-      "--follow",      -- Follow symlinks
-      "--color=never",
-      "--pcre2"        -- Better regex support
-      -- Use <leader>L for --hidden --no-ignore search
-    },
+    vimgrep_arguments = vimgrep_arguments,
     mappings = {
       i = {
         ["<C-n>"] = actions.cycle_history_next,
@@ -283,4 +331,4 @@ telescope.load_extension("live_grep_args")
 telescope.load_extension("smart_history")
 
 end
-return {setup=setup}
+return M
